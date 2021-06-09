@@ -17,8 +17,7 @@ class CreateTablesTable extends Migration
             $table->id();
             $table->string('table_number')->nullable();
             $table->string('table_id')->unique();
-            $table->string('section')->nullable();
-            $table->string('tablet_number')->nullable();
+            $table->string('section')->nullable();           
             $table->string('position')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();

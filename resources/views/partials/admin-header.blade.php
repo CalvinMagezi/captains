@@ -17,7 +17,7 @@
       <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
       <meta name="author" content="codedthemes" />
       <!-- Favicon icon -->
-      <link rel="icon" href="{{ asset('admin/images/favicon.ico') }}" type="image/x-icon">
+      <link rel="icon" href="{{ asset('admin/images/logo.png') }}" type="image/x-icon">
     <!-- Google font-->
     <link href="{{ url('https://fonts.googleapis.com/css?family=Roboto:400,500') }}" rel="stylesheet">
     <!-- waves.css -->
@@ -37,6 +37,7 @@
       <!-- Style.css -->
       <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/mapping.css') }}">
       <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/style.css') }}">
+      
   </head>
 
   <body>
@@ -114,8 +115,8 @@
                               </div>
                           </div>
                       </div>
-                      <a href="index.html">
-                          <img class="img-fluid" src="admin/images/logo.png" alt="Theme-Logo" />
+                      <a href="/">
+                          <img class="img-fluid" style="max-width: 50px;" src="admin/images/logo.png" alt="Theme-Logo" />
                       </a>
                       <a class="mobile-options waves-effect waves-light">
                           <i class="ti-more"></i>
@@ -155,7 +156,22 @@
                                   </li>
                                   <li class="waves-effect waves-light">
                                       <div class="media">
-                                          <img class="d-flex align-self-center img-radius" src="admin/images/avatar-2.jpg" alt="Generic placeholder image">
+
+                                        @if( Auth::user()->role  == 'admin' || Auth::user()->position == 'asst. accountant')
+                                        <img src="admin/images/roles/admin.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                        @endif
+                                        @if(Auth::user()->position == 'cashier')
+                                        <img src="admin/images/roles/admin.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                        @endif
+                                        @if(Auth::user()->position == 'cook' || Auth::user()->position == 'sous-chef')
+                                        <img src="admin/images/roles/cook.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                        @endif
+                                        @if(Auth::user()->position == 'steward')
+                                        <img src="admin/images/roles/steward.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                        @endif
+                                        @if(Auth::user()->position == 'wait' || Auth::user()->position == 'bartender')
+                                        <img src="admin/images/roles/wait.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                        @endif
                                           <div class="media-body">
                                               <h5 class="notification-user">{{ Auth::user()->name }}</h5>
                                               <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
@@ -187,7 +203,21 @@
                           </li>
                           <li class="user-profile header-notification">
                               <a href="#!" class="waves-effect waves-light">
-                                  <img src="admin/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
+                                @if( Auth::user()->role  == 'admin' || Auth::user()->position == 'asst. accountant')
+                                <img src="admin/images/roles/admin.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                @endif
+                                @if(Auth::user()->position == 'cashier')
+                                <img src="admin/images/roles/admin.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                @endif
+                                @if(Auth::user()->position == 'cook' || Auth::user()->position == 'sous-chef')
+                                <img src="admin/images/roles/cook.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                @endif
+                                @if(Auth::user()->position == 'steward')
+                                <img src="admin/images/roles/steward.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                @endif
+                                @if(Auth::user()->position == 'wait' || Auth::user()->position == 'bartender')
+                                <img src="admin/images/roles/wait.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                @endif
                                   <span>{{ Auth::user()->name }}</span>
                                   <i class="ti-angle-down"></i>
                               </a>
@@ -231,7 +261,21 @@
                       <div class="pcoded-inner-navbar main-menu">
                           <div class="">
                               <div class="main-menu-header">
-                                  <img class="img-80 img-radius" src="admin/images/avatar-4.jpg" alt="User-Profile-Image">
+                                @if( Auth::user()->role  == 'admin' || Auth::user()->position == 'asst. accountant')
+                                <img src="admin/images/roles/admin.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                @endif
+                                @if(Auth::user()->position == 'cashier')
+                                <img src="admin/images/roles/admin.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                @endif
+                                @if(Auth::user()->position == 'cook' || Auth::user()->position == 'sous-chef')
+                                <img src="admin/images/roles/cook.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                @endif
+                                @if(Auth::user()->position == 'steward')
+                                <img src="admin/images/roles/steward.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                @endif
+                                @if(Auth::user()->position == 'wait' || Auth::user()->position == 'bartender')
+                                <img src="admin/images/roles/wait.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                @endif
                                   <div class="user-details">
                                       <span id="more-details">{{ Auth::user()->name }}<i class="fa fa-caret-down"></i></span>
                                   </div>
@@ -259,7 +303,7 @@
                           <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Overall Management</div>
                           <ul class="pcoded-item pcoded-left-item">
                               <li class="active">
-                                  <a href="index.html" class="waves-effect waves-dark">
+                                  <a href="/dashboard" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                       <span class="pcoded-mcaret"></span>
@@ -272,6 +316,13 @@
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                                   <ul class="pcoded-submenu">
+                                    <li class=" ">
+                                        <a href="/create-order" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">New Order</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
                                       <li class=" ">
                                           <a href="accordion.html" class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -342,6 +393,8 @@
         
                           </ul>
         
+                          @if (Auth::user()->role == 'admin')
+                              
                           <div class="pcoded-navigation-label" data-i18n="nav.category.other">Admin</div>
                           <ul class="pcoded-item pcoded-left-item">
                               <li class="pcoded-hasmenu ">
@@ -376,5 +429,9 @@
                                   </ul>
                               </li>
                           </ul>
+                              
+                          @endif
+                          
+
                       </div>
                   </nav>

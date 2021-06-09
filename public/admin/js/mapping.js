@@ -1,14 +1,13 @@
 (function ($) {
     "user strict";
 
-    const words = ["girl", "a", "the", "of", "on", "one", "a", "a","achieve", "always", "am",
-"an", "and", "anything", "are", "as", "be", "become", "believe", "best", "bring", "build", "but", "day",
-"do", "ed", "emotional", "energy", "er", "eus", "fight", "find", "for", "forever", "friend", "give" ,"great" ,"grow" ,"have" ,"he", "hero", "I", "I","in", "ing", "is", "it", "like", "me", "my", "never", "on", "or", "our", "physical", "power", "reach", "s", "she", "strength", "strong", 
-"super", "take", "the", "to", "victory", "we", "willpower"]
+    const words = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 "," 9 ", " 10 ", " 11 ",
+" 12 ", " 13 ", " 14 ", " 15 ", " 16 ", " 17 ", " 18 ", " 19 ", " 20 "]
 const outside_tables = document.querySelector(".outside-tables")
+const inside_tables = document.querySelector(".inside-tables")
 outside_tables.style.top = "200px"
 
-function placeWords(array) {
+function placeTablesOut(array) {
   let index = 0
   let top = 100
   let left = 30
@@ -18,6 +17,33 @@ function placeWords(array) {
     magnet.setAttribute("class", "word")
     magnet.setAttribute("id", word + index)
     outside_tables.appendChild(magnet)
+    magnet.style.top = top + "px"
+    magnet.style.left = left + "px"
+    dragElement(document.getElementById(word+index));
+    
+    if (left > window.innerWidth/1.5) {
+      top += magnet.offsetHeight + 8
+      left = 30
+    }
+    else {
+      left += magnet.offsetWidth + 8
+
+    }
+    console.log(window.innerWidth)
+    index++
+  })
+}
+
+function placeTablesIn(array) {
+  let index = 0
+  let top = 100
+  let left = 30
+  array.forEach(word => {
+   let magnet = document.createElement('div')
+   magnet.append(word)
+    magnet.setAttribute("class", "word")
+    magnet.setAttribute("id", word + index)
+    inside_tables.appendChild(magnet)
     magnet.style.top = top + "px"
     magnet.style.left = left + "px"
     dragElement(document.getElementById(word+index));
@@ -69,6 +95,7 @@ function dragMouseDown(e) {
   }
 }
 
-placeWords(words)
+placeTablesIn(words)
+placeTablesOut(words)
 
 })(jQuery);

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTabletsTable extends Migration
+class CreateIpAddressTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateTabletsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tablets', function (Blueprint $table) {
+        Schema::create('ip_address', function (Blueprint $table) {
             $table->id();
-            $table->string('unique_id');
-            $table->string('tablet_number')->nullable();
+            $table->string('ip_address')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });
@@ -29,6 +28,6 @@ class CreateTabletsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tablets');
+        Schema::dropIfExists('ip_address');
     }
 }

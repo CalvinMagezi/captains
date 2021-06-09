@@ -18,9 +18,14 @@ class CreateItemsTable extends Migration
             $table->string('unique_id')->nullable();
             $table->string('name')->nullable();
             $table->string('details')->nullable();
+            $table->string('major_category')->nullable();
             $table->string('category')->nullable();
+            $table->string('specifics')->nullable();
+            $table->decimal('sprice', 15, 2)->nullable();
+            $table->decimal('hprice', 15, 2)->nullable();        
             $table->string('status')->nullable();
-            $table->integer('price')->default(0);
+            $table->decimal('price', 8, 2);
+            $table->integer('quantity')->default('1');
             $table->timestamps();
         });
     }

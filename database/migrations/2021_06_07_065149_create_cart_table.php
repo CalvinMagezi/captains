@@ -17,8 +17,7 @@ class CreateCartTable extends Migration
             $table->id();
             $table->string('unique_id')->unique();
             $table->integer('number_of_items')->default(0);
-            $table->string('status')->default('open');
-            $table->string('tablet_number')->nullable();
+            $table->string('status')->default('open');        
             $table->string('order_id')->nullable();
             $table->timestamps();
         });
