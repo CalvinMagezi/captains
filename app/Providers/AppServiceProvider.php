@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
         }
         
-        Schema::defaultstringLength(300);
+        Schema::defaultstringLength(191);
 
         Paginator::useBootstrap();
     }
