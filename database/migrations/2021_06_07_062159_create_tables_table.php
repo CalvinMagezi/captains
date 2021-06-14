@@ -20,6 +20,8 @@ class CreateTablesTable extends Migration
             $table->string('section')->nullable();           
             $table->string('position')->nullable();
             $table->string('status')->nullable();
+            $table->string('top')->default('0');
+            $table->string('left')->default('0');
             $table->timestamps();
         });
     }

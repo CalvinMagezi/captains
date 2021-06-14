@@ -8,7 +8,7 @@
                 <div class="col-md-8">
                     <div class="page-header-title">
                         <h5 class="m-b-10">Dashboard</h5>
-                        <p class="m-b-0">Welcome {{ Auth::user()->name }}</p>
+                        <p class="m-b-0">Welcome {{Auth::user()->first_name.' '.Auth::user()->last_name }}</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -31,78 +31,112 @@
                   <!-- Page-body start -->
                   <div class="page-body">
                       <div class="row justify-content-center"> 
-                        @section('content')
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-7"></div>
-                                    <div class="col-md-5">
-                                        <form action="{{route('orders.index')}}">
-                                            <div class="row">
-                                                <div class="col-md-5">
-                                                    <input type="date" name="start_date" class="form-control" value="{{request('start_date')}}" />
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <input type="date" name="end_date" class="form-control" value="{{request('end_date')}}" />
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <button class="btn btn-outline-primary" type="submit">Submit</button>
+                        @if (session('success'))
+                        <div class="alert alert-danger">
+                            {{session('sucess')}}
+                        </div>
+                    @endif
+                        <div class="col-8">                        
+                            <div class="card">
+                                <div class="card-header">
+                                    Place A New Order
+                                </div>
+                            
+                                <div class="card-body">
+                                    <form action="{{ route("store-order") }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="customer_name">Order Taken By</label>
+                                            <input type="text" id="customer_name" name="customer_name" value="{{Auth::user()->first_name.' '.Auth::user()->last_name }}" class="form-control"  readonly>                                           
+                                            <p class="helper-block">
+                                                
+                                            </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="customer_email">Table Number</label>
+                                            <input type="email" id="customer_email" value="4" name="customer_email" class="form-control" readonly>                                           
+                                            <p class="helper-block">
+                                               
+                                            </p>
+                                        </div>
+                            
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Order Details
+                                            </div>
+                            
+                                            <div class="card-body">
+                                                <table class="table" id="products_table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Product</th>
+                                                            <th>Quantity</th>
+                                                            <th>Specifics</th>
+                                                            <th>Priority</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (old('products', ['']) as $index => $oldProduct)
+                                                            <tr id="product{{ $index }}">
+                                                                <td>
+                                                                    <input class="typeahead form-control" type="text">
+
+                                                                    {{-- <select name="products[]" class="form-control">
+                                                                        <option value="">-- choose product --</option>
+                                                                        @foreach ($products as $product)
+                                                                            <option value="{{ $product->id }}"{{ $oldProduct == $product->id ? ' selected' : '' }}>
+                                                                                {{ $product->name }} (KES {{ number_format($product->price, 2) }})
+                                                                            </option>                                                                            
+                                                                        @endforeach
+                                                                    </select>
+                                                                    <input type="hidden" name="prices[]" value="{{ old('prices.'. $index) ?? '1' }}"> --}}
+
+
+                                                                </td>
+                                                                <td>
+                                                                    <input type="number" name="quantities[]" class="form-control" value="{{ old('quantities.' . $index) ?? '1' }}" />
+                                                                </td>
+                                                                <td>
+                                                                    <div class="input-group mb-3">                                                                       
+                                                                        <select class="custom-select" id="specifics">
+                                                                          <option name="specifics[]" value="regular" selected>Regular</option>
+                                                                          <option name="specifics[]" value="hot">Hot</option>
+                                                                          <option name="specifics[]" value="cold">Cold</option>                                                                          
+                                                                        </select>
+                                                                      </div>                                                                    
+                                                                </td>
+                                                                <td>
+                                                                    <div class="input-group mb-3">                                                                       
+                                                                        <select class="custom-select" id="priority">
+                                                                          <option name="priority[]" value="regular" selected>Regular</option>
+                                                                          <option name="priority[]" value="hot">VIP</option>
+                                                                          <option name="priority[]" value="cold">Rushed</option>                                                                          
+                                                                        </select>
+                                                                      </div>                                                                     
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                        <tr id="product{{ count(old('products', [''])) }}"></tr>
+                                                    </tbody>
+                                                </table>
+                            
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <button id="add_row" class="btn btn-default pull-left">+ Add Row</button>
+                                                        <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <input class="btn btn-danger" type="submit" value="{{ trans('Place Order') }}">
+                                        </div>
+                                    </form>
+                            
+                            
                                 </div>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Customer Name</th>
-                                            <th>Total</th>
-                                            <th>Received Amount</th>
-                                            <th>Status</th>
-                                            <th>To Pay</th>
-                                            <th>Created At</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($orders as $order)
-                                        <tr>
-                                            <td>{{$order->id}}</td>
-                                            <td>{{$order->getCustomerName()}}</td>
-                                            <td>{{ config('settings.currency_symbol') }} {{$order->formattedTotal()}}</td>
-                                            <td>{{ config('settings.currency_symbol') }} {{$order->formattedReceivedAmount()}}</td>
-                                            <td>
-                                                @if($order->receivedAmount() == 0)
-                                                    <span class="badge badge-danger">Not Paid</span>
-                                                @elseif($order->receivedAmount() < $order->total())
-                                                    <span class="badge badge-warning">Partial</span>
-                                                @elseif($order->receivedAmount() == $order->total())
-                                                    <span class="badge badge-success">Paid</span>
-                                                @elseif($order->receivedAmount() > $order->total())
-                                                    <span class="badge badge-info">Change</span>
-                                                @endif
-                                            </td>
-                                            <td>{{config('settings.currency_symbol')}} {{number_format($order->total() - $order->receivedAmount(), 2)}}</td>
-                                            <td>{{$order->created_at}}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th></th>
-                                            <th></th>
-                                            {{-- <th>{{ config('settings.currency_symbol') }} {{ number_format($total, 2) }}</th>
-                                            <th>{{ config('settings.currency_symbol') }} {{ number_format($receivedAmount, 2) }}</th> --}}
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                                {{ $orders->links() }}
                             </div>
-                        </div>
-                        @endsection
+                    </div>
                       </div>
                   </div>
                   <!-- Page-body end -->
@@ -120,44 +154,36 @@
 
 @include('partials.admin-footer')
 {{-- <script type="text/javascript" src="{{ asset('admin/js/mapping.js') }}"></script> --}}
-<script type="text/javascript" src="{{ asset('admin/js/order.js') }}"></script>
+{{-- <script type="text/javascript" src="{{ asset('admin/js/order.js') }}"></script> --}}
 <script>
     $(document).ready(function(){
-      let row_number = {{ count(old('items', [''])) }};
-
-    
-
-
-      $("#add_row").click(function(e){
-
-        e.preventDefault();
-        var tr = $(this).parents('tr:first').clone();
-        $('#items_table tbody').append(tr);
-        $tr.append('<td><button class="remove">Remove</button></td>');
-        var $td = $('#items_table > tbody > tr').find('td:eq(6)').hide();
-
-        let new_row_number = row_number - 1;
-        $('#item' + row_number).html($('#item' + new_row_number).html()).find('td:first-child');
-
-
-        $('#items_table').append('<tr id="item' + (row_number + 1) + '"></tr>');
-
-
-        row_number++;
-
-
-      });
-  
-
-
-      $("#delete_row").click(function(e){
-        e.preventDefault();
-        if(row_number > 1){
-          $("#item" + (row_number - 1)).html('');
-          row_number--;
-        }
-      });
+    let row_number = {{ count(old('products', [''])) }};
+    $("#add_row").click(function(e){
+      e.preventDefault();
+      let new_row_number = row_number - 1;
+      $('#product' + row_number).html($('#product' + new_row_number).html()).find('td:first-child');
+      $('#products_table').append('<tr id="product' + (row_number + 1) + '"></tr>');
+      row_number++;
     });
+
+    $("#delete_row").click(function(e){
+      e.preventDefault();
+      if(row_number > 1){
+        $("#product" + (row_number - 1)).html('');
+        row_number--;
+      }
+    });
+
+    var path = "{{ route('autocomplete') }}";
+    $('input.typeahead').typeahead({
+        source:  function (query, process) {
+        return $.get(path, { query: query }, function (data) {
+                return process(data);
+            });
+        }
+    });
+    
+  });
   </script>
 </body>
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIpAddressTable extends Migration
+class AddQuantityToProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateIpAddressTable extends Migration
      */
     public function up()
     {
-        Schema::create('ip_address', function (Blueprint $table) {
-            $table->id();
-            $table->string('ip_address')->nullable();
-            $table->string('status')->nullable();
-            $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            $table->integer('quantity')->after('price')->default('1');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateIpAddressTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ip_address');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('quantity');
+        });
     }
 }

@@ -9,8 +9,11 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
 use App\Models\Item;
+use App\Models\Product;
+use App\Models\Table;
 use Gate;
 use DB;
+use Log;
 use Symfony\Component\HttpFoundation\Response;
 
 use App\Models\User;
@@ -21,10 +24,15 @@ class AdminController extends Controller
 
         $users = User::all();
         $orders = Order::all();
+        $tables = Table::all();
+
+        $active_table_count = Table::where('status','=','active')->count();
         
         return view('admin.dashboard', [
             'users' => $users,
             'orders' => $orders,
+            'tables' => $tables,
+            'total_active_tables' => $active_table_count,
         ]);
     }
 
@@ -38,11 +46,9 @@ class AdminController extends Controller
                 $request->user()->cart()->get()
             );
         }
-        $orders = DB::table('orders')->select('*')->paginate(5);
-
-        return view('admin.create-order', [
-            'orders' => $orders,
-        ]);
+        $products = Product::all();              
+       
+        return view('admin.create-order', compact('products'));
     }
 
     public function create()
@@ -57,20 +63,41 @@ class AdminController extends Controller
     {
         $order = Order::create($request->all());
 
-        //Check if order was placed from one of the registered IP's
-        $ipAddress = $request->ip();
+        $products = $request->input('products', []);
+        // $table_number = implode (". ", $request->input('table_number',[]));
+        $quantities = implode (" ", $request->input('quantities',[]));
+        $specifics = implode (" ", $request->input('specifics',[]));
+        $priority = implode (" ", $request->input('priority',[]));
+        $prices = implode (" ", $request->input('prices',[])); 
+        $prices_sum = array_sum ($request->input('prices',[]));
+        $quantities_sum = array_sum ($request->input('quantities',[]));
+        $taken_by = Auth::user();
+        Log::info($taken_by);
+        $new_order = new Order;
+        
+        $new_order->taken_by = $taken_by;
+        $new_order->table_number = $request->table_number;
+        $new_order->specifics = $specifics;
+        $new_order->priority = $priority;
+        $new_order->quantities = $quantities;
+        $new_order->qunatities_total = $quantities_sum;
+        $new_order->prices = $prices;
+        $new_order->prices_total = $prices_sum;
+            
 
-        $items = $request->input('items', []);
-        $quantities = $request->input('quantities', []);
+        // for ($product=0; $product < count($products); $product++) {
+        //     if ($products[$product] != '') {
+        //         $order->products()->attach($products[$product], ['quantity' => $quantities[$product]]);
+        //     }
+        // }
+        
+        Log::info($new_order);
+
+        $new_order->save();
 
         
-        for ($item=0; $item < count($items); $item++) {
-            if ($items[$item] != '') {
-                $order->items()->attach($items[$item], ['quantity' => $quantities[$item]]);
-            }
-        }
 
-        return redirect()->route('admin.orders.index');
+        return redirect('/create-order')->with('success', 'Order Successfully Placed!');
     }
 
     public function edit(Order $order)

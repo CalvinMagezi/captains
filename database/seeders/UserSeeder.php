@@ -16,10 +16,13 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        
+
         //Staff Seeder
 
         DB::table('users')->insert([
-            'name' => 'Sharon Adhiambo Oduor',
+            'first_name' => 'Sharon',
+            'last_name' => 'Adhiambo Oduor',
             'staff_number' => '42',
             'position' => 'cashier',
             'role' => 'staff',
@@ -28,7 +31,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Anita Oneya Omuruli',
+            'first_name' => 'Anita',
+            'last_name' => 'Oneya Omuruli',
             'staff_number' => '40',
             'position' => 'wait',
             'role' => 'staff',
@@ -37,7 +41,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'George Morigo Mwangi',
+            'first_name' => 'George',
+            'last_name' => 'Morigo Mwangi',
             'staff_number' => '39',
             'position' => 'wait',
             'role' => 'staff',
@@ -46,7 +51,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Marylin Aluoch Odhiambo',
+            'first_name' => 'Marylin',
+            'last_name' => 'Aluoch Odhiambo',
             'staff_number' => '38',
             'position' => 'cashier',
             'role' => 'staff',
@@ -55,7 +61,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Macdonald Ondigo Obondi',
+            'first_name' => 'Macdonald',
+            'last_name' => 'Ondigo Obondi',
             'staff_number' => '36',
             'position' => 'head chef',
             'role' => 'admin',
@@ -64,7 +71,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Moses Mbae Njoroge',
+            'first_name' => 'Moses',
+            'last_name' => 'Mbae Njoroge',
             'staff_number' => '35',
             'position' => 'bartender',
             'role' => 'staff',
@@ -73,7 +81,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Esther Muya',
+            'first_name' => 'Esther Muya',
+            'last_name' => 'Esther Muya',
             'staff_number' => '34',
             'position' => 'asst. accountant',
             'role' => 'staff',
@@ -82,7 +91,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'James Mutiso',
+            'first_name' => 'James',
+            'last_name' => 'Mutiso',
             'staff_number' => '33',
             'position' => 'steward',
             'role' => 'staff',
@@ -91,7 +101,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Simon Khachina Sakwa',
+            'first_name' => 'Simon',
+            'last_name' => 'Khachina Sakwa',
             'staff_number' => '32',
             'position' => 'cook',
             'role' => 'staff',
@@ -100,7 +111,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Shamim Aseda Anyango',
+            'first_name' => 'Shamim',
+            'last_name' => 'Aseda Anyango',
             'staff_number' => '29',
             'position' => 'wait',
             'role' => 'staff',
@@ -109,7 +121,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Lawrence Muderema Jumba',
+            'first_name' => 'Lawrence',
+            'last_name' => 'Muderema Jumba',
             'staff_number' => '27',
             'position' => 'sous-chef',
             'role' => 'staff',
@@ -118,7 +131,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Benson Maingi Ndeti',
+            'first_name' => 'Benson',
+            'last_name' => 'Maingi Ndeti',
             'staff_number' => '24',
             'position' => 'steward',
             'role' => 'staff',
@@ -127,7 +141,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Noel Imali Amolla',
+            'first_name' => 'Noel',
+            'last_name' => 'Imali Amolla',
             'staff_number' => '19',
             'position' => 'head waitress',
             'role' => 'admin',
@@ -136,7 +151,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Joshua Muli Muange',
+            'first_name' => 'Joshua',
+            'last_name' => 'Muli Muange',
             'staff_number' => '18',
             'position' => 'steward',
             'role' => 'staff',
@@ -145,7 +161,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Moses Kyalo Musembi',
+            'first_name' => 'Moses',
+            'last_name' => 'Kyalo Musembi',
             'staff_number' => '17',
             'position' => 'cook',
             'role' => 'staff',
@@ -154,7 +171,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Kevin Otieno Olele',
+            'first_name' => 'Kevin',
+            'last_name' => 'Otieno Olele',
             'staff_number' => '16',
             'position' => 'restaurant manager',
             'role' => 'admin',
@@ -163,7 +181,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Eliud Maina Muthuri',
+            'first_name' => 'Eliud',
+            'last_name' => 'Maina Muthuri',
             'staff_number' => '10',
             'position' => 'cook',
             'role' => 'staff',
@@ -172,7 +191,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Shadrack Kilei Mweu',
+            'first_name' => 'Shadrack',
+            'last_name' => 'Kilei Mweu',
             'staff_number' => '3',
             'position' => 'store keeper',
             'role' => 'admin',
@@ -181,7 +201,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Mary Wambui Maingi',
+            'first_name' => 'Mary',
+            'last_name' => 'Wambui Maingi',
             'staff_number' => '1',
             'position' => 'service supervisor',
             'role' => 'admin',
@@ -192,24 +213,28 @@ class UserSeeder extends Seeder
         //Tech Team
 
         DB::table('users')->insert([
-            'name' => 'Calvin Magezi',          
+            'first_name' => 'Calvin',          
+            'last_name' => 'Magezi',          
             'role' => 'admin',
             'email' => 'calvinmagezi@ymail.com',
             'password' => Hash::make('password'),
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Admin',          
+            'first_name' => 'Admin',          
+            'last_name' => 'Admin',          
             'role' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
         ]);
 
         DB::table('users')->insert([
-            'name' => 'staff',          
+            'first_name' => 'staff',          
+            'last_name' => 'staff',          
             'role' => 'staff',
             'email' => 'staff@gmail.com',
             'password' => Hash::make('password'),
         ]);
     }
+    
 }

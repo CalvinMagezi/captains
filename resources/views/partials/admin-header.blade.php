@@ -3,19 +3,12 @@
 
 <head>
     <title>Captains Terrace Admin Menu </title>
-    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 10]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-      <!-- Meta -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
-      <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
-      <meta name="author" content="codedthemes" />
+      <meta name="description" content="Captains Terrace Restaurant, Bar and Lounge Nairobi" />
+      <meta name="keywords" content="restaurant, pos, msimboit, captains terrace, bar, south c, lounge, responsive" />
+      <meta name="author" content="msimboit" />
       <!-- Favicon icon -->
       <link rel="icon" href="{{ asset('admin/images/logo.png') }}" type="image/x-icon">
     <!-- Google font-->
@@ -173,7 +166,7 @@
                                         <img src="admin/images/roles/wait.png" alt="user image" class="img-radius img-40 align-top m-r-15">
                                         @endif
                                           <div class="media-body">
-                                              <h5 class="notification-user">{{ Auth::user()->name }}</h5>
+                                              <h5 class="notification-user">{{Auth::user()->first_name.' '.Auth::user()->last_name }}</h5>
                                               <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
                                               <span class="notification-time">30 minutes ago</span>
                                           </div>
@@ -218,7 +211,7 @@
                                 @if(Auth::user()->position == 'wait' || Auth::user()->position == 'bartender')
                                 <img src="admin/images/roles/wait.png" alt="user image" class="img-radius img-40 align-top m-r-15">
                                 @endif
-                                  <span>{{ Auth::user()->name }}</span>
+                                  <span>{{Auth::user()->first_name.' '.Auth::user()->last_name }}</span>
                                   <i class="ti-angle-down"></i>
                               </a>
                               <ul class="show-notification profile-notification">
@@ -277,7 +270,7 @@
                                 <img src="admin/images/roles/wait.png" alt="user image" class="img-radius img-40 align-top m-r-15">
                                 @endif
                                   <div class="user-details">
-                                      <span id="more-details">{{ Auth::user()->name }}<i class="fa fa-caret-down"></i></span>
+                                      <span id="more-details">{{Auth::user()->first_name.' '.Auth::user()->last_name }}<i class="fa fa-caret-down"></i></span>
                                   </div>
                               </div>
         
@@ -308,53 +301,98 @@
                                       <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
-                              </li>
-                              <li class="pcoded-hasmenu">
-                                  <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Orders</span>
+                              </li>                              
+                          </ul>
+
+                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Orders</div>
+                          <ul class="pcoded-item pcoded-left-item">
+                            <li class=" ">
+                                <a href="/create-order" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">New Order</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                              <li class=" ">
+                                  <a href="accordion.html" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Ongoing</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
-                                  <ul class="pcoded-submenu">
-                                    <li class=" ">
-                                        <a href="/create-order" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">New Order</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                      <li class=" ">
-                                          <a href="accordion.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Ongoing</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="breadcrumb.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Ready To Pay</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="button.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Flagged</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="tabs.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Closed</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>                                      
-                                  </ul>
+                              </li>                                      
+                              <li class=" ">
+                                  <a href="button.html" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Flagged</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
                               </li>
+                              <li class=" ">
+                                  <a href="tabs.html" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Closed</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>                                      
                           </ul>
-                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Items &amp; Orders</div>
+
+                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Tables &amp; Mapping</div>
+                          <ul class="pcoded-item pcoded-left-item">
+                            <li>
+                                <a href="/show-tables" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Mapping</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                              <li>
+                                  <a href="chart.html" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Table Info</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+                              
+                              
+        
+                          </ul> 
+
+                          
+
+                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Reports</div>
+                          <ul class="pcoded-item pcoded-left-item">
+                              <li>
+                                  <a href="form-elements-component.html" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Today's Sales</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inside Sales</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+                              <li>
+                                <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Outside Sales</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">History</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+        
+                          </ul>
+        
+                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Items</div>
                           <ul class="pcoded-item pcoded-left-item">
                               <li>
                                   <a href="form-elements-component.html" class="waves-effect waves-dark">
@@ -366,71 +404,12 @@
                               <li>
                                   <a href="bs-basic-table.html" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Orders</span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Most Popular</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
         
-                          </ul>
-        
-                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Tables &amp; Mapping</div>
-                          <ul class="pcoded-item pcoded-left-item">
-                              <li>
-                                  <a href="chart.html" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Table Info</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="map-google.html" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Mapping</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                              </li>
-                              
-        
-                          </ul>
-        
-                          @if (Auth::user()->role == 'admin')
-                              
-                          <div class="pcoded-navigation-label" data-i18n="nav.category.other">Admin</div>
-                          <ul class="pcoded-item pcoded-left-item">
-                              <li class="pcoded-hasmenu ">
-                                  <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Admin Functions</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                                  <ul class="pcoded-submenu">
-                                      <li class="">
-                                          <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Edit Users</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>                                      
-                                      <li class="">
-                                          <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Edit Tables & Mapping</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class="">
-                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Edit Orders & Items</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                
-                                  </ul>
-                              </li>
-                          </ul>
-                              
-                          @endif
+                          </ul>                           
                           
 
                       </div>

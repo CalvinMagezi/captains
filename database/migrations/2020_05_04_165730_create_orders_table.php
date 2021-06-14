@@ -15,16 +15,14 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();                
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
-            $table->string('item_name')->nullable();        
-            $table->string('quantity')->nullable();
-            $table->string('amount')->nullable();
-            $table->string('table_number')->nullable(); 
-            $table->integer('priority')->default(0);
-            $table->string('status')->nullable();
+            $table->string('taken_by')->nullable();
+            $table->string('table_number')->nullable();
             $table->string('specifics')->nullable();
-            $table->string('unique_id')->nullable();                                                                          
+            $table->string('priority')->nullable();
+            $table->integer('quantities')->nullable();
+            $table->integer('quantities_total')->nullable();
+            $table->integer('prices')->nullable();
+            $table->integer('prices_total')->nullable();
             $table->timestamps();
         });
     }
