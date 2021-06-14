@@ -49,6 +49,7 @@ class OrderController extends Controller
         $total = $request->input('total');     
         
         $new_order = new Order([
+            'status'       => 'ongoing',
             'taken_by'     => $taken_by,
             'table_number' => $table_number,
             'items'        => $items,

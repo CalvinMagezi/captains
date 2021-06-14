@@ -248,9 +248,9 @@
                                                                             </div>
                                                                         </div>
                                                                         Table #</th>
-                                                                    <th>Order</th>
+                                                                    <th>Taken By</th>
                                                                     <th>Status</th>
-                                                                    <th class="text-right">Priority</th>
+                                                                    <th class="text-right">Total</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -276,9 +276,9 @@
                                                                                 </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td>{{ $order->item_name }}</td>
+                                                                        <td>{{ $order->taken_by }}</td>
                                                                         <td>{{ $order->status }}</td>
-                                                                        <td class="text-right"><label class="label label-danger">{{ $order->priority }}</label></td>
+                                                                        <td class="text-right"><label class="label label-success">KES {{ $order->prices_total }}</label></td>
                                                                     </tr>
                                                                     @endforeach
                                                             
