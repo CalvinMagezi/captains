@@ -110,7 +110,7 @@
                           </div>
                       </div>
                       <a href="/">
-                          <img class="img-fluid" style="max-width: 50px;" src="admin/images/logo.png" alt="Theme-Logo" />
+                          <img class="img-fluid img-responsive" style="max-width: 100px;" src="admin/images/logo.png" alt="Theme-Logo" />
                       </a>
                       <a class="mobile-options waves-effect waves-light">
                           <i class="ti-more"></i>

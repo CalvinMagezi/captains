@@ -13,9 +13,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        // $this->call(UserSeeder::class);
-        $this->call(SettingsSeeder::class);
+    {                
         $this->call(UserSeeder::class);
         $this->call(TableSeeder::class);
         $path = public_path('sql/items.sql');

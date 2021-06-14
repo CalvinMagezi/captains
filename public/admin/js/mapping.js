@@ -39,6 +39,9 @@ $.ajax({
     arr_top.push(item.top);        
     arr_left.push(item.left);        
     });   
+
+    console.log(arr_top)
+    console.log(arr_left)
     
 var outside_tables = document.getElementById('outside-tables');
 

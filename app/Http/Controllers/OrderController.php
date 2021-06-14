@@ -4,52 +4,64 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderStoreRequest;
 use App\Models\Order;
+use App\Models\Table;
 use Illuminate\Http\Request;
+use Log;
 
 class OrderController extends Controller
 {
     public function index(Request $request) {
-        $orders = new Order();
-        if($request->start_date) {
-            $orders = $orders->where('created_at', '>=', $request->start_date);
-        }
-        if($request->end_date) {
-            $orders = $orders->where('created_at', '<=', $request->end_date . ' 23:59:59');
-        }
-        $orders = $orders->with(['items', 'payments', 'customer'])->latest()->paginate(10);
+        $all_orders = Order::all();
+        $all_orders_count = Order::all()->count();
 
-        $total = $orders->map(function($i) {
-            return $i->total();
-        })->sum();
-        $receivedAmount = $orders->map(function($i) {
-            return $i->receivedAmount();
-        })->sum();
 
-        return view('orders.index', compact('orders', 'total', 'receivedAmount'));
+
+        return view('admin.orders.index');
     }
 
-    public function store(OrderStoreRequest $request)
-    {
-        $order = Order::create([
-            'customer_id' => $request->customer_id,
-            'user_id' => $request->user()->id,
+    public function new_order(){
+        $all_orders = Order::all();
+        $all_orders_count = Order::all()->count();
+        $all_tables = Table::all();
+
+
+        return view('admin.orders.index', [
+            'orders' => $all_orders,
+            'total_orders' => $all_orders_count,
+            'tables' => $all_tables,
+        ]);
+    }
+
+    public function store(Request $request){        
+
+        Log::info($request->all());
+
+        $orders = Order::all();
+        $total_orders = Order::all()->count();
+
+        $taken_by = $request->input('taken_by');
+        $table_number = $request->input('table_number',[]);
+        $items = implode (",", $request->input('items',[]));
+        $prices = implode (",", $request->input('prices',[]));     
+        $quantities = implode (",", $request->input('quantities',[]));     
+        $specifics = implode (",", $request->input('specifics',[]));     
+        $priority = implode (",", $request->input('priority',[]));     
+        $total = $request->input('total');     
+        
+        $new_order = new Order([
+            'taken_by'     => $taken_by,
+            'table_number' => $table_number,
+            'items'        => $items,
+            'prices'       => $prices,
+            'quantities'   => $quantities,
+            'specifics'    => $specifics,
+            'priority'     => $priority,
+            'prices_total' => $total,  
         ]);
 
-        $cart = $request->user()->cart()->get();
-        foreach ($cart as $item) {
-            $order->items()->create([
-                'price' => $item->price,
-                'quantity' => $item->pivot->quantity,
-                'product_id' => $item->id,
-            ]);
-            $item->quantity = $item->quantity - $item->pivot->quantity;
-            $item->save();
-        }
-        $request->user()->cart()->detach();
-        $order->payments()->create([
-            'amount' => $request->amount,
-            'user_id' => $request->user()->id,
-        ]);
-        return 'success';
+        $new_order->save();
+        
+        
+        return redirect('/new-order')->with('success', 'Successfully Added New Table');    
     }
 }

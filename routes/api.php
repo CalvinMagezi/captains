@@ -21,6 +21,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Search
 Route::get('/get-products', 'App\Http\Controllers\SearchController@autocomplete_product')->name('get-products');
 
+//Orders
+Route::post('/save-order', 'App\Http\Controllers\OrderController@store')->name('save-order');
+
 //Tables
 Route::get('/get-tables', 'App\Http\Controllers\MappingController@get')->name('get_table_mapping');
 Route::get('/get-outside', 'App\Http\Controllers\MappingController@getOutside')->name('get_outside_tables');

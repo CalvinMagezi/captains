@@ -67,9 +67,7 @@ class MappingController extends Controller
 
     }    
 
-    public function store(Request $request){        
-
-        Log::info($request->all());
+    public function store(Request $request){                
 
         $tables = Table::all();
         $total_table = Table::all()->count();

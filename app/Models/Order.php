@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Item;
 
 class Order extends Model
 {
@@ -20,25 +19,22 @@ class Order extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at',
+        'completed_at',
     ];
 
     protected $fillable = [
         'taken_by',
         'status',
         'table_number',
-        'item_name',
+        'items',
         'priority',
         'specifics',
+        'quantities',
+        'prices',
+        'prices_total',
         'created_at',
         'updated_at',
-        'deleted_at',
-        'customer_name',
-        'customer_email',
+        'completed_at',        
     ];
 
-    public function products()
-    {
-        return $this->belongsToMany(Item::class)->withPivot(['quantity']);
-    }
 }

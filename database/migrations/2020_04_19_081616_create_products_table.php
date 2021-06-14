@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->string('barcode')->nullable();
+            $table->integer('quantity')->default('1');
             $table->decimal('price', 8, 2)->default(0);
             $table->decimal('hprice', 8, 2)->default(0);            
             $table->boolean('status')->default(true)->nullable();

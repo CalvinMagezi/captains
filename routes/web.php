@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('/dashboard');
 });
-Route::get('/home', [App\Http\Controllers\AdminController::class, 'index'])->middleware('auth');
+Route::get('/home', [App\Http\Controllers\AdminController::class, 'index'])->middleware('auth')->name('home');
 Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
 //=============
@@ -39,6 +39,9 @@ Route::get('autocomplete', [SearchController::class, 'autocomplete_product'])->n
 //Orders
 Route::get('/create-order', [App\Http\Controllers\AdminController::class, 'show_create'])->middleware('auth')->name('create-order');
 Route::post('/create-order', [App\Http\Controllers\AdminController::class, 'store'])->name('store-order');
+
+Route::get('/new-order', [App\Http\Controllers\OrderController::class, 'new_order'])->middleware('auth')->name('new-order');
+
 
 //Mapping
 Route::get('/show-tables', [App\Http\Controllers\MappingController::class, 'show'])->middleware('auth')->name('show-mapping');
