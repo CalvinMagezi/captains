@@ -15,7 +15,8 @@
         "laravel/fortify": "^1.4",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^3.3"
+        "laravel/ui": "^3.3",
+        "vojtys/typeahead": "^0.4.3"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

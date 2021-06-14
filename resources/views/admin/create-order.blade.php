@@ -79,7 +79,7 @@
                                                         @foreach (old('products', ['']) as $index => $oldProduct)
                                                             <tr id="product{{ $index }}">
                                                                 <td>
-                                                                    <input class="typeahead form-control" type="text">
+                                                                    <input name="product[]" id="prod_{{$oldProduct}}" class="search form-control" type="text">
 
                                                                     {{-- <select name="products[]" class="form-control">
                                                                         <option value="">-- choose product --</option>
@@ -154,7 +154,8 @@
 
 @include('partials.admin-footer')
 {{-- <script type="text/javascript" src="{{ asset('admin/js/mapping.js') }}"></script> --}}
-{{-- <script type="text/javascript" src="{{ asset('admin/js/order.js') }}"></script> --}}
+<script type="text/javascript" src="{{ asset('admin/js/order.js') }}"></script>
+
 <script>
     $(document).ready(function(){
     let row_number = {{ count(old('products', [''])) }};
@@ -174,15 +175,7 @@
       }
     });
 
-    var path = "{{ route('autocomplete') }}";
-    $('input.typeahead').typeahead({
-        source:  function (query, process) {
-        return $.get(path, { query: query }, function (data) {
-                return process(data);
-            });
-        }
-    });
-    
+
   });
   </script>
 </body>

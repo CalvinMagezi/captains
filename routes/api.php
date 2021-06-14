@@ -18,6 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Search
+Route::get('/get-products', 'App\Http\Controllers\SearchController@autocomplete_product')->name('get-products');
+
+//Tables
 Route::get('/get-tables', 'App\Http\Controllers\MappingController@get')->name('get_table_mapping');
 Route::get('/get-outside', 'App\Http\Controllers\MappingController@getOutside')->name('get_outside_tables');
 Route::post('/save-tables', 'App\Http\Controllers\MappingController@store')->name('save-tables');
+

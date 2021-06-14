@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use DB;
 
 class SearchController extends Controller
 {
@@ -17,18 +18,12 @@ class SearchController extends Controller
         return view('search');
     }
   
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
-     //Product Autocomplete
-    public function autocomplete_product(Request $request)
-    {
-        $data = Product::select("name")
-                ->where("name","LIKE","%{$request->query}%")
-                ->get();
+     //Product Autocomplete Ajax Request
+    public function autocomplete_product()
+    {       
+    
+        $data = DB::table('products')->select('*')->get();
    
         return response()->json($data);
     }

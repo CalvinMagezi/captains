@@ -30,6 +30,7 @@
       <!-- Style.css -->
       <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/mapping.css') }}">
       <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/style.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ asset('css/search.css') }}">
       
   </head>
 
@@ -221,22 +222,22 @@
                                       </a>
                                   </li>
                                   <li class="waves-effect waves-light">
-                                      <a href="user-profile.html">
+                                      <a href="#">
                                           <i class="ti-user"></i> Profile
                                       </a>
                                   </li>
                                   <li class="waves-effect waves-light">
-                                      <a href="email-inbox.html">
+                                      <a href="#">
                                           <i class="ti-email"></i> My Messages
                                       </a>
                                   </li>
                                   <li class="waves-effect waves-light">
-                                      <a href="auth-lock-screen.html">
+                                      <a href="#">
                                           <i class="ti-lock"></i> Lock Screen
                                       </a>
                                   </li>
                                   <li class="waves-effect waves-light">
-                                      <a href="auth-normal-sign-in.html">
+                                      <a href="#">
                                           <i class="ti-layout-sidebar-left"></i> Logout
                                       </a>
                                   </li>
@@ -277,9 +278,9 @@
                               <div class="main-menu-content">
                                   <ul>
                                       <li class="more-details">
-                                          <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                          <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                          <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                                          <a href="#"><i class="ti-user"></i>View Profile</a>
+                                          <a href="#"><i class="ti-settings"></i>Settings</a>
+                                          <a href="#"><i class="ti-layout-sidebar-left"></i>Logout</a>
                                       </li>
                                   </ul>
                               </div>
@@ -314,21 +315,21 @@
                                 </a>
                             </li>
                               <li class=" ">
-                                  <a href="accordion.html" class="waves-effect waves-dark">
+                                  <a href="#" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                       <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Ongoing</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>                                      
                               <li class=" ">
-                                  <a href="button.html" class="waves-effect waves-dark">
+                                  <a href="#" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                       <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Flagged</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
                               <li class=" ">
-                                  <a href="tabs.html" class="waves-effect waves-dark">
+                                  <a href="#" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                       <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Closed</span>
                                       <span class="pcoded-mcaret"></span>
@@ -346,7 +347,7 @@
                                 </a>
                             </li>
                               <li>
-                                  <a href="chart.html" class="waves-effect waves-dark">
+                                  <a href="#" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">Table Info</span>
                                       <span class="pcoded-mcaret"></span>
@@ -362,28 +363,28 @@
                           <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Reports</div>
                           <ul class="pcoded-item pcoded-left-item">
                               <li>
-                                  <a href="form-elements-component.html" class="waves-effect waves-dark">
+                                  <a href="#" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">Today's Sales</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
                               <li>
-                                  <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                                  <a href="#" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inside Sales</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
                               <li>
-                                <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                                <a href="#" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">Outside Sales</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
                             <li>
-                                <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                                <a href="#" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">History</span>
                                     <span class="pcoded-mcaret"></span>
@@ -395,14 +396,14 @@
                           <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Items</div>
                           <ul class="pcoded-item pcoded-left-item">
                               <li>
-                                  <a href="form-elements-component.html" class="waves-effect waves-dark">
+                                  <a href="#" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Items</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
                               <li>
-                                  <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                                  <a href="#" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">Most Popular</span>
                                       <span class="pcoded-mcaret"></span>
