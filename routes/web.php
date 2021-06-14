@@ -37,9 +37,8 @@ Route::get('search', [SearchController::class, 'index'])->name('search');
 Route::get('autocomplete', [SearchController::class, 'autocomplete_product'])->name('autocomplete');
 
 //Orders
-Route::get('/create-order', [App\Http\Controllers\AdminController::class, 'show_create'])->middleware('auth')->name('create-order');
+Route::get('/create-order', [App\Http\Controllers\OrderController::class, 'new_order'])->middleware('auth')->name('new-order');
 Route::post('/create-order', [App\Http\Controllers\AdminController::class, 'store'])->name('store-order');
-
 Route::get('/new-order', [App\Http\Controllers\OrderController::class, 'new_order'])->middleware('auth')->name('new-order');
 
 
