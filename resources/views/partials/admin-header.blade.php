@@ -237,7 +237,7 @@
                                       </a>
                                   </li>
                                   <li class="waves-effect waves-light">
-                                      <a href="#">
+                                      <a href="/logout">
                                           <i class="ti-layout-sidebar-left"></i> Logout
                                       </a>
                                   </li>
@@ -280,7 +280,7 @@
                                       <li class="more-details">
                                           <a href="#"><i class="ti-user"></i>View Profile</a>
                                           <a href="#"><i class="ti-settings"></i>Settings</a>
-                                          <a href="#"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                                          <a href="/logout"><i class="ti-layout-sidebar-left"></i>Logout</a>
                                       </li>
                                   </ul>
                               </div>

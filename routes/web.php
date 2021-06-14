@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('/dashboard');
 });
 Route::get('/home', [App\Http\Controllers\AdminController::class, 'index'])->middleware('auth');
 Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');

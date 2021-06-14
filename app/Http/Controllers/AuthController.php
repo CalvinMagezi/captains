@@ -27,7 +27,7 @@ class AuthController extends Controller
     Auth::logout();
  
     // Redirect to homepage
-    return redirect('/');
+    return view('auth.login');
     }
 
 
