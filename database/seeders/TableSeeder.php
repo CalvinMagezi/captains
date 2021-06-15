@@ -21,7 +21,7 @@ class TableSeeder extends Seeder
      */
     public function run()
     {
-        for($i=0; $i<=20; $i++){
+        for($i=0; $i<=44; $i++){
 
             if($i % 2 == 0){
                 DB::table('tables')->insert([            
@@ -43,6 +43,8 @@ class TableSeeder extends Seeder
 
             
         }
+
+
         
     }
 }

@@ -88,14 +88,6 @@
               PostOrderSpecifics.push(item_specifics);
               PostOrderTotalPrice = price_total;              
 
-              console.log(PostOrderItems);              
-              console.log(PostTakenBy);
-              console.log(PostTableNumber);
-              console.log(PostOrderPrices);
-              console.log(PostOrderPriority);
-              console.log(PostOrderQuantities);
-              console.log(PostOrderSpecifics);
-              console.log(PostOrderTotalPrice);
 
               // Adding a row inside the tbody.
               $('#tbody').append(`<tr id="R${++rowIdx}">
@@ -120,7 +112,7 @@
               // Adding a row inside the confirmation table.
               $('#tbody_confirm').append(`<tr id="R${++rowConIdx}">
               <td class="row-index text-center">
-              <p>#${rowConIdx}</p>
+              <p value="${rowConIdx}">${rowConIdx}</p>
               </td>
               <td class="text-center">
               <p>${searched_word} x ${item_quantity}</p>
@@ -141,26 +133,48 @@
               $('#number').val(1);
 
             });
+            
+            function remove_same_row(id2){
+
+              console.log(id2)
+
+              $('#tbody_confirm tr').each(function(){
+                var id = $(this).attr('id');
+
+                console.log(id)
+                
+                var c_id = parseInt(id.substring(1));                
+              
+                if(c_id == id2){
+                  $(this).remove();
+                } 
+              })      
+                            
+            };
 
             // jQuery button click event to remove a row.
             $('#tbody').on('click', '.remove', function () {
 
               // Getting all the rows next to the row
               // containing the clicked button
-              var child = $(this).closest('tr').nextAll();
+              var child = $(this).closest('tr').nextAll();                                       
 
               // Iterating across all the rows 
               // obtained to change the index
               child.each(function () {
 
                 // Getting <tr> id.
-                var id = $(this).attr('id');
+                var id = $(this).attr('id'); 
+                var id2 = id.substring(1);
+                remove_same_row(id2);
 
                 // Getting the <p> inside the .row-index class.
                 var idx = $(this).children('.row-index').children('p');
 
                 // Gets the row number from <tr> id.
                 var dig = parseInt(id.substring(1));
+
+                                             
 
                 // Modifying row index.
                 idx.html(`Row ${dig - 1}`);
@@ -170,30 +184,14 @@
               });
 
               // Removing the current row.
-              $(this).closest('tr').remove();
+              $(this).closest('tr').remove();              
 
 
 
               // Decreasing total number of rows by 1.
-              rowIdx--;
-
-              // var y = [1, 2, 2, 3, 2]
-              // var removeItem = 2;
-
-              // y = jQuery.grep(y, function(value) {
-              //   return value != removeItem;
-              // });
-
-              console.log(PostOrderItems);              
-              console.log(PostTakenBy);
-              console.log(PostTableNumber);
-              console.log(PostOrderPrices);
-              console.log(PostOrderPriority);
-              console.log(PostOrderQuantities);
-              console.log(PostOrderSpecifics);
-              console.log(PostOrderTotalPrice);
-            });
-
+              rowIdx--;              
+            
+            });            
 
 
 
@@ -209,7 +207,7 @@
 
                       $('#number').val(value);
                       
-                      console.log(value)
+                    
                     });
                     
                     $('#minus').unbind('click').bind('click', function () {
@@ -220,7 +218,7 @@
                           value--;
                         }        
 
-                        console.log(value)
+                     
 
                         $('#number').val(value);
                     });

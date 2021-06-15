@@ -167,8 +167,8 @@
                                                         <div class="row">
                                                             @foreach ($tables as $table)  
                                                             @if($table->status == 'active')                                                                                                                  
-                                                            <div class="col-lg-3 col-md-4 col-sm-6 p-1 mr-1 mb-1 text-center" style="border:1px solid black;">
-                                                                <button style="border: none; width:100%; background:none; " type="button" data-toggle="modal" data-target="#mod_{{ $table->table_number}}">
+                                                            <div class="col-lg-3 col-md-4 col-sm-6 p-1 mr-1 mb-1 text-center" style="border:1px solid black; background:green;">
+                                                                <button style="border: none; width:100%; background:green;" type="button" data-toggle="modal" data-target="#mod_{{ $table->table_number}}">
                                                                     {{ $table->table_number }}
                                                                 </button>   
                                                                 

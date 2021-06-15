@@ -1,6 +1,6 @@
 .mapping-container {
-    width: 100%;
-    height: 400px;
+    width: 550px;
+    height: 600px;
     border: 4px solid;
     overflow: hidden;
     position: relative;
@@ -16,3 +16,141 @@
   font-family: 'Zilla Slab', serif;
 
 }
+
+.balcony{
+  width: 100%;
+  height: 30px;
+  top: 0 !important;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.long-table-1{
+  position: absolute;
+  width: 40%;
+  height: 30px;
+  top: 30px !important;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.bar{
+position: absolute;
+left:40%;
+top: 30px;
+width: 20%;
+height: 30px;
+border: 1px solid black;
+padding: 5px;
+}
+
+.long-table-2{
+  position: absolute;
+  width: 40%;
+  height: 30px;
+  top: 30px !important;
+  right: 0 !important;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.dj{
+  height: 60px;
+  width: 20%;
+  position: absolute;
+  left: 0 !important;
+  top: 22.5%;
+  border: 1px solid black;
+  padding: 15px;
+}
+
+.kitchen{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 50%;
+  width: 5%;
+  border: 1px solid black;
+  padding-top: 15%;
+  padding-left: 7.5px;
+  padding-right: 7.5px;
+}
+
+.page-line-l{
+  position: absolute;
+  width: 45%;
+  top: 50% !important;
+  height: 1px;
+  border: 2px solid black;  
+}
+
+.page-line-r{
+  position: absolute;
+  width: 45%;
+  top: 50% !important;
+  right: 0 !important;
+  height: 1px;
+  border: 2px solid black;  
+}
+
+.vip-1{
+  position: absolute;
+  width: 20%;
+  height: 60px;
+  top: 50% !important;
+  left: 0;
+  border: 2px solid black; 
+  padding: 15px; 
+}
+
+.vip-2 {
+  position: absolute;
+  width: 20%;
+  height: 60px;
+  top: 50% !important;
+  right: 0;
+  border: 2px solid black; 
+  padding: 15px; 
+}
+
+.bar-2{
+  position: absolute;
+  width: 15%;
+  height: 30px;
+  top: 52.5% !important;
+  left:20%;
+  border: 2px solid black; 
+  padding: 5px; 
+}
+
+.station{
+  position: absolute;
+  width: 15%;
+  height: 30px;
+  top: 52.5% !important;
+  right: 20%;
+  border: 2px solid black; 
+  padding: 5px; 
+}
+
+.bar-3 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 30px;
+  width: 20%;
+  border: 2px solid black; 
+  padding: 5px; 
+}
+
+.dj-2{
+  position: absolute;
+  left: 40%;
+  bottom: 0;
+  height: 30px;
+  width: 20%;
+  border: 2px solid black; 
+  padding: 5px; 
+}
+
+
