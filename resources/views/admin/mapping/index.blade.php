@@ -14,9 +14,9 @@
                 <div class="col-md-4">
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
-                            <a href="index.html"> <i class="fa fa-home"></i> </a>
+                            <a href="/"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Dashboard</a>
+                        <li class="breadcrumb-item"><a href="#!">Mapping</a>
                         </li>
                     </ul>
                 </div>
@@ -44,7 +44,7 @@
 
                          <div class="row justify-content-center">
                              {{-- Outside Tables --}}
-                            <div class="col-8">
+                            <div class="col-lg-8 col-md-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <h5>Current Table Mapping Layout</h5>
@@ -90,7 +90,7 @@
 
                          
                             @if (Auth::user()->role == 'admin')
-                            <div class="col-4">
+                            <div class="col-lg-4 col-md-12 col-sm-12">
                                 <h4 class="mb-1">Admin Privaleges</h4>
                                 <hr>
                                 <button type="button" class="btn btn-success save_tables mb-2">Save Changes</button>
@@ -109,8 +109,8 @@
                                     <button type="submit" class="btn btn-primary mb-2">Add An Outside Table</button>
                                 </form> --}}
                                 <hr>
-                                <h5>Reset or Delete</h5>
-                                <p class="disable">Click on a table and confirm delete or reset.</p>
+                                <h5>Reset</h5>
+                                <p class="disable">Click on a table and confirm reset.</p>
                                 <hr>
                                 
                                     <div class="row p-1" style="background:white; border:1px solid black;">
@@ -135,19 +135,8 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            <div class="row size-2rem text-center mb-1">
-                                                                <div class="col-lg-6">
-                                                                    <input type="checkbox" class="res" checked/>
-                                                                    <label for="res">Reset</label>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <input type="checkbox" class="del" />
-                                                                     <label for="del">Delete</label>
-                                                                </div>
-                                                            </div>
-                                                                                                                        
-                                                        Confirm that you wish to <span class="del_res_choice">reset</span> table number <strong>{{ $table->table_number}}</strong>.
+                                                        <div class="modal-body">                                                                                                                                                                                    
+                                                        Confirm that you wish to reset table number <strong>{{ $table->table_number}}</strong>.
                                                         </div>
                                                         <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -185,37 +174,6 @@
 
 @include('partials.admin-footer')
 <script type="text/javascript" src="{{ asset('admin/js/mapping.js') }}"></script>
-<script>
-    $(document).ready(function(){
-        $('.res').click(function(){
-            if($(this).is(":checked")){
-                
-                $('.res').prop('checked', true);
-                $('.del').prop('checked', false);
-
-
-                $('.del_res_choice').html('reset');
-                $('.confirm').html('Confirm Reset');
-
-                $('.updateForm').attr('action', '{{route("reset-table")}}');
-            }            
-        });
-
-        $('.del').click(function(){
-            if($(this).is(":checked")){
-                
-                $('.del').prop('checked', true);
-                $('.res').prop('checked', false);
-
-                $('.del_res_choice').html('delete');
-                $('.confirm').html('Confirm Delete');
-
-                $('.updateForm').attr('action', '{{route("delete-table")}}');
-            }            
-        });
-    });
-</script>
-
 </body>
 
 </html>

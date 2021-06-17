@@ -153,4 +153,11 @@ padding: 5px;
   padding: 5px; 
 }
 
+.free{
+  background: red !important;
+}
+
+.not-free{
+  background: green !important;
+}
 

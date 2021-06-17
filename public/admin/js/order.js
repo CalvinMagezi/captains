@@ -272,10 +272,12 @@ $('.save-order').click(function(){
       success:function(response){
          console.log("success");
          window.alert("Successfully Added New Order");
+         location.reload();
       },
       error:function(){
           console.log("error");
           window.alert("Oops Something Went Wrong");
+          location.reload();
       }
   });
 });

@@ -47,4 +47,6 @@ Route::get('/show-tables', [App\Http\Controllers\MappingController::class, 'show
 Route::post('/new-inside-table', [App\Http\Controllers\MappingController::class, 'create_inside'])->middleware('auth')->name('new-inside-table');
 Route::post('/new-outside-table', [App\Http\Controllers\MappingController::class, 'create_outside'])->middleware('auth')->name('new-outside-table');
 Route::post('/reset-table', [App\Http\Controllers\MappingController::class, 'reset'])->middleware('auth')->name('reset-table');
-Route::post('/delete-table', [App\Http\Controllers\MappingController::class, 'delete'])->middleware('auth')->name('delete-table');
+// Route::post('/delete-table', [App\Http\Controllers\MappingController::class, 'delete'])->middleware('auth')->name('delete-table');
+Route::get('/assign-tables', [App\Http\Controllers\MappingController::class, 'assign_index'])->middleware('auth')->name('assign-tables');
+Route::post('/clear-assign', [App\Http\Controllers\MappingController::class, 'clear_assign'])->middleware('auth')->name('clear-assign');

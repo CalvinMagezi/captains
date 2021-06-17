@@ -339,6 +339,15 @@
 
                           <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Tables &amp; Mapping</div>
                           <ul class="pcoded-item pcoded-left-item">
+                              @if (Auth::user()->role == 'admin')
+                              <li>
+                                <a href="/assign-tables" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Assign Tables</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                              @endif
                             <li>
                                 <a href="/show-tables" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>

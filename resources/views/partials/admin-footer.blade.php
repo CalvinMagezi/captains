@@ -1,6 +1,7 @@
 <!-- Required Jquery -->
 <script type="text/javascript" src="{{ asset('admin/js/jquery/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/jquery-ui/jquery-ui.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/js/jquery-ui-touch-punch-master/jquery.ui.touch-punch.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/popper.js/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/bootstrap/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/pages/widget/excanvas.js') }}"></script>
@@ -26,5 +27,4 @@
 <script src="{{ asset('admin/js/pcoded.min.js') }}"></script>
 <script src="{{ asset('admin/js/vertical-layout.min.js') }}"></script>
 <!-- custom js -->
-<script type="text/javascript" src="{{ asset('admin/pages/dashboard/custom-dashboard.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/script.js') }}"></script>

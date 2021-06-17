@@ -132,7 +132,7 @@
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <h5>Table Maps</h5>
-                                                        <span class="text-muted">View current table mapping and table status.<em style="color: red">Red</em> means inactive, <em style="color: green">Green</em> means active.</span>
+                                                        <span class="text-muted">View current table mapping and table status.<em style="color: red">Red</em> means it has not been assigned, <em style="color: green">Green</em> means it has been assigned.</span>
                                                         <div class="card-header-right">
                                                             <ul class="list-unstyled card-option">
                                                                 <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -183,7 +183,8 @@
                                                                 <label class="label label-success">+</label>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        @if (Auth::user()->role == 'admin')
+                                                        <div class="row justify-content-center">
                                                             @foreach ($tables as $table)  
                                                             @if($table->status == 'active')                                                                                                                  
                                                             <div class="col-lg-3 col-md-4 col-sm-6 p-1 mr-1 mb-1 text-center" style="border:1px solid black; background:green;">
@@ -207,7 +208,7 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                        <button type="submit" class="btn btn-primary confirm">Confirm Reset</button>
+                                                                        <button type="submit" class="btn btn-primary view-table">View Table</button>
                                                                         </div>
                                                                     </div>
                                                                     </div>
@@ -217,6 +218,45 @@
                                                             @endif
                                                             @endforeach
                                                         </div>
+                                                        @endif
+                                                        @if(Auth::user()->role != 'admin')
+                                                        <div class="row justify-content-center">
+                                                            @foreach ($tables as $table)  
+                                                            @if($table->status == 'active')
+                                                            @if ($tabble->managed_by == Auth::user()->first_name)                                                                                                                                                                                                                                                                                                       
+                                                            <div class="col-lg-3 col-md-4 col-sm-6 p-1 mr-1 mb-1 text-center" style="border:1px solid black; background:green;">
+                                                                <button style="border: none; width:100%; background:green;" type="button" data-toggle="modal" data-target="#mod_{{ $table->table_number}}">
+                                                                    {{ $table->table_number }}
+                                                                </button>   
+                                                                
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="mod_{{ $table->table_number}}" tabindex="-{{ $loop->iteration}}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                        </div>
+                                                                        <div class="modal-body">                                                                            
+                                                                                                                                        
+                                                                        View Info For table number <strong>{{ $table->table_number}}</strong>.
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-primary view-table">View Table</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    </div>
+                                                                </div> 
+                                                                                                                                   
+                                                            </div>
+                                                            @endif
+                                                            @endif
+                                                            @endforeach
+                                                        </div>
+                                                        @endif                                                       
                                                     </div>
                                                 </div>
                                                 <div class="card quater-card">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Table;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -115,6 +116,79 @@ class MappingController extends Controller
         return redirect('/show-tables')->with('success', 'Table Successfully Deleted!');                 
     }
 
+     //===========================
+    // Table Assingment Functions
+    //===========================
+
+    public function assign_index(){
+
+        $waiters = DB::table('users')
+                        ->where('position','=','wait')
+                        ->orWhere('position','=','head waitress')
+                        ->get();
+
+        $tables = Table::all();                        
+
+        return view('admin.mapping.assign', [
+            'waiters' => $waiters,
+            'tables'  => $tables,
+        ]);
+    }
+   
+    public function assign(Request $request){
+        
+        $tables = Table::all();
+        $tables_assigned = implode (",", $request->input('tables_assigned',[]));        
+        $chosen_tables = explode (",", $tables_assigned);
+        $chosen_tables_length = count($chosen_tables);
+        $i = 0;
+
+        while ($i < $chosen_tables_length)
+        {
+
+            $update_table = DB::table('tables')
+                         ->where('table_number', '=', $chosen_tables[$i])
+                         ->update([
+                        'managed_by' => $request->input('assigned_to'),                                                                                                                                                                 
+                ]);  
+
+            $i++;
+        }
+
+        $update_user = DB::table('users')
+                ->where('first_name', $request->input('assigned_to'))
+                ->update([
+               'tables_incharge_of' => $tables_assigned,                                                                                                                                  
+                ]);        
+
+    }
+
+    public function clear_assign(){
+        $tables = Table::all();
+        $users = User::all();
+
+        foreach($tables as $table){               
+
+            $update_table = DB::table('tables')                     
+                     ->update([
+                        'managed_by' => 'free',                                                                                                                                                               
+            ]);                                   
+
+        }
+
+        foreach($users as $user){               
+
+            $update_users = DB::table('users')                     
+                     ->update([
+                        'tables_incharge_of' => 'free',                                                                                                                                                               
+            ]);                                   
+
+        }
+
+        return redirect('/assign-tables');
+
+    }
+
     //=============================
     //Ajax Requests
     //=============================
@@ -124,5 +198,6 @@ class MappingController extends Controller
 
         return response()->json($tables, 200);
     }
+    
 
 }

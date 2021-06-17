@@ -19,6 +19,7 @@ class User extends Authenticatable
         'first-name', 
         'tables_incharge_of', 
         'last-name', 
+        'color_code',
         'role',
         'position',
         'staff_number',

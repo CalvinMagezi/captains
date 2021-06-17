@@ -4,6 +4,7 @@
 
 var table_number = [];
 var table_id = [];
+var managed_by = [];
 var status = [];
 var arr_top = [];
 var arr_left = [];
@@ -35,13 +36,11 @@ $.ajax({
 
     table_number.push(item.table_number);
     table_id.push(item.table_id);
+    managed_by.push(item.managed_by);
     status.push(item.status);        
     arr_top.push(item.top);        
     arr_left.push(item.left);        
     });   
-
-    console.log(arr_top)
-    console.log(arr_left)
     
 var outside_tables = document.getElementById('outside-tables');
 
@@ -60,11 +59,20 @@ function placeTablesOut(array) {
   array.forEach(table => {
 
     let top = arr_top[index];
-    let left = arr_left[index];   
+    let left = arr_left[index]; 
+    let managed = managed_by[index];  
 
    let magnet = document.createElement('div')
    magnet.append(table)
     magnet.setAttribute("class", "word")
+    if(managed == 'free'){
+      magnet.style.background = 'red';
+      magnet.style.color = 'white';
+    }else{
+      magnet.style.background = 'green';
+      magnet.style.color = 'white';
+    }
+
     magnet.setAttribute("id", table + index)
     outside_tables.appendChild(magnet)
     magnet.style.top = top 
@@ -122,10 +130,12 @@ $('.save_tables').click(function(){
       success:function(response){
          console.log("success");
          window.alert("Successfully Updated Table Mapping");
+         location.reload();
       },
       error:function(){
           console.log("error");
           window.alert("Oops Something Went Wrong");
+          location.reload();
       }
   });
 });
