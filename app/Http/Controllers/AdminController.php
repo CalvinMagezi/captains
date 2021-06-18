@@ -14,6 +14,7 @@ use App\Models\Table;
 use Gate;
 use DB;
 use Log;
+use Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 use App\Models\User;
@@ -26,12 +27,27 @@ class AdminController extends Controller
         $orders = Order::all();
         $tables = Table::all();
 
+        $all_order_count = Order::all()->count();
+        $all_closed_orders = Order::all()->where('status','=','closed')->count();
+
+        $my_order_count = Order::all()->where('taken_by','=',Auth::user()->first_name.' '.Auth::user()->last_name)->count();
+        $my_closed_order_count = Order::all()
+                            ->where('taken_by','=',Auth::user()->first_name.' '.Auth::user()->last_name)
+                            ->where('status','=','closed')
+                            ->count();
+        $my_assigned_tables = Table::where('managed_by','=',Auth::user()->first_name)->count();                            
+
         $active_table_count = Table::where('status','=','active')->count();
         
         return view('admin.dashboard', [
             'users' => $users,
             'orders' => $orders,
             'tables' => $tables,
+            'all_orders' => $all_order_count,
+            'all_closed_orders' => $all_closed_orders,
+            'my_order_count' => $my_order_count,
+            'my_closed_order_count' => $my_closed_order_count,
+            'my_assigned_tables' => $my_assigned_tables,
             'total_active_tables' => $active_table_count,
         ]);
     }

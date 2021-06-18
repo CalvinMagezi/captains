@@ -42,18 +42,28 @@
                                   <h3>My Tables</h3>
                                   
                               </div>
-                            @foreach ($tables as $table)  
-                                                                                                                                            
-                            <div class="col-lg-1 col-md-2 col-sm-3 p-1 mr-1 mb-1 text-center tb" style="border:1px solid black;">
-                                <button style="border: none; width:100%; background:none;" class="set-table" type="button">
-                                    {{ $table->table_number }}
-                                </button>                                                                                                                              
-                            </div>
-                            
+                              
+                                @foreach ($tables as $table)  
+                                      @if (Auth::user()->role != 'admin')
+                                          @if ($table->managed_by == Auth::user()->first_name)
+                                          <div class="col-lg-1 col-md-2 col-sm-3 p-1 mr-1 mb-1 text-center tb" style="border:1px solid black;">
+                                            <button style="border: none; width:100%; background:none;" class="set-table text-center" type="button">
+                                                {{ $table->table_number }}
+                                            </button>                                                                                                                              
+                                          </div>
+                                          @endif
+                                      @else
+                                      <div class="col-lg-1 col-md-2 col-sm-3 p-1 mr-1 mb-1 text-center tb" style="border:1px solid black;">
+                                        <button style="border: none; width:100%; background:none;" class="set-table text-center" type="button">
+                                            {{ $table->table_number }}
+                                        </button>                                                                                                                              
+                                      </div>
+                                      @endif                                                                                                                                                                
                             @endforeach
                             
                           </div>
-                        <div class="col-7 text-center">
+                          <div class="row">
+                        <div class="col-lg-7 col-md-12 col-sm-12 text-center">
                             <div class="row">
                                 <div class="col-lg-6 col-md-9">
                                     <label for="search">Search For Item Name</label>
@@ -112,7 +122,7 @@
                               </div>
                               
                         </div>
-                        <div class="col-5 text-center">                           
+                        <div class="col-lg-5 col-md-12 col-sm-12 text-center">                           
 
                                 <div class="card text-center">
                                     <div class="card-header">
@@ -153,6 +163,7 @@
                                   </div>                                                            
                             
                         </div>
+                      </div>
                       </div>
                   </div>
                   <!-- Page-body end -->

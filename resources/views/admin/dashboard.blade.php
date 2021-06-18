@@ -37,10 +37,14 @@
                                                     <div class="card-block">
                                                         <div class="row justify-content-center text-center align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-purple">30</h4>
-                                                                <h6 class="text-muted m-b-0">Open Orders</h6>
-                                                            </div>
-                                                            
+                                                                @if (Auth::user()->role != 'admin')
+                                                                <h4 class="text-c-purple">{{ $my_order_count }}</h4>                                                                
+                                                                <h6 class="text-muted m-b-0">My Open Orders</h6>
+                                                                @else
+                                                                <h4 class="text-c-purple">{{ $all_orders }}</h4> 
+                                                                <h6 class="text-muted m-b-0">All Open Orders</h6>
+                                                                @endif                                                                
+                                                            </div>                                                            
                                                         </div>
                                                     </div>
                                                     <div class="card-footer bg-c-purple">
@@ -61,10 +65,14 @@
                                                     <div class="card-block">
                                                         <div class="row justify-content-center text-center  align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-green">290</h4>
+                                                                @if (Auth::user()->role != 'admin')
+                                                                <h4 class="text-c-green">{{ $my_closed_order_count}}</h4>
+                                                                <h6 class="text-muted m-b-0">My losed Orders</h6>
+                                                                @else
+                                                                <h4 class="text-c-green">{{ $all_closed_orders }}</h4>
                                                                 <h6 class="text-muted m-b-0">Closed Orders</h6>
-                                                            </div>
-                                                           
+                                                                @endif                                                                
+                                                            </div>                                                           
                                                         </div>
                                                     </div>
                                                     <div class="card-footer bg-c-green">
@@ -84,8 +92,13 @@
                                                     <div class="card-block">
                                                         <div class="row justify-content-center text-center  align-items-center">
                                                             <div class="col-8">
+                                                                @if (Auth::user()->role != 'admin')
+                                                                <h4 class="text-c-red">{{ $my_assigned_tables }}</h4>
+                                                                <h6 class="text-muted m-b-0">My Assigned Tables</h6>
+                                                                @else 
                                                                 <h4 class="text-c-red">{{ $total_active_tables }}</h4>
                                                                 <h6 class="text-muted m-b-0">Active Tables</h6>
+                                                                @endif
                                                             </div>
                                                            
                                                         </div>
@@ -176,7 +189,11 @@
                                                     <div class="card-block">
                                                         <div class="row">
                                                             <div class="col">
-                                                                <h4>Active Tables</h4>
+                                                                @if (Auth::user()->role != 'admin')
+                                                                <h4>My Active Tables</h4>
+                                                                @else
+                                                                <h4>All Active Tables</h4>
+                                                                @endif                                                                
                                                                 <p class="text-muted">Today</p>
                                                             </div>
                                                             <div class="col-auto">
@@ -223,7 +240,7 @@
                                                         <div class="row justify-content-center">
                                                             @foreach ($tables as $table)  
                                                             @if($table->status == 'active')
-                                                            @if ($tabble->managed_by == Auth::user()->first_name)                                                                                                                                                                                                                                                                                                       
+                                                            @if ($table->managed_by == Auth::user()->first_name)                                                                                                                                                                                                                                                                                                       
                                                             <div class="col-lg-3 col-md-4 col-sm-6 p-1 mr-1 mb-1 text-center" style="border:1px solid black; background:green;">
                                                                 <button style="border: none; width:100%; background:green;" type="button" data-toggle="modal" data-target="#mod_{{ $table->table_number}}">
                                                                     {{ $table->table_number }}

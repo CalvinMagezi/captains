@@ -138,63 +138,38 @@
                           </li>
                       </ul>
                       <ul class="nav-right">
+                        @if (Auth::user()->role != 'admin')
                           <li class="header-notification">
                               <a href="#!" class="waves-effect waves-light">
                                   <i class="ti-bell"></i>
                                   <span class="badge bg-c-red"></span>
                               </a>
+                              
                               <ul class="show-notification">
-                                  <li>
-                                      <h6>Notifications</h6>
-                                      <label class="label label-danger">New</label>
-                                  </li>
-                                  <li class="waves-effect waves-light">
-                                      <div class="media">
+                                <li>
+                                    <h6>My Tables</h6>
+                                    <label class="label label-danger">{{ Auth::user()->role }}</label>
+                                </li>
+                                @foreach ($tables as $table)
+                                @if ($table->managed_by == Auth::user()->first_name)  
+                                <li class="waves-effect waves-light">
+                                    <div class="media">                                      
+                                        <div class="media-body">
+                                            <h5 class="notification-user">Table number: {{ $table->table_number }}</h5>
+                                            <p class="notification-msg">Table status: {{ $table->status}}</p>
+                                            <span class="notification-time">Table location: {{ $table->position }}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                @endif                                    
+                                @endforeach                                                                
+                            </ul>
+                        </li>
+                              @else
+                                  
+                              @endif
+                                                       
 
-                                        @if( Auth::user()->role  == 'admin' || Auth::user()->position == 'asst. accountant')
-                                        <img src="admin/images/roles/admin.png" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                        @endif
-                                        @if(Auth::user()->position == 'cashier')
-                                        <img src="admin/images/roles/admin.png" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                        @endif
-                                        @if(Auth::user()->position == 'cook' || Auth::user()->position == 'sous-chef')
-                                        <img src="admin/images/roles/cook.png" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                        @endif
-                                        @if(Auth::user()->position == 'steward')
-                                        <img src="admin/images/roles/steward.png" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                        @endif
-                                        @if(Auth::user()->position == 'wait' || Auth::user()->position == 'bartender')
-                                        <img src="admin/images/roles/wait.png" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                        @endif
-                                          <div class="media-body">
-                                              <h5 class="notification-user">{{Auth::user()->first_name.' '.Auth::user()->last_name }}</h5>
-                                              <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                              <span class="notification-time">30 minutes ago</span>
-                                          </div>
-                                      </div>
-                                  </li>
-                                  <li class="waves-effect waves-light">
-                                      <div class="media">
-                                          <img class="d-flex align-self-center img-radius" src="admin/images/avatar-4.jpg" alt="Generic placeholder image">
-                                          <div class="media-body">
-                                              <h5 class="notification-user">Joseph William</h5>
-                                              <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                              <span class="notification-time">30 minutes ago</span>
-                                          </div>
-                                      </div>
-                                  </li>
-                                  <li class="waves-effect waves-light">
-                                      <div class="media">
-                                          <img class="d-flex align-self-center img-radius" src="admin/images/avatar-3.jpg" alt="Generic placeholder image">
-                                          <div class="media-body">
-                                              <h5 class="notification-user">Sara Soudein</h5>
-                                              <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                              <span class="notification-time">30 minutes ago</span>
-                                          </div>
-                                      </div>
-                                  </li>
-                              </ul>
-                          </li>
                           <li class="user-profile header-notification">
                               <a href="#!" class="waves-effect waves-light">
                                 @if( Auth::user()->role  == 'admin' || Auth::user()->position == 'asst. accountant')
