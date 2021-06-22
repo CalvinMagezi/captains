@@ -89,7 +89,7 @@
       </div>
   </div>
   <!-- Pre-loader end -->
-  <div id="pcoded" class="pcoded">
+  <div id="pcoded" class="pcoded" hidden-print>
       <div class="pcoded-overlay-box"></div>
       <div class="pcoded-container navbar-wrapper">
           <nav class="navbar header-navbar pcoded-header">
@@ -290,21 +290,21 @@
                                 </a>
                             </li>
                               <li class=" ">
-                                  <a href="#" class="waves-effect waves-dark">
+                                  <a href="/ongoing-orders" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                       <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Ongoing</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>                                      
                               <li class=" ">
-                                  <a href="#" class="waves-effect waves-dark">
+                                  <a href="/flagged-orders" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                       <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Flagged</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
                               <li class=" ">
-                                  <a href="#" class="waves-effect waves-dark">
+                                  <a href="/closed-orders" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                       <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Closed</span>
                                       <span class="pcoded-mcaret"></span>
@@ -386,13 +386,13 @@
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
-                              <li>
+                              {{-- <li>
                                   <a href="#" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">Most Popular</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
-                              </li>
+                              </li> --}}
         
                           </ul>                           
                           

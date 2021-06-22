@@ -4,7 +4,7 @@
     var available_products = [];
     var available_prices = [];
     var available_hprices = [];
-    var available_category = [];
+    var available_category = [];    
     var available_major_category = [];
 
     var PostTableNumber = '',
@@ -13,13 +13,49 @@
         PostOrderPrices = [],
         PostOrderQuantities = [],
         PostOrderSpecifics = [],
+        PostOrderCategory = [],
+        PostOrderMCategory = [],
         PostOrderPriority = [],
         PostOrderTotalPrice = '';   
 
 
+   
+           
+
+
     $(document).ready(function() {
+
+
+      $('.print_table').click(function(){
+        // var print_bill = document.getElementById('confirm_table');
+        // var wme = window.open("","","width=900,heigh=700")
+        
+        // wme.document.write(print_bill.outerHTML)
+        // wme.document.close()
+        // wme.focus();
+        // wme.print()
+        
+        // setTimeout(() => {
+        // wme.close()  
+        // }, 1000);
+
+        print()
+
+      });
+
       
-      
+      $('.pt_item').each(function(){
+        $(this).click(function(){
+
+          var item = $(this).val();
+          var item_text = $(this).attr('placeholder');         
+          
+          $('#search').val(item) 
+          $('#search_p').val(item_text)          
+    
+        
+        });
+      })        
 
       $.ajaxSetup({
 
@@ -69,7 +105,11 @@
               
               var item_index = available_products.indexOf(searched_word);
 
-              var item_price = available_prices[item_index];              
+              var item_price = available_prices[item_index];
+              
+              var item_category = available_category[item_index];
+
+              var item_m_categrory = available_major_category[item_index]
 
               var item_quantity = $('#number').val();
 
@@ -83,6 +123,8 @@
               
               PostOrderItems.push(searched_word);
               PostOrderPrices.push(item_price);
+              PostOrderCategory.push(item_category);
+              PostOrderMCategory.push(item_m_categrory);
               PostOrderPriority.push(item_priority);
               PostOrderQuantities.push(item_quantity);
               PostOrderSpecifics.push(item_specifics);
@@ -96,64 +138,67 @@
                   </td>
                   <td class="text-center">
                   <p>${searched_word}</p>
+                  <input class="sl_word" type="hidden" name="products[]" value="${searched_word}" />
                   </td>
                   <td class="text-center">
                   <p>${item_price}</p>
                   </td>
                   <td class="text-center">
                   <p>${item_quantity}</p>
+                  <input type="hidden" name="quantities[]" value="${item_quantity}" />
+                  <input type="hidden" name="total_price" value="${confirm_price}" />
+                  <input type="hidden" name="specifics[]" value="${item_specifics}" />
+                  <input type="hidden" name="priority[]" value="${item_priority}" />
                   </td>
-                    <td class="text-center">
-                      <button class="btn btn-danger remove"
+                    <td hidden-print class="text-center">
+                      <button hidden-print class="btn btn-danger remove"
                         type="button">Remove</button>
                       </td>
                     </tr>`);                    
 
-              // Adding a row inside the confirmation table.
-              $('#tbody_confirm').append(`<tr id="R${++rowConIdx}">
-              <td class="row-index text-center">
-              <p value="${rowConIdx}">${rowConIdx}</p>
-              </td>
-              <td class="text-center">
-              <p>${searched_word} x ${item_quantity}</p>
-              <input type="hidden" name="products[]" value="${searched_word}" />
-              <input type="hidden" name="quantities[]" value="${item_quantity}" />
-              </td>
-              <td class="text-center">
-              <p>${confirm_price}</p>
-              <input type="hidden" name="total_price" value="${confirm_price}" />
-              <input type="hidden" name="specifics[]" value="${item_specifics}" />
-              <input type="hidden" name="priority[]" value="${item_priority}" />
-              </td>                             
-                </tr>`);
+              // Adding a row inside the confirmation table.             
 
               $('#price_total').html('Order Total: KES '+price_total);  
 
               $('#search').val('');
+              $('#search_p').val('');
               $('#number').val(1);
 
-            });
-            
-            function remove_same_row(id2){
-
-              console.log(id2)
-
-              $('#tbody_confirm tr').each(function(){
-                var id = $(this).attr('id');
-
-                console.log(id)
-                
-                var c_id = parseInt(id.substring(1));                
-              
-                if(c_id == id2){
-                  $(this).remove();
-                } 
-              })      
-                            
-            };
+            });                       
 
             // jQuery button click event to remove a row.
             $('#tbody').on('click', '.remove', function () {
+
+              var s_id = $(this).closest('tr').attr('id');              
+              var s_dig = parseInt(s_id.substring(1)) -1;               
+
+              if(s_dig < 0){
+                s_dig = 0;
+              }
+                                
+              price_total = price_total - (parseInt(PostOrderPrices[s_dig]) * parseInt(PostOrderQuantities[s_dig])); 
+
+              PostOrderTotalPrice = price_total;
+
+              $('#price_total').html('Order Total: KES '+price_total);
+
+              // console.log(price_total);
+
+              PostOrderItems.splice(s_dig,1)
+              PostOrderPrices.splice(s_dig,1)
+              PostOrderCategory.splice(s_dig,1)
+              PostOrderMCategory.splice(s_dig,1)
+              PostOrderQuantities.splice(s_dig,1)
+              PostOrderSpecifics.splice(s_dig,1)
+              PostOrderPriority.splice(s_dig,1) 
+              
+              
+                // console.log(PostOrderItems)
+                // console.log(PostOrderPrices)
+                // console.log(PostOrderQuantities)
+                // console.log(PostOrderSpecifics)
+                // console.log(PostOrderPriority)
+
 
               // Getting all the rows next to the row
               // containing the clicked button
@@ -162,31 +207,29 @@
               // Iterating across all the rows 
               // obtained to change the index
               child.each(function () {
+                
 
                 // Getting <tr> id.
-                var id = $(this).attr('id'); 
-                var id2 = id.substring(1);
-                remove_same_row(id2);
+                var id = $(this).attr('id');                                             
 
                 // Getting the <p> inside the .row-index class.
-                var idx = $(this).children('.row-index').children('p');
+                var idx = $(this).children('.row-index').children('p');               
 
                 // Gets the row number from <tr> id.
-                var dig = parseInt(id.substring(1));
-
-                                             
+                var dig = parseInt(id.substring(1));                                                                                       
 
                 // Modifying row index.
-                idx.html(`Row ${dig - 1}`);
+                idx.html(`# ${dig - 1}`);
 
                 // Modifying row id.
-                $(this).attr('id', `R${dig - 1}`);
+                $(this).attr('id', `R${dig - 1}`);  
+
               });
 
-              // Removing the current row.
-              $(this).closest('tr').remove();              
+              // Removing the current row.              
 
-
+              $(this).closest('tr').remove(); 
+            
 
               // Decreasing total number of rows by 1.
               rowIdx--;              
@@ -265,6 +308,8 @@ $('.save-order').click(function(){
               taken_by: PostTakenBy,
               items: PostOrderItems,              
               prices: PostOrderPrices, 
+              categories: PostOrderCategory,
+              m_categories: PostOrderMCategory,
               quantities: PostOrderQuantities, 
               specifics: PostOrderSpecifics, 
               priority: PostOrderPriority, 

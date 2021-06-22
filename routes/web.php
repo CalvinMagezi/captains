@@ -40,6 +40,9 @@ Route::get('autocomplete', [SearchController::class, 'autocomplete_product'])->n
 Route::get('/create-order', [App\Http\Controllers\OrderController::class, 'new_order'])->middleware('auth')->name('new-order');
 Route::post('/create-order', [App\Http\Controllers\AdminController::class, 'store'])->name('store-order');
 Route::get('/new-order', [App\Http\Controllers\OrderController::class, 'new_order'])->middleware('auth')->name('new-order');
+Route::get('/ongoing-orders', [App\Http\Controllers\OrderController::class, 'ongoing'])->name('ongoing-orders');
+Route::get('/flagged-orders', [App\Http\Controllers\OrderController::class, 'flagged'])->name('flagged-orders');
+Route::get('/closed-orders', [App\Http\Controllers\OrderController::class, 'closed'])->name('closed-orders');
 
 
 //Mapping

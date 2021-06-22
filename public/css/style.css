@@ -3466,3 +3466,17 @@ ol {
 		font-size: 24px;
 	}
 }
+
+
+.show-on-print{
+	display: none; 
+   }
+   
+@media print {
+	 .show-on-print{
+	   display:block !important;
+	 }
+	 .hide-on-print{
+	   display: none;
+	 }
+	}

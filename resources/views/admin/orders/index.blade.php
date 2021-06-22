@@ -62,33 +62,155 @@
                             @endforeach
                             
                           </div>
-                          <div class="row">
+                          <div class="row justify-content-center">
                         <div class="col-lg-7 col-md-12 col-sm-12 text-center">
                             <div class="row">
-                                <div class="col-lg-6 col-md-9">
-                                    <label for="search">Search For Item Name</label>
-                                    <input name="search" id="search" class="search form-control" type="text">
+                              <div class="col-12 justify-content-center">
+                                <div class="row ">
+                                  <div class="col-12 justify-content-center"><strong>Pick a Category</strong></div>
+                                  <div class="col-6 text-center">
+                                    <div class="pt-1 pb-1 text-center mx-auto" style="height:90px; width:90px;" >
+                                      <!-- Scrollable modal -->
+                                      <!-- Button trigger modal -->
+                                      <button type="button" style="height: 100%; width:100%;" class="btn btn-alert pt-2 pb-2 disabled" data-toggle="modal" data-target="#staticBackp">
+                                        FOOD
+                                      </button>
+                                      
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="staticBackdropLabel">All Foods</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                              ...
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                              <button type="button" class="btn btn-primary">Understood</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                  <div class="col-6">
+                                    <div class="pt-1 pb-1 text-center mx-auto" style="height:90px; width:90px;" >
+                                      
+                                      <!-- Scrollable modal -->
+                                      <!-- Button trigger modal -->
+                                      <button type="button" style="height: 100%; width:100%;" class="btn btn-primary pt-2 pb-2" data-toggle="modal" data-target="#drinks">
+                                        DRINKS
+                                      </button>
+                                      
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="drinks" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="staticBackdropLabel">All Drinks</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <div class="row justify-content-center">
+                                              @foreach ($drinks as $drink)
+                                              <div class="col-4 mb-1 mr-1">                                              
+                                              <button type="button" style="height: 100%; width:100%;" class="btn btn-primary pt-2 pb-2 m-1 p-1 mb-1 mr-1" data-toggle="modal" data-target="#c_{{$loop->iteration}}">
+                                                {{$drink}}
+                                              </button>
+
+                                                        <!-- Modal -->
+                                                <div class="modal fade" id="c_{{$loop->iteration}}" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-labelledby="for_category" aria-hidden="true">
+                                                  <div class="modal-dialog modal-dialog-scrollable">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header">
+                                                        <h5 class="modal-title" id="for_category">Type: {{$drink}}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                        <div class="row justify-content-left text-left">
+                                                          @foreach ($products as $product)
+                                                          @if ($product->category == $drink )
+                                                          <div class="col-6 mb-2 mr-1">
+                                                           
+                                                          <button type="button" data-dismiss="modal" class="btn btn-success pt_item" placeholder="{{$product->price}}" value="{{$product->name}}">
+                                                            {{$product->name}}KES {{$product->price}}
+                                                          </button>    
+                                                       
+                                                          </div>
+                                                          @endif
+                                                          @endforeach 
+                                                        </div>
+                                                                                                               
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                                        
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              @endforeach
+                                            </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                            
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                  </div>
                                 </div>
-                                <div class="col-lg-2 col-md-4">
-                                    <label for="search">How Many</label>
+                                <div class="row mb-2 mt-2">
+                                  <div class="col-6 pt-1 pb-1">
+                                    <div class="form-row">
+                                      <label class="col-2" for="search"><strong>Item Name: </strong></label>
+                                      <input name="search" id="search" class="search col-10 form-control" type="text">
+                                    </div>                                    
+                                  </div>
+                                  <div class="col-6 pt-1 pb-1">
+                                    <div class="form-row">
+                                      <label class="col-2" for="search_p"><strong>Item Price: </strong></label>
+                                    <input name="search_p" id="search_p" class="search form-control col-10" type="text">
+                                    </div>                                    
+                                  </div>
+                                </div>
+                                
+                              </div>
+                               
+                              <div class="col-12">
+                              <div class="row text-center">
+                                <div class="col-lg-4 col-md-4">
+                                    <label for="search"><strong>How Many: </strong></label>
                                     <div data-role="controlgroup" data-type="horizontal" data-mini="true">
                                         <button class="plus" id="plus" data-inline="true">+</button>
                                         <input type="text" id="number" value="1" class="text-center" style="width:30px;" readonly/>
                                         <button class="minus" id="minus" data-inline="true">-</button>
                                       </div>
                                 </div>
-                                <div class="col-lg-2 col-md-4">
-                                    <label for="specifics">Specifics</label>
+                                <div class="col-lg-4 col-md-4">
+                                    <label for="specifics"><strong>Specifics: </strong></label>
                                     <div class="input-group mb-3">                                        
-                                        <select class="custom-select" id="specifics">
+                                        <select style="width: 100%;" class="custom-select" id="specifics">
                                           <option value="regular" selected>Regular</option>
                                           <option value="cold">Cold</option>
                                           <option value="Hot">Hot</option>                                          
                                         </select>
                                       </div>
                                 </div>
-                                <div class="col-lg-2 col-md-4">
-                                    <label for="priority">Priority</label>
+                                <div class="col-lg-4 col-md-4">
+                                    <label for="priority"><strong>Priority: </strong></label>
                                     <div class="input-group mb-3">                                        
                                         <select class="custom-select" id="priority">
                                           <option value="regular" selected>Regular</option>
@@ -98,30 +220,17 @@
                                         </select>
                                       </div>
                                 </div>
+                              </div>
                             </div>
+
+                            </div>                          
                             
                             <button class="btn btn-md btn-success mb-3 mt-2" 
                                 id="addBtn" type="button">
                                   Add Item To Order
-                              </button>
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                  <thead>
-                                    <tr>
-                                      <th class="text-center">#</th>
-                                      <th class="text-center">Name</th>
-                                      <th class="text-center">Price</th>
-                                      <th class="text-center">Quantity</th>                                      
-                                      <th class="text-center">Remove</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody id="tbody">
-                            
-                                  </tbody>
-                                </table>
-                              </div>
-                              
+                              </button>                                                          
                         </div>
+
                         <div class="col-lg-5 col-md-12 col-sm-12 text-center">                           
 
                                 <div class="card text-center">
@@ -134,16 +243,18 @@
                                     </div>
                                     <div class="card-body">                                      
                                       
-                                      <div class="table-responsive">
-                                        <table class="table table-bordered confirm_table">
+                                      <div id="confirm_wrapper" class="table-responsive">
+                                        <table id="confirm_table" class="table table-bordered confirm_table show-on-print" print>
                                           <thead>
-                                            <tr>
+                                            <tr>                                              
                                               <th class="text-center">#</th>
                                               <th class="text-center">Name & Quantity</th>
-                                              <th class="text-center">Price</th>                                         
+                                              <th class="text-center">Price</th> 
+                                              <th class="text-center">Quantity</th>                                      
+                                              <th class="text-center">Remove</th>                                        
                                             </tr>
                                           </thead>
-                                          <tbody id="tbody_confirm">
+                                          <tbody id="tbody">
                                     
                                           </tbody>
                                         </table>
@@ -153,11 +264,11 @@
                                     </div>
                                     <div class="card-footer text-muted">
                                         <input type="hidden" class="final_price" name="price_total" readonly>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="extra_notes">Extra Notes</label>
                                             <textarea class="form-control" id="extra_notes" rows="3"></textarea>
-                                          </div>
-                                        <a href="#" class="btn btn-primary mb-2">Print Order</a>
+                                          </div> --}}
+                                        <button href="#" class="btn btn-primary mb-2 print_table">Print Order</button>
                                         <button type="submit" class="btn btn-success mb-2 save-order">Submit Order</button>
                                     </div>
                                   </div>                                                            
