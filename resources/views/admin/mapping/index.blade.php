@@ -43,7 +43,8 @@
                         
 
                          <div class="row justify-content-center">
-                             {{-- Outside Tables --}}
+                            @if (Auth::user()->role == 'admin')
+                            {{-- Outside Tables --}}
                             <div class="col-lg-8 col-md-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
@@ -87,6 +88,55 @@
                                     </div>
                                 </div>
                             </div>
+                                                            
+                            @else
+                                {{-- Outside Tables --}}
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Current Table Mapping Layout</h5>
+                                        <span class="text-muted">View current table mapping and table status.<em style="color: red">Red</em> means inactive, <em style="color: green">Green</em> means active.</span>
+                                        <div class="card-header-right">
+                                            <ul class="list-unstyled card-option">
+                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                <li><i class="fa fa-minus minimize-card"></i></li>
+                                                <li><i class="fa fa-refresh reload-card"></i></li>
+                                                <li><i class="fa fa-edit close-card"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-block align-items-center justify-content-center">
+                                        <div id="mapping-container" class="mapping-container mx-auto" >
+                                            <section id="outside-tables" class="outside-tables">
+                                                <div class="balcony text-center">View Of Park</div>
+                                                <div class="long-table-1 text-center">Long Table 1</div>
+                                                <div class="bar text-center">Cocktail Bar</div>
+                                                <div class="long-table-2 text-center">Long Table 2</div>
+                                                <div class="dj text-center"> DJ Stand</div>
+                                                <div class="kitchen text-center">K I T C H E N</div>
+                                                <div class="page-line-l"></div>
+                                                <div class="page-line-r"></div>
+                                                <div class="vip-1 text-center">Prive' 1</div>
+                                                <div class="vip-2 text-center">Prive' 2</div>
+                                                <div class="bar-2 text-center">Bar</div>
+                                                <div class="station text-center">Station</div>
+                                                <div class="bar-3 text-center">Main Bar</div>
+                                                <div class="dj-2 text-center">DJ Stand</div>
+                                                {{-- <div class="curtain-1"></div>
+                                                <div class="curtain-2"></div>
+                                                <div class="curtain-3"></div>
+                                                <div class="curtain-4"></div>
+                                                <div class="curtain-5"></div>
+                                                <div class="curtain-6"></div> --}}
+                                            </section>                                                      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                                
+                            @endif                            
 
                          
                             @if (Auth::user()->role == 'admin')
@@ -113,7 +163,7 @@
                                 <p class="disable">Click on a table and confirm reset.</p>
                                 <hr>
                                 
-                                    <div class="row p-1" style="background:white; border:1px solid black;">
+                                    <div class="row justify-content-center p-1" style="background:white; border:1px solid black;">
                                         @foreach ($tables as $table)
                                         
                                         <div class="col-lg-3 col-md-4 col-sm-6 p-1 mr-1 mb-1 text-center" style="border:1px solid black;">

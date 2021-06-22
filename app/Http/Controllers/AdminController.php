@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyOrderRequest;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Item;
 use App\Models\Product;
 use App\Models\Table;
@@ -24,7 +25,10 @@ class AdminController extends Controller
     public function index(){
 
         $users = User::all();
-        $orders = Order::all();
+        $orders = DB::table('orders')
+                    ->where('status','=','ongoing')
+                    ->paginate(10);
+        $order_details = OrderDetails::all();
         $tables = Table::all();
 
         $all_order_count = Order::all()->count();
@@ -42,6 +46,7 @@ class AdminController extends Controller
         return view('admin.dashboard', [
             'users' => $users,
             'orders' => $orders,
+            'order_details' => $order_details,
             'tables' => $tables,
             'all_orders' => $all_order_count,
             'all_closed_orders' => $all_closed_orders,

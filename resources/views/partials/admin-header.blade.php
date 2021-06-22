@@ -150,6 +150,7 @@
                                     <h6>My Tables</h6>
                                     <label class="label label-danger">{{ Auth::user()->role }}</label>
                                 </li>
+                                @if (Auth::user()->tables_incharge_of != 'free')
                                 @foreach ($tables as $table)
                                 @if ($table->managed_by == Auth::user()->first_name)  
                                 <li class="waves-effect waves-light">
@@ -162,7 +163,9 @@
                                     </div>
                                 </li>
                                 @endif                                    
-                                @endforeach                                                                
+                                @endforeach  
+                                @endif
+                                                                                              
                             </ul>
                         </li>
                               @else
@@ -344,7 +347,7 @@
 
                           
 
-                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Reports</div>
+                          {{-- <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Reports</div>
                           <ul class="pcoded-item pcoded-left-item">
                               <li>
                                   <a href="#" class="waves-effect waves-dark">
@@ -375,9 +378,9 @@
                                 </a>
                             </li>
         
-                          </ul>
+                          </ul> --}}
         
-                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Items</div>
+                          {{-- <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Items</div>
                           <ul class="pcoded-item pcoded-left-item">
                               <li>
                                   <a href="#" class="waves-effect waves-dark">
@@ -386,15 +389,15 @@
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
-                              {{-- <li>
+                              <li>
                                   <a href="#" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">Most Popular</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
-                              </li> --}}
+                              </li>
         
-                          </ul>                           
+                          </ul>                            --}}
                           
 
                       </div>

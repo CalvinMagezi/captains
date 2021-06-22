@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {                
         $this->call(UserSeeder::class);
         $this->call(TableSeeder::class);
+        $this->call(SectionSeeder::class);
         $path = public_path('sql/items.sql');
         $sql = file_get_contents($path);
         DB::unprepared($sql);        

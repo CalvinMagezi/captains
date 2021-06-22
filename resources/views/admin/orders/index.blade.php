@@ -268,7 +268,7 @@
                                             <label for="extra_notes">Extra Notes</label>
                                             <textarea class="form-control" id="extra_notes" rows="3"></textarea>
                                           </div> --}}
-                                        <button href="#" class="btn btn-primary mb-2 print_table">Print Order</button>
+                                        {{-- <button href="#" class="btn btn-primary mb-2 print_table">Print Order</button> --}}
                                         <button type="submit" class="btn btn-success mb-2 save-order">Submit Order</button>
                                     </div>
                                   </div>                                                            

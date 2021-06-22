@@ -44,6 +44,9 @@ Route::get('/ongoing-orders', [App\Http\Controllers\OrderController::class, 'ong
 Route::get('/flagged-orders', [App\Http\Controllers\OrderController::class, 'flagged'])->name('flagged-orders');
 Route::get('/closed-orders', [App\Http\Controllers\OrderController::class, 'closed'])->name('closed-orders');
 
+Route::post('/soft-delete-order',[App\Http\Controllers\OrderController::class, 'soft_delete'])->name('soft-delete-order');
+Route::post('/restore-order',[App\Http\Controllers\OrderController::class, 'restore'])->name('restore-order');
+
 
 //Mapping
 Route::get('/show-tables', [App\Http\Controllers\MappingController::class, 'show'])->middleware('auth')->name('show-mapping');

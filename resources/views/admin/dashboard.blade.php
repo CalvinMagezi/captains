@@ -30,7 +30,7 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                     <div class="page-body">
-                                        <div class="row">
+                                        <div class="row justify-content-center">
                                             <!-- task, page, download counter  start -->
                                             <div class="col-xl-3 col-md-6">
                                                 <div class="card">
@@ -115,7 +115,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6">
+                                            {{-- <div class="col-xl-3 col-md-6">
                                                 <div class="card">
                                                     <div class="card-block">
                                                         <div class="row justify-content-center text-center  align-items-center">
@@ -137,7 +137,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <!-- task, page, download counter  end -->
     
                                             <!--  sale analytics start -->
@@ -276,7 +276,7 @@
                                                         @endif                                                       
                                                     </div>
                                                 </div>
-                                                <div class="card quater-card">
+                                                {{-- <div class="card quater-card">
                                                     <div class="card-block">
                                                         <h6 class="text-muted m-b-15">This Month</h6>
                                                         <h4>KES 3,9452.50</h4>
@@ -288,12 +288,15 @@
                                                         <p class="text-muted">Inside Revenue<span class="f-right">40%</span></p>
                                                         <div class="progress"><div class="progress-bar bg-c-green" style="width: 40%"></div></div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
+
                                             </div>
+
                                             <!--  sale analytics end -->
     
                                             <!--  project and team member start -->
                                             <div class="col-xl-8 col-md-12">
+                                                
                                                 <div class="card table-card">
                                                     <div class="card-header">
                                                         <h5>Active Orders</h5>
@@ -312,56 +315,178 @@
                                                             <table class="table table-hover">
                                                                 <thead>
                                                                 <tr>
-                                                                    <th>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                            <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                        </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        Table #</th>
+                                                                    <th>Order #</th>
+                                                                    <th>Table #</th>
                                                                     <th>Taken By</th>
                                                                     <th>Status</th>
-                                                                    <th class="text-right">Total</th>
+                                                                    <th>Total</th>                                                
+                                                                    <th>View</th>
+                                                                    @if (Auth::user()->role == 'admin')
+                                                                    {{-- <th>Edit</th> --}}
+                                                                    <th>Delete</th>
+                                                                    @endif                                                
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-
+                        
                                                                     @foreach ($orders as $order)
+                                                                    @if($order->status == 'ongoing')
                                                                     <tr>
+                                                                        <td># {{$loop->iteration}}</td>
+                                                                        <td>Table: {{ $order->table_number }}</td>
+                                                                        <td>{{ $order->taken_by }}</td>
+                                                                        <td>{{ $order->status }}</td>
+                                                                        <td>KES {{ $order->prices_total }}</td>
+                                                                        
                                                                         <td>
-                                                                            <div class="chk-option">
-                                                                                <div class="checkbox-fade fade-in-primary">
-                                                                                    <label class="check-task">
-                                                                                        <input type="checkbox" value="">
-                                                                                        <span class="cr">
-                                                                                                    <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                                </span>
-                                                                                    </label>
+                                                                            <button class="btn btn-success" data-toggle="modal" data-target="#edit_{{$order->id}}">View</button>
+                    
+                                                                            <!-- Modal -->
+                                                                            <div class="modal fade" id="edit_{{$order->id}}" tabindex="-1" aria-labelledby="edit_{{$order->id}}Label" aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="edit_{{$order->id}}Label">View Order: {{ $loop->iteration}}</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">                                                               
+                                                                                        <table class="table table-responsive">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <td>Order Items</td>
+                                                                                                    <td>Item Price</td>
+                                                                                                    <td>Quantity</td>
+                                                                                                    <td>Specifics</td>
+                                                                                                    <td>Priority</td>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                @foreach ($order_details as $details)
+                                                                                                    @if ($details->order_id == $order->id)
+                                                                                                        <tr>
+                                                                                                            <td>{{$details->item_name}}</td>
+                                                                                                            <td>{{$details->price}}</td>
+                                                                                                            <td>{{$details->quantity}}</td>
+                                                                                                            <td>{{$details->specifics}}</td>
+                                                                                                            <td>{{$details->priority}}</td>
+                                                                                                        </tr>
+                                                                                                    @endif
+                                                                                                @endforeach
+                                                                                            </tbody>
+                                                                                        </table>                                                                
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                                                
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="d-inline-block align-middle">
-                                                                                {{-- <img src="admin/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15"> --}}
-                                                                                <div class="d-inline-block">
-                                                                                    <h6>{{ $order->table_number }}</h6>
-                                                                                    {{-- <p class="text-muted m-b-0">Graphics Designer</p> --}}
                                                                                 </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td>{{ $order->taken_by }}</td>
-                                                                        <td>{{ $order->status }}</td>
-                                                                        <td class="text-right"><label class="label label-success">KES {{ $order->prices_total }}</label></td>
+                                                                        @if (Auth::user()->role == 'admin')
+                                                                        {{-- <td>
+                                                                            <button class="btn btn-warning" data-toggle="modal" data-target="#close_{{$order->id}}">Edit</button>
+                                                                            
+                                                                            <div class="modal fade" id="close_{{$order->id}}" tabindex="-1" aria-labelledby="close_{{$order->id}}Label" aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="close_{{$order->id}}Label">Close Order: {{ $loop->iteration}}</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <form action="">
+                                                                                            @csrf
+                        
+                                                                                            <table class="table table-responsive">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <td>Order Items</td>
+                                                                                                        <td>Item Price</td>
+                                                                                                        <td>Quantity</td>
+                                                                                                        <td>Specifics</td>
+                                                                                                        <td>Priority</td>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    @foreach ($order_details as $details)
+                                                                                                        @if ($details->order_id == $order->id)
+                                                                                                            <tr>
+                                                                                                                <td>
+                                                                                                                    <input type="text" name="detail_name" placeholder="{{$details->item_name}}">                                                                                                
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <input type="text" name="detail_price" placeholder="{{$details->price}}">
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <input type="text" name="detail_quantity" placeholder="{{$details->quantity}}">
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <input type="text" name="detail_specifics" placeholder="{{$details->specifics}}">
+                                                                                                                    
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <input type="text" name="detail_priority" placeholder="{{$details->priority}}">                                                                                                
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        @endif
+                                                                                                    @endforeach
+                                                                                                </tbody>
+                                                                                            </table>
+                        
+                        
+                                                                                        
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                    <button type="submit" class="btn btn-success">Save Changes</button>
+                                                                                </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td> --}}
+                                                                        <td>
+                                                                            <button class="btn btn-danger" data-toggle="modal" data-target="#delete_{{$order->id}}">Delete</button>
+                                                                            <!-- Modal -->
+                                                                            <div class="modal fade" id="delete_{{$order->id}}" tabindex="-1" aria-labelledby="delete_{{$order->id}}Label" aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="delete_{{$order->id}}Label">Delete Order: {{ $loop->iteration}}</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                    Are you sure you wish to delete this order?
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                    <form action="{{route('soft-delete-order')}}" method="POST">
+                                                                                    @csrf
+                                                                                        <input type="hidden" name="order_id" value="{{$order->id}}">
+                                                                                        <button type="submit" class="btn btn-danger">Delete Order</button>
+                                                                                    </form>
+                                                                                    
+                                                                                    </div>
+                                                                                </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>                                                        
+                                                                        @endif
                                                                     </tr>
+                                                                    @endif
                                                                     @endforeach
                                                             
-                                                                </tbody>
-                                                            </table>
+                                                                    
+                                                                </tbody>                                        
+                                                            </table>                                        
                                                             <div class="text-right m-r-20">
-                                                                <a href="#!" class=" b-b-primary text-primary">View Active Orders</a>
+                                                                <a href="#!" class=" b-b-primary text-primary">{{ $orders->render() }}</a>
                                                             </div>
                                                         </div>
                                                     </div>
