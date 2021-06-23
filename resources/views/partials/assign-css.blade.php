@@ -62,7 +62,6 @@
 }
 
 .assigning  .input_numbers::placeholder {
-  color: #ccc;
   text-indent: 5px;
   line-height: 2em;
   font-family: 'Roboto', sans-serif;
@@ -119,8 +118,7 @@ textarea {
 }
 
 .assigning .submit-button {
-  position: relative;
-  left: 40%;
+ 
   font-size: 16px;
   font-family: 'Roboto', sans-serif;
   -webkit-border-radius: 5;
@@ -185,5 +183,36 @@ textarea {
 
 .assigning .task-descrip {
   line-height: 2em;
+}
+
+.radio-toolbar {
+  margin: 10px;
+}
+
+.radio-toolbar input[type="radio"] {
+  z-index: -80;
+  width: 100%;
+}
+
+.radio-toolbar label {
+    display: inline-block;    
+    padding: 10px 20px;
+    font-family: sans-serif, Arial;
+    font-size: 16px;
+    border: 2px solid #444;
+    border-radius: 4px;
+}
+
+.radio-toolbar label:hover {
+  background-color: #dfd;
+}
+
+.radio-toolbar input[type="radio"]:focus + label {
+    border: 2px dashed #444;
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+    background-color: #bfb;
+    border-color: #4c4;
 }
 </style>

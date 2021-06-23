@@ -3,6 +3,7 @@
 
     var selected_tables = [];
     var assigned_to = '';
+    var color_code = '';
 
 $('.choose_this_table').click(function(){
 
@@ -26,12 +27,13 @@ $('.choose_this_table').click(function(){
 $('.submit-button').click(function () {
   
    assigned_to = $("input[name='assignto']:checked").val();
-   console.log(assigned_to);
+   color_code = $("input[name='assignto']:checked").attr('id');
+   
     $.ajax({
       
       url: "/api/assign-tables",
       type:"POST",
-      data: { tables_assigned: selected_tables,assigned_to: assigned_to},
+      data: { tables_assigned: selected_tables,assigned_to: assigned_to, color_code: color_code},
       success:function(response){
          console.log("success");
          window.alert("Successfully Updated Table Mapping");

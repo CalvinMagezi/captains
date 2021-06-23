@@ -38,8 +38,17 @@
                                   
                                     
                                     <h1 class="text-center">Assign Tables</h1>
-                                    <h3 class="text-center">Task Description</h3>
-                                    <p class="text-center"> <span style="color: red;">Red</span> tables have already been assigned</p>
+                                    <h3 class="text-center">Color Coding</h3>
+                                    <div class="row justify-content-center">
+                                        @foreach ($waiters as $waiter)
+                                        <div class="col-3">
+                                            <div class="p-3 mr-1 text-center" style="color: #fff; background: {{$waiter->color_code}}; border:1px solid grey; border-radius:5px;">{{$waiter->first_name}}</div>
+                                        </div>                                        
+                                    @endforeach
+                                    <div class="col-3">
+                                        <div class="p-3 m-1 text-center" style="color: #fff; border:1px solid grey; border-radius:5px; background:red;">Free</div>
+                                    </div>
+                                    </div>                                   
                                     <div class="row justify-content-center">
                                         @foreach ($tables as $table)
                                            <div class="col-2 text-center m-1">
@@ -48,7 +57,7 @@
                                                 {{ $table->table_number }}    
                                             </button>   
                                                @else
-                                               <button disabled class="choose_this_table" id="tb{{ $table->table_number }}" style="border: 1px solid black; width:100%; background:red;" >
+                                               <button disabled class="choose_this_table" id="tb{{ $table->table_number }}" style="border: 1px solid black; width:100%; color:white; background:{{ $table->color_code }};" >
                                                 {{ $table->table_number }}    
                                             </button>   
                                                @endif
@@ -58,15 +67,27 @@
                                     </div>
                                     <div id="form-col-wrapper" class="justify-content-center text-center align-items-center">
                                       <div id="form-left mx-auto">
-                                        <h3>Assigned To</h3>
+                                        <h3>Assign To: </h3>
+                                        <div class="row justify-content-center text-center align-items-center radio-toolbar">
                                         @foreach ($waiters as $waiter)
-                                        <input type="radio" value="{{ $waiter->first_name }}" name="assignto" class="mr-1 assignto" required>{{ $waiter->first_name }} 
-                                        @endforeach                                                                                    
+                                        <div class="col-4" >                                             
+                                            <input type="radio" value="{{ $waiter->first_name }}" id="{{$waiter->color_code}}" name="assignto" class="mr-1 assignto" required> 
+                                            <label style="background:{{$waiter->color_code}}; color:white;" for="{{$waiter->color_code}}">{{ $waiter->first_name }} </label>                                                                                  
+                                        </div>                                        
+                                        @endforeach    
+                                        </div>
+                                                                                                                        
                                       </div>                                     
-                                        <div class="form-footer mt-2 text-center">                                            
-                                            <input class="submit-button mb-1 my-auto" type="submit" value="Assign Table" >
-                                            <br>
-                                            <button class="btn btn-info mt-1 my-auto" type="submit" data-toggle="modal" data-target="#clear">Clear Assigned Tables</button>
+                                        <div class="form-footer mt-2">  
+                                            <div class="row justify-content-center align-items-center text-center">
+                                                <div class="col-4 mb-2">
+                                                    <input class="submit-button mb-1 my-auto" type="submit" value="Assign Table" >
+                                                </div>
+                                                <div class="col-12">
+                                                    <button class="btn btn-info mt-1 my-auto" type="submit" data-toggle="modal" data-target="#clear">Clear Assigned Tables</button>
+                                                </div>
+                                            </div>                                          
+                                            
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="clear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

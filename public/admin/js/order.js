@@ -300,7 +300,12 @@ $('.set-table').click(function(){
 
 $('.save-order').click(function(){
 
-  $.ajax({
+  if (PostTableNumber == '') {
+
+    window.alert('Please select a table number')
+
+  } else {
+    $.ajax({
       //this part
       url: "/api/save-order",
       type:"POST",
@@ -325,6 +330,8 @@ $('.save-order').click(function(){
           location.reload();
       }
   });
+  }
+  
 });
             
 

@@ -16,8 +16,9 @@ class CreateTablesTable extends Migration
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
             $table->string('table_number')->nullable();
-            $table->string('managed_by')->nullable();
+            $table->string('managed_by')->default('free');
             $table->string('table_id')->unique();
+            $table->string('color_code')->default('red');
             $table->string('section')->nullable();           
             $table->string('position')->nullable();
             $table->string('status')->nullable();

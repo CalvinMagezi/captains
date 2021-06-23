@@ -145,7 +145,17 @@
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <h5>Table Maps</h5>
-                                                        <span class="text-muted">View current table mapping and table status.<em style="color: red">Red</em> means it has not been assigned, <em style="color: green">Green</em> means it has been assigned.</span>
+                                                        <h3 class="text-center">Color Coding</h3>
+                                                        <div class="row justify-content-center">
+                                                            @foreach ($waiters as $waiter)
+                                                            <div class="col-3">
+                                                                <div class="p-3 mr-1 text-center" style="color: #fff; background: {{$waiter->color_code}}; border:1px solid grey; border-radius:5px;">{{$waiter->first_name}}</div>
+                                                            </div>                                        
+                                                        @endforeach
+                                                        <div class="col-3">
+                                                            <div class="p-3 m-1 text-center" style="color: #fff; border:1px solid grey; border-radius:5px; background:red;">Free</div>
+                                                        </div>
+                                                        </div> 
                                                         <div class="card-header-right">
                                                             <ul class="list-unstyled card-option">
                                                                 <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -205,7 +215,7 @@
                                                             @foreach ($tables as $table)  
                                                             @if($table->status == 'active')                                                                                                                  
                                                             <div class="col-lg-3 col-md-4 col-sm-6 p-1 mr-1 mb-1 text-center" style="border:1px solid black; background:green;">
-                                                                <button style="border: none; width:100%; background:green;" type="button" data-toggle="modal" data-target="#mod_{{ $table->table_number}}">
+                                                                <button style="border: none; width:100%; color:white; background:green;" type="button" data-toggle="modal" data-target="#mod_{{ $table->table_number}}">
                                                                     {{ $table->table_number }}
                                                                 </button>   
                                                                 

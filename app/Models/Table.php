@@ -14,6 +14,7 @@ class Table extends Model
     protected $fillable = [
         'table_number', 
         'managed_by', 
+        'color_code',
         'table_id',
         'section',
         'position',

@@ -83,7 +83,11 @@ class OrderController extends Controller
 
         $new_order->save();
 
-        
+        $activate_table = DB::table('tables')
+                                ->where('table_number','=',$table_number)
+                                ->update([
+                                    'status' => 'active',
+                                ]);
 
         for ($i=0; $i < count($request->input('items',[])); $i++) { 
 

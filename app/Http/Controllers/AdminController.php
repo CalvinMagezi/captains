@@ -31,6 +31,11 @@ class AdminController extends Controller
         $order_details = OrderDetails::all();
         $tables = Table::all();
 
+        $waiters = DB::table('users')
+        ->where('position','=','wait')
+        ->orWhere('position','=','head waitress')
+        ->get();
+
         $all_order_count = Order::all()->count();
         $all_closed_orders = Order::all()->where('status','=','closed')->count();
 
@@ -47,6 +52,7 @@ class AdminController extends Controller
             'users' => $users,
             'orders' => $orders,
             'order_details' => $order_details,
+            'waiters' => $waiters,
             'tables' => $tables,
             'all_orders' => $all_order_count,
             'all_closed_orders' => $all_closed_orders,

@@ -17,10 +17,16 @@ class MappingController extends Controller
     public function show(){  
     
         $tables = Table::all();
+
+        $waiters = DB::table('users')
+                        ->where('position','=','wait')
+                        ->orWhere('position','=','head waitress')
+                        ->get();
              
     
             return view('admin.mapping.index', [
-                'tables' => $tables,            
+                'tables' => $tables,   
+                'waiters' => $waiters,         
             ]);
         }
 
@@ -149,7 +155,8 @@ class MappingController extends Controller
             $update_table = DB::table('tables')
                          ->where('table_number', '=', $chosen_tables[$i])
                          ->update([
-                        'managed_by' => $request->input('assigned_to'),                                                                                                                                                                 
+                        'managed_by' => $request->input('assigned_to'), 
+                        'color_code' => $request->input('color_code')                                                                                                                                                                
                 ]);  
 
             $i++;
@@ -171,7 +178,8 @@ class MappingController extends Controller
 
             $update_table = DB::table('tables')                     
                      ->update([
-                        'managed_by' => 'free',                                                                                                                                                               
+                        'managed_by' => 'free', 
+                        'color_code' => 'red'                                                                                                                                                              
             ]);                                   
 
         }

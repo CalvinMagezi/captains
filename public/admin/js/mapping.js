@@ -5,6 +5,7 @@
 var table_number = [];
 var table_id = [];
 var managed_by = [];
+var color_code_arr = [];
 var status = [];
 var arr_top = [];
 var arr_left = [];
@@ -37,6 +38,7 @@ $.ajax({
     table_number.push(item.table_number);
     table_id.push(item.table_id);
     managed_by.push(item.managed_by);
+    color_code_arr.push(item.color_code);
     status.push(item.status);        
     arr_top.push(item.top);        
     arr_left.push(item.left);        
@@ -61,16 +63,17 @@ function placeTablesOut(array) {
     let top = arr_top[index];
     let left = arr_left[index]; 
     let managed = managed_by[index];  
+    let color_code = color_code_arr[index];    
 
    let magnet = document.createElement('div')
    magnet.append(table)
     magnet.setAttribute("class", "word")
+    magnet.style.color = 'white';
+
     if(managed == 'free'){
-      magnet.style.background = 'red';
-      magnet.style.color = 'white';
+      magnet.style.background = 'red';      
     }else{
-      magnet.style.background = 'green';
-      magnet.style.color = 'white';
+      magnet.style.background = color_code;      
     }
 
     magnet.setAttribute("id", table + index)

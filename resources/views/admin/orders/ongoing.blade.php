@@ -33,13 +33,13 @@
                 <div class="page-body">
                     <div class="row justify-content-center">
                         @if (Auth::user()->role == 'admin' || Auth::user()->position == 'bartender')                                                                                                          
-                        <div class="col-xl-6 col-md-12">
+                        <div class="col-xl-6 col-md-6">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row justify-content-center  align-items-center">
                                         <div class="col-12">
                                             
-                                            <h2 class="text-center m-b-0">Cocktail Bar Items Due</h2>
+                                            <h2 class="text-center m-b-0">Cocktail Bar</h2>
                                             <hr>
                                             
                                                     <table class="table table-responsive">
@@ -85,13 +85,13 @@
                         @endif 
 
                         @if (Auth::user()->role == 'admin' || Auth::user()->position == 'bartender') 
-                        <div class="col-xl-6 col-md-12">
+                        <div class="col-xl-6 col-md-6">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row justify-content-center  align-items-center">
                                         <div class="col-12">
                                                                                                                                                      
-                                            <h2 class="text-center m-b-0">Main Bar Items Due</h2>
+                                            <h2 class="text-center m-b-0">Main Bar</h2>
                                             <hr>
                                             
                                                     <table class="table table-responsive">
