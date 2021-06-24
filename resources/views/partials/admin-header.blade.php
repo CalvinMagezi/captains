@@ -312,7 +312,21 @@
                                       <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Closed</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
-                              </li>                                      
+                              </li>  
+                              <li class=" ">
+                                <a href="/main-bar" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Main Bar</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li> 
+                            <li class=" ">
+                                <a href="/cocktail-bar" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Cocktail Bar</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>                                     
                           </ul>
 
                           <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Tables &amp; Mapping</div>

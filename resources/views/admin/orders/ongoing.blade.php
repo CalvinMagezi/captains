@@ -30,113 +30,7 @@
         <div class="main-body">
             <div class="page-wrapper">
                 <!-- Page-body start -->
-                <div class="page-body">
-                    <div class="row justify-content-center">
-                        @if (Auth::user()->role == 'admin' || Auth::user()->position == 'bartender')                                                                                                          
-                        <div class="col-xl-6 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row justify-content-center  align-items-center">
-                                        <div class="col-12">
-                                            
-                                            <h2 class="text-center m-b-0">Cocktail Bar</h2>
-                                            <hr>
-                                            
-                                                    <table class="table table-responsive">
-                                                        <thead>
-                                                            <tr>
-                                                                <td>For Order #</td>
-                                                                <td>Item Name</td>
-                                                                <td>Quantity</td>
-                                                                <td>Specifics</td>
-                                                                <td>Priority</td>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="cocktail_bar_table">
-                                                            @foreach ($order_details as $details)
-                                                             @if ($details->dispatched_to == 'cocktail bar')
-                                                            <tr>
-                                                                <td><strong>{{$details->order_id}}</strong></td>
-                                                                <td><strong>{{$details->item_name}}</strong></td>
-                                                                <td><strong>{{$details->quantity}}</strong></td>
-                                                                <td><strong>{{$details->specifics}}</strong></td>
-                                                                <td><strong>{{$details->priority}}</strong></td>
-                                                            </tr>
-                                                            @endif
-                                                            @endforeach 
-                                                        </tbody>
-                                                    </table>                                                                                                                                                                                                 
-                                             
-                                        </div>                                       
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-c-red">
-                                    <div class="row align-items-center">
-                                        <div class="col-9">
-                                            <p class="text-white m-b-0"><span id="total_cocktails"></span> items left</p>
-                                        </div>
-                                        <div class="col-3 text-right">
-                                            <i class="fa fa-line-chart text-white f-16"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif 
-
-                        @if (Auth::user()->role == 'admin' || Auth::user()->position == 'bartender') 
-                        <div class="col-xl-6 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row justify-content-center  align-items-center">
-                                        <div class="col-12">
-                                                                                                                                                     
-                                            <h2 class="text-center m-b-0">Main Bar</h2>
-                                            <hr>
-                                            
-                                                    <table class="table table-responsive">
-                                                        <thead>
-                                                            <tr>
-                                                                <td>For Order #</td>
-                                                                <td>Item Name</td>
-                                                                <td>Quantity</td>
-                                                                <td>Specifics</td>
-                                                                <td>Priority</td>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="main_bar_table">
-                                                            @foreach ($order_details as $details)
-                                                             @if ($details->dispatched_to == 'main bar')
-                                                            <tr>
-                                                                <td><strong>{{$details->order_id}}</strong></td>
-                                                                <td><strong>{{$details->item_name}}</strong></td>
-                                                                <td><strong>{{$details->quantity}}</strong></td>
-                                                                <td><strong>{{$details->specifics}}</strong></td>
-                                                                <td><strong>{{$details->priority}}</strong></td>
-                                                            </tr>
-                                                            @endif
-                                                            @endforeach 
-                                                        </tbody>
-                                                    </table>                                                                                                                                                                                                 
-                                             
-                                        </div>                                       
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-c-red">
-                                    <div class="row align-items-center">
-                                        <div class="col-9">
-                                            <p class="text-white m-b-0"><span id="total_main_bar"></span> items left</p>
-                                        </div>
-                                        <div class="col-3 text-right">
-                                            <i class="fa fa-line-chart text-white f-16"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif 
-                    </div>
-
+                <div class="page-body">                    
                     <div class="row justify-content-center">
                         <div class="col-12">
                             <div class="card table-card">
@@ -164,7 +58,7 @@
                                                 <th>Total</th>                                                
                                                 <th>View</th>
                                                 @if (Auth::user()->role == 'admin')
-                                                {{-- <th>Edit</th> --}}
+                                                <th>Close Order</th>
                                                 <th>Delete</th>
                                                 @endif                                                
                                             </tr>
@@ -226,9 +120,9 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    @if (Auth::user()->role == 'admin')
-                                                    {{-- <td>
-                                                        <button class="btn btn-warning" data-toggle="modal" data-target="#close_{{$order->id}}">Edit</button>
+                                                    @if (Auth::user()->role == 'admin' || Auth::user()->position == 'cashier')
+                                                    <td>
+                                                        <button class="btn btn-warning" data-toggle="modal" data-target="#close_{{$order->id}}">Close Order</button>
                                                         
                                                         <div class="modal fade" id="close_{{$order->id}}" tabindex="-1" aria-labelledby="close_{{$order->id}}Label" aria-hidden="true">
                                                             <div class="modal-dialog">
@@ -240,57 +134,43 @@
                                                                 </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form action="">
+                                                                    <form method="POST" action="{{route('close-order')}}">
                                                                         @csrf
-    
-                                                                        <table class="table table-responsive">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <td>Order Items</td>
-                                                                                    <td>Item Price</td>
-                                                                                    <td>Quantity</td>
-                                                                                    <td>Specifics</td>
-                                                                                    <td>Priority</td>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                @foreach ($order_details as $details)
-                                                                                    @if ($details->order_id == $order->id)
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <input type="text" name="detail_name" placeholder="{{$details->item_name}}">                                                                                                
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="text" name="detail_price" placeholder="{{$details->price}}">
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="text" name="detail_quantity" placeholder="{{$details->quantity}}">
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="text" name="detail_specifics" placeholder="{{$details->specifics}}">
-                                                                                                
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="text" name="detail_priority" placeholder="{{$details->priority}}">                                                                                                
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    @endif
-                                                                                @endforeach
-                                                                            </tbody>
-                                                                        </table>
-    
-    
-                                                                    
+                                                                        <div class="row text-center mb-1">
+                                                                            <div class="col-12">
+                                                                        <h6>Confirm Closure for Order: <strong style="font-size: 1.5rem;">{{$order->id}}</strong></h6>
+                                                                        <input type="hidden" name="order_id" value="{{$order->id}}">
+                                                                        <h6>Taken By: <strong style="font-size: 1.5rem;">{{$order->taken_by}}</strong></h6>
+                                                                        <input type="hidden" name="taken_by" value="{{$order->taken_by}}">
+                                                                        <h6>Closed By: <strong style="font-size: 1.5rem;">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</strong></h6>
+                                                                        <input type="hidden" name="closed_by" value="{{Auth::user()->first_name}} {{Auth::user()->last_name}}">
+                                                                        <h6>On table number: <strong style="font-size: 1.5rem;">{{$order->table_number}}</strong></h6> 
+                                                                        <input type="hidden" name="table_number" value="{{$order->table_number}}">
+                                                                            </div>
+                                                                        </div>
+                                                                          <hr>
+                                                                        <div class="row mt-1 text-center">
+                                                                        <div class="col-6">
+                                                                            <h6>Amount Received:</h6>
+                                                                            <br>
+                                                                            <input type="text" name="amount_received" required>
+                                                                        </div>  
+                                                                        <div class="col-6">
+                                                                        <h6>Expected Amount:</h6>
+                                                                        <br>
+                                                                            <input type="text" placeholder="KES {{$order->prices_total}}" readonly>
+                                                                        </div>  
+                                                                        </div>                                                                                                                                     
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-success">Save Changes</button>
+                                                                <button type="submit" class="btn btn-success">Close Order</button>
                                                             </form>
                                                                 </div>
                                                             </div>
                                                             </div>
                                                         </div>
-                                                    </td> --}}
+                                                    </td>
                                                     <td>
                                                         <button class="btn btn-danger" data-toggle="modal" data-target="#delete_{{$order->id}}">Delete</button>
                                                         <!-- Modal -->

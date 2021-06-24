@@ -23,6 +23,8 @@ Route::get('/get-products', 'App\Http\Controllers\SearchController@autocomplete_
 
 //Orders
 Route::post('/save-order', 'App\Http\Controllers\OrderController@store')->name('save-order');
+Route::post('/close-order', 'App\Http\Controllers\OrderController@close_order')->name('close-order');
+Route::post('/item-ready', 'App\Http\Controllers\OrderController@item_ready')->name('item-ready');
 
 //Tables
 Route::get('/get-tables', 'App\Http\Controllers\MappingController@get')->name('get_table_mapping');

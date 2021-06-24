@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Table;
 use DB;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Log;
 
@@ -20,6 +21,44 @@ class OrderController extends Controller
 
 
         return view('admin.orders.index');
+    }
+
+    public function main_bar(){
+
+        $all_orders = DB::table('orders')
+        ->where('status','=','ongoing')
+        ->paginate(10);
+
+        $order_details = OrderDetails::all();   
+
+        $tables = Table::all();
+
+
+        return view('admin.orders.main-bar', [
+        'all_orders' => $all_orders,
+        'tables' => $tables,
+        'order_details' => $order_details
+        ]);
+
+    }
+
+    public function cocktail_bar(){
+
+        $all_orders = DB::table('orders')
+        ->where('status','=','ongoing')
+        ->paginate(10);
+
+        $order_details = OrderDetails::all();   
+
+        $tables = Table::all();
+
+
+        return view('admin.orders.cocktail-bar', [
+        'all_orders' => $all_orders,
+        'tables' => $tables,
+        'order_details' => $order_details
+        ]);
+
     }
 
 
@@ -121,7 +160,6 @@ class OrderController extends Controller
     }
 
 
-
     public function ongoing(){
 
         $all_orders = DB::table('orders')
@@ -194,8 +232,45 @@ class OrderController extends Controller
                                 'status' => 'ongoing'
                             ]);
 
-        return Redirect::back()->with(['success', 'Successfully Delete Order']);
+        return Redirect::back()->with(['message', 'Successfully Delete Order']);
     }
 
+    public function close_order(Request $request){
+
+        $order_id = $request->input('order_id');   
+        $amount_received = $request->input('amount_received');
+        $closed_by = $request->input('closed_by');
+        $taken_by = $request->input('taken_by');
+        $table_number = $request->input('table_number');
+        $completed_at = Carbon::now();
+
+
+        $restore = DB::table('orders')
+                            ->where('id',$order_id)
+                            ->where('taken_by',$taken_by)
+                            ->where('table_number',$table_number)
+                            ->update([
+                                'status'          => 'closed',
+                                'amount_received' => $amount_received,
+                                'closed_by'       => $closed_by,
+                                'completed_at'       => $completed_at
+                            ]);
+
+
+        return Redirect::back()->with(['message', 'Successfully Closed Order']);
+    }
+
+    public function item_ready(Request $request){
+
+        $item_ready = DB::table('order_details')
+                        ->where('order_id','=',$request->input('order_id'))
+                        ->where('item_name','=',$request->input('item_name'))
+                        ->where('taken_by','=',$request->input('taken_by'))
+                        ->update([
+                            'ready' => true,
+                        ]);
+
+        return Redirect::back()->with(['message', 'Successfully Notified Waiter']);                        
+    }
     
 }

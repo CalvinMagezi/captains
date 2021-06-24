@@ -20,6 +20,7 @@ class CreateOrderDetailsTable extends Migration
             $table->string('item_name')->nullable();
             $table->string('item_category')->nullable();
             $table->string('dispatched_to')->nullable();
+            $table->boolean('ready')->default(false);
             $table->string('item_m_category')->nullable();            
             $table->string('price')->nullable();
             $table->string('quantity')->nullable();

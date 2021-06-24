@@ -24,6 +24,7 @@ class Order extends Model
 
     protected $fillable = [
         'taken_by',
+        'closed_by',
         'status',
         'table_number',
         'items',
@@ -32,6 +33,7 @@ class Order extends Model
         'quantities',
         'prices',
         'prices_total',
+        'amount_received',
         'created_at',
         'updated_at',
         'completed_at',        

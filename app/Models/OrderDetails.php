@@ -29,6 +29,7 @@ class OrderDetails extends Model
         'item_name',
         'item_category',
         'dispatched_to',
+        'ready',
         'item_m_category',
         'priority',
         'specifics',

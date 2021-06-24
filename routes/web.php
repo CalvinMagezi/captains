@@ -43,6 +43,8 @@ Route::get('/new-order', [App\Http\Controllers\OrderController::class, 'new_orde
 Route::get('/ongoing-orders', [App\Http\Controllers\OrderController::class, 'ongoing'])->name('ongoing-orders');
 Route::get('/flagged-orders', [App\Http\Controllers\OrderController::class, 'flagged'])->name('flagged-orders');
 Route::get('/closed-orders', [App\Http\Controllers\OrderController::class, 'closed'])->name('closed-orders');
+Route::get('/main-bar', [App\Http\Controllers\OrderController::class, 'main_bar'])->name('main_bar');
+Route::get('/cocktail-bar', [App\Http\Controllers\OrderController::class, 'cocktail_bar'])->name('cocktail_bar');
 
 Route::post('/soft-delete-order',[App\Http\Controllers\OrderController::class, 'soft_delete'])->name('soft-delete-order');
 Route::post('/restore-order',[App\Http\Controllers\OrderController::class, 'restore'])->name('restore-order');

@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('status')->nullable();
             $table->string('taken_by')->nullable();
+            $table->string('closed_by')->nullable();
             $table->string('table_number')->nullable();
             $table->string('items')->nullable();
             $table->string('specifics')->nullable();
@@ -24,6 +25,7 @@ class CreateOrdersTable extends Migration
             $table->string('quantities')->nullable();            
             $table->string('prices')->nullable();
             $table->string('prices_total')->nullable();
+            $table->string('amount_received')->nullable();
             $table->dateTime('completed_at')->nullable();
             $table->timestamps();
         });
