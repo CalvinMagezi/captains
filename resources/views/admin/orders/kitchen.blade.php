@@ -17,7 +17,7 @@
                         <li class="breadcrumb-item">
                             <a href="index.html"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">View Ongoing Orders</a>
+                        <li class="breadcrumb-item"><a href="#!">View Ongoing Kitchen Orders</a>
                         </li>
                     </ul>
                 </div>
@@ -41,7 +41,7 @@
                                             {{ session()->get('message') }}
                                         </div>
                                     @endif
-                                    <h5>Main Bar Orders</h5>
+                                    <h5>Kitchen Orders</h5>
                                     <div class="card-header-right">
                                         <ul class="list-unstyled card-option">
                                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -65,9 +65,9 @@
                                                     <td>Ready</td>                                                                
                                                 </tr>
                                             </thead>
-                                            <tbody id="cocktail_bar_table">
+                                            <tbody id="main_bar_table">
                                                 @foreach ($order_details as $details)
-                                                 @if ($details->dispatched_to == 'cocktail bar')
+                                                 @if ($details->dispatched_to == 'kitchen')
                                                  @if ($details->ready == true)
                                                  <tr style="background:green; color:white;" class="text-center"> 
                                                 @else
@@ -182,7 +182,7 @@
 <script type="text/javascript" src="{{ asset('admin/js/order.js') }}"></script>
 <script>
     var cocktailBar = $('#cocktail_bar_table tr').length;
-    var mainBar = $('#cocktail_bar_table tr').length;
+    var mainBar = $('#main_bar_table tr').length;
 
     $('#total_cocktails').html(cocktailBar)
     $('#total_main_bar').html(mainBar) 

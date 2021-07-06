@@ -47,7 +47,7 @@ class config_products extends Command
             ->distinct()
             ->get();
             
-        $drinks = array('cocktail','Beers', 'Gin','mocktail', 'vodka','Shooters','whiskey', 'Tea','red wine','rum','juices','water','cocktail','roses','sparkling','Smoothies and shakes','white wine','tequila','soft drinks','cognacs','Energy drinks','champagne','Sangria','Brandy','wine','liquors',);    
+        $drinks = array('cocktail','Beers', 'Gin','mocktail', 'vodka','Shooters','whiskey', 'Tea','red wine','rum','juices','water','cocktail','roses','sparkling','Smoothies and shakes','white wine','tequilla','sparkling wine','Smothies and shakes','soft drinks','cognacs','Energy drinks','champagne','Sangria','Brandy','wine','liquors',);    
             
             foreach ($all_items as $product) {
                 $unique_id = $product->id.'-'.Str::random(4);

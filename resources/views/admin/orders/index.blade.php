@@ -72,22 +72,63 @@
                                     <div class="pt-1 pb-1 text-center mx-auto" style="height:90px; width:90px;" >
                                       <!-- Scrollable modal -->
                                       <!-- Button trigger modal -->
-                                      <button type="button" style="height: 100%; width:100%;" class="btn btn-alert pt-2 pb-2 disabled" data-toggle="modal" data-target="#staticBackp">
+                                      <button type="button" style="height: 100%; width:100%;" class="btn btn-warning pt-2 pb-2" data-toggle="modal" data-target="#foods">
                                         FOOD
                                       </button>
                                       
                                       <!-- Modal -->
-                                      <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                      <div class="modal fade" id="foods" tabindex="-1" aria-labelledby="foodsLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-scrollable">
                                           <div class="modal-content">
                                             <div class="modal-header">
-                                              <h5 class="modal-title" id="staticBackdropLabel">All Foods</h5>
+                                              <h5 class="modal-title" id="foodsLabel">All Foods</h5>
                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                               </button>
                                             </div>
                                             <div class="modal-body">
-                                              ...
+                                              <div class="row justify-content-center">
+                                                @foreach ($foods as $food)
+                                                <div class="col-4 mb-1 mr-1">                                              
+                                                <button type="button" style="height: 100%; width:100%;" class="btn btn-primary pt-2 pb-2 m-1 p-1 mb-1 mr-1" data-toggle="modal" data-target="#cf_{{$loop->iteration}}">
+                                                  {{$food}}
+                                                </button>
+  
+                                                          <!-- Modal -->
+                                                  <div class="modal fade" id="cf_{{$loop->iteration}}" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-labelledby="for_f_category" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-scrollable">
+                                                      <div class="modal-content">
+                                                        <div class="modal-header">
+                                                          <h5 class="modal-title" id="for_f_category">Type: {{$food}}</h5>
+                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                          </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                          <div class="row justify-content-left text-left">
+                                                            @foreach ($products as $product)
+                                                            @if ($product->category == $food )
+                                                            <div class="col-6 mb-2 mr-1">
+                                                             
+                                                            <button type="button" data-dismiss="modal" class="btn btn-success pt_item" placeholder="{{$product->price}}" value="{{$product->name}}">
+                                                              {{$product->name}}KES {{$product->price}}
+                                                            </button>    
+                                                         
+                                                            </div>
+                                                            @endif
+                                                            @endforeach 
+                                                          </div>
+                                                                                                                 
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                                        
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                @endforeach
+                                              </div>
                                             </div>
                                             <div class="modal-footer">
                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

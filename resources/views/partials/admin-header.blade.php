@@ -314,6 +314,13 @@
                                   </a>
                               </li>  
                               <li class=" ">
+                                <a href="/kitchen" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Kitchen</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li> 
+                              <li class=" ">
                                 <a href="/main-bar" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                     <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Main Bar</span>

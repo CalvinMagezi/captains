@@ -44,7 +44,11 @@ class AdminController extends Controller
                             ->where('taken_by','=',Auth::user()->first_name.' '.Auth::user()->last_name)
                             ->where('status','=','closed')
                             ->count();
-        $my_assigned_tables = Table::where('managed_by','=',Auth::user()->first_name)->count();                            
+        $my_assigned_tables = Table::where('managed_by','=',Auth::user()->first_name)->count();  
+        
+        $my_orders = Order::where('taken_by','=',Auth::user()->first_name.' '.Auth::user()->last_name)
+                            ->where('status','=','ongoing')
+                            ->get();                           
 
         $active_table_count = Table::where('status','=','active')->count();
         
@@ -56,6 +60,7 @@ class AdminController extends Controller
             'tables' => $tables,
             'all_orders' => $all_order_count,
             'all_closed_orders' => $all_closed_orders,
+            'my_orders' => $my_orders,
             'my_order_count' => $my_order_count,
             'my_closed_order_count' => $my_closed_order_count,
             'my_assigned_tables' => $my_assigned_tables,

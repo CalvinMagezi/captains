@@ -42,6 +42,25 @@ class OrderController extends Controller
 
     }
 
+    public function kitchen(){
+
+        $all_orders = DB::table('orders')
+        ->where('status','=','ongoing')
+        ->paginate(10);
+
+        $order_details = OrderDetails::all();   
+
+        $tables = Table::all();
+
+
+        return view('admin.orders.kitchen', [
+        'all_orders' => $all_orders,
+        'tables' => $tables,
+        'order_details' => $order_details
+        ]);
+
+    }
+
     public function cocktail_bar(){
 
         $all_orders = DB::table('orders')
@@ -68,16 +87,45 @@ class OrderController extends Controller
         $all_orders_count = Order::all()->count();
         $all_tables = Table::all();
 
+        $foods_arr = array();
+        $drinks_arr = array();
+
+        $foods = DB::table('products')
+                    ->select('category')
+                    ->where('major_category','=','Food')
+                    ->distinct('category')
+                    ->get();
+
+        foreach ($foods as $food) {
+
+            if($food != null){
+                array_push($foods_arr, $food->category);
+            }   
+
+        }                 
+
         $products = DB::table('products')->select('*')->get();
 
-        $drinks = array('cocktail','Beers', 'Gin','mocktail', 'vodka','Shooters','whiskey', 'Tea','red wine','rum','juices','water','roses','sparkling','Smoothies and shakes','white wine','tequila','soft drinks','cognacs','Energy drinks','champagne','Sangria','Brandy','wine','liquors',);    
-        
+        $drinks = DB::table('products')
+                    ->select('category')
+                    ->where('major_category','=','Drinks')
+                    ->distinct('category')
+                    ->get();
+
+            foreach ($drinks as $drink) {
+
+            if($food != null){
+                array_push($drinks_arr, $drink->category);
+            }   
+
+            } 
 
         return view('admin.orders.index', [
             'orders' => $all_orders,
             'total_orders' => $all_orders_count,
             'tables' => $all_tables,
-            'drinks' => $drinks,
+            'drinks' => $drinks_arr,
+            'foods'  => $foods_arr,
             'products' => $products
         ]);
 
@@ -129,12 +177,22 @@ class OrderController extends Controller
                                 ]);
 
         for ($i=0; $i < count($request->input('items',[])); $i++) { 
+            
 
-            if ($item_category_arr[$i] == 'cocktail') {
-                $section = 'cocktail bar';
-            }else{
-                $section = 'main bar';
-            }          
+            if ($item_m_category_arr[$i] == 'Drinks') {
+
+                if ($item_category_arr[$i] == 'cocktail') {
+                    $section = 'cocktail bar';
+                }else{
+                    $section = 'main bar';
+                }                
+            }
+            
+            if($item_m_category_arr[$i] == 'Food'){
+                $section = 'kitchen';
+            }
+            
+          
                         
             $new_order_details = new OrderDetails([
                 'order_id'        => $new_order->id,
@@ -271,6 +329,15 @@ class OrderController extends Controller
                         ]);
 
         return Redirect::back()->with(['message', 'Successfully Notified Waiter']);                        
+    }
+
+    //Ajax Requests
+    public function get_details()
+    {       
+    
+        $data = DB::table('order_details')->select('*')->get();
+   
+        return response()->json($data);
     }
     
 }

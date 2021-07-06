@@ -161,3 +161,41 @@ padding: 5px;
   background: green !important;
 }
 
+.curtain-1{
+  position: absolute;
+  width: 75%;
+  bottom: 0 !important;
+  left: -13% !important;
+  transform: rotate(90deg);
+  height: 1px;
+  border: 2px solid black; 
+}
+.curtain-2{
+  position: absolute;
+  width: 21%;
+  bottom: 10% !important;
+  left: 0 !important;  
+  height: 1px;
+  border: 2px solid black; 
+}
+.curtain-3{
+  position: absolute;
+  width: 75%;
+  bottom: 0 !important;
+  left: 30% !important;
+  transform: rotate(90deg);
+  height: 1px;
+  border: 2px solid black; 
+}
+
+.entrance{
+  height: 180px;
+  width: 6%;
+  position: absolute;
+  right: 0 !important;
+  bottom: 5%;
+  border: 1px solid black;
+  padding: 15px;
+}
+
+

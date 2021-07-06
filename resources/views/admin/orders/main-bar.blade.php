@@ -186,6 +186,10 @@
 
     $('#total_cocktails').html(cocktailBar)
     $('#total_main_bar').html(mainBar) 
+
+    setInterval(() => {
+        location.reload()
+    }, 5000);
 </script>
 
 </body>
