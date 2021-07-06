@@ -29,7 +29,64 @@
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
-                                    <div class="page-body">
+                                    <div class="page-body"> 
+                                        <div class="row fixed-bottom">
+                                        <div class="col-12 text-right pb-2">                                            
+                                            @if (Auth::user()->position == 'wait' || Auth::user()->position == 'head waitress' || Auth::user()->role == 'admin') 
+    
+                                            @foreach ($my_orders as $order) 
+                                        <!-- Button trigger modal -->
+                                            <button type="button"  class="btn btn-danger text-left mr-2" data-toggle="modal" data-target="#Modal{{$loop->iteration}}">
+                                                Order For Table: {{$order->table_number}}
+                                            </button>
+                                        
+                                            <style>
+                                                .modal-backdrop {
+                                                z-index: -1 !important;
+                                                background-color: grey !important;
+                                                width: 100%;
+                                                }
+                                            </style>
+                                            
+                                            <!-- Modal -->
+                                            <div class="modal fade text-center" id="Modal{{$loop->iteration}}" tabindex="-1" aria-labelledby="ModalLabel{{$loop->iteration}}" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h5 class="modal-title" id="ModalLabel{{$loop->iteration}}">Order For Table: {{$order->table_number}}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        @foreach ($order_details as $order_d)
+                                                        @if ($order->id == $order_d->order_id )
+                                                        <br>
+                                                        <p><strong style="font-size: 1.2rem">({{$loop->iteration}}) Item:</strong> {{$order_d->item_name}}
+                                                            <br>
+                                                            <strong style="font-size: 1.1rem">Dispatched to:</strong> {{$order_d->dispatched_to}}
+                                                            <br>
+                                                            @if ($order_d->ready == false)
+                                                            <strong style="font-size: 1.1rem;">Status: </strong><span style="color:red;">preparing</span>                                                            
+                                                            @else
+                                                            <strong style="font-size: 1.1rem;">Status: </strong> <span style="color:green;">ready</span>y
+                                                            @endif
+                                                            </p>
+                                                        <br>
+                                                        @endif                        
+                                                        @endforeach 
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>  
+                                        
+                                              @endforeach
+                                        @endif
+                                        </div>
+                                        </div>                                       
                                         <div class="row justify-content-center">
                                             <!-- task, page, download counter  start -->
                                             <div class="col-xl-3 col-md-6">
@@ -551,47 +608,6 @@
             </div>
         </div>
     </div>
-
-    @if (Auth::user()->position == 'wait' || Auth::user()->position == 'head waitress' || Auth::user()->role == 'admin') 
-    @foreach ($my_orders as $order) 
-    
-    <!-- Button trigger modal -->
-        <button style="position: fixed; right:0; bottom:0;"  type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#Modal{{$loop->iteration}}">
-            Order For Table: {{$order->table_number}}
-        </button>
-    
-        
-        <!-- Modal -->
-        <div class="modal fade" id="Modal{{$loop->iteration}}" tabindex="-{{$loop->iteration + 1}}" aria-labelledby="ModalLabel{{$loop->iteration}}" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="ModalLabel{{$loop->iteration}}">Order For Table: {{$order->table_number}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                    @foreach ($order_details as $order_d)
-                    @if ($order->id == $order_d->order_id )
-                    <br>
-                    <p>Item: {{$order_d->item_name}}
-                        <br>
-                        Dispatched to {{$order_d->dispatched_to}}
-                        <br>
-                        Status: {{$order_d->ready}}</p>
-                    <br>
-                    @endif                        
-                    @endforeach 
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                
-                </div>
-            </div>
-            </div>
-        </div>            
-          @endforeach
-    @endif
     
     @include('partials.admin-footer')
     <script type="text/javascript" src="{{ asset('admin/js/mapping.js') }}"></script>
