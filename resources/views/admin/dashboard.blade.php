@@ -66,10 +66,10 @@
                                                             <br>
                                                             <strong style="font-size: 1.1rem">Dispatched to:</strong> {{$order_d->dispatched_to}}
                                                             <br>
-                                                            @if ($order_d->ready == false)
+                                                            @if ($order_d->ready == '0')
                                                             <strong style="font-size: 1.1rem;">Status: </strong><span style="color:red;">preparing</span>                                                            
                                                             @else
-                                                            <strong style="font-size: 1.1rem;">Status: </strong> <span style="color:green;">ready</span>y
+                                                            <strong style="font-size: 1.1rem;">Status: </strong> <span style="color:green;">ready</span>
                                                             @endif
                                                             </p>
                                                         <br>
