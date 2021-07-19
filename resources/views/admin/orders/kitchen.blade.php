@@ -31,6 +31,13 @@
             <div class="page-wrapper">
                 <!-- Page-body start -->
                 <div class="page-body">
+                    @if (session('success'))
+                    <div class="row justify-content-center">             
+                        <div class="col-12 btn btn-success" style="width: 100%">
+                            <h4 style="color: white;" class="pt-2 pb-2">{{ session()->get('success') }}</h4>
+                        </div>
+                      </div>
+                    @endif
                     <div class="row justify-content-center">                        
                         @if (Auth::user()->role == 'admin' || Auth::user()->position == 'bartender') 
                         <div class="col-12">
@@ -66,67 +73,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="main_bar_table">
-                                                @foreach ($order_details as $details)
-                                                 @if ($details->dispatched_to == 'kitchen')
-                                                 @if ($details->ready == true)
-                                                 <tr style="background:green; color:white;" class="text-center"> 
-                                                @else
-                                                <tr class="text-center"> 
-                                                @endif                                                   
-                                                    <td>
-                                                        
-                                                        <strong>{{$details->order_id}}</strong>
-                                                    </td>
-                                                    <td><strong>{{$details->item_name}}</strong></td>
-                                                    <td><strong>{{$details->quantity}}</strong></td>
-                                                    <td><strong>{{$details->specifics}}</strong></td>
-                                                    <td><strong>{{$details->priority}}</strong></td>
-                                                    @if ($details->ready == true)
-                                                    <td><strong>Notified: {{$details->taken_by}}</strong></td>
-                                                    @endif  
-                                                   
-                                                    @if ($details->ready != true)
-                                                    <td>
-                                                        
-                                                        
-                                                        <button class="btn btn-success" data-toggle="modal" data-target="#edit{{$loop->iteration}}">Ready</button>
-                                                        
-                                                        
-                                                        
-                                                          <!-- Modal -->
-                                                            <div class="modal fade" id="edit{{$loop->iteration}}" tabindex="-1" aria-labelledby="edit{{$loop->iteration}}Label" aria-hidden="true">
-                                                                 <div class="modal-dialog">
-                                                                         <div class="modal-content">
-                                                                              <div class="modal-header">
-                                                                                <h5 class="modal-title" id="edit{{$loop->iteration}}Label">Notify: {{ $details->taken_by}}</h5>
-                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                               <span aria-hidden="true">&times;</span>
-                                                                              </button>
-                                                                            </div>
-                                                                         <div class="modal-body">                                                               
-                                                                         Notify <strong>{{ $details->taken_by}}</strong> 
-                                                                        <br>
-                                                                         that their <strong>{{ $details->item_name}}</strong> is ready to be picked?                                                              
-                                                                      </div>
-                                                                     <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>  
-                                                                    <form action="{{route('item-ready')}}" method="POST">
-                                                                    @csrf
-                                                                    <input type="hidden" name="order_id" value="{{$details->order_id}}">
-                                                                    <input type="hidden" name="item_name" value="{{$details->item_name}}">
-                                                                    <input type="hidden" name="taken_by" value="{{$details->taken_by}}">
-                                                                        <button type="submit" class="btn btn-success">Notify</button> 
-                                                                    </form>                                                              
-                                                                                                                                  
-                                                              </div>
-                                                           </div>
-                                                         </div>
-                                                       </div>
-                                                    </td> 
-                                                    @endif                                                                                                                   
-                                                </tr>
-                                                @endif
-                                                @endforeach 
+                                               
                                             </tbody>                                       
                                         </table>                                        
                                         
@@ -181,16 +128,44 @@
 {{-- <script type="text/javascript" src="{{ asset('admin/js/mapping.js') }}"></script> --}}
 <script type="text/javascript" src="{{ asset('admin/js/order.js') }}"></script>
 <script>
-    var cocktailBar = $('#cocktail_bar_table tr').length;
-    var mainBar = $('#main_bar_table tr').length;
+     (function ($) {
+    "user strict";
 
-    $('#total_cocktails').html(cocktailBar)
-    $('#total_main_bar').html(mainBar) 
+    $(document).ready(function(){
+        $.ajaxSetup({
 
-    setInterval(() => {
-        location.reload()
-    }, 10000);
-    
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });
+
+            setInterval(() => {
+            //Empty then populate Array With All Products                
+
+            $(".table tbody").empty();
+
+            $.ajax({          
+                url: "/api/get-kitchen-items",
+                type:"GET",          
+                success:function(result){                           
+                result.forEach((item) => {
+                 
+                    markup = "<tr class='text-center'><td> "+ item.order_id + "</td> <td>"+ item.item_name +"</td> <td>" + item.quantity +"</td> <td>"+ item.specifics +"</td><td>"+ item.priority +"<td><form action='/api/item-ready' method='POST'> <input type='hidden' name='item_name' value='"+item.item_name+"'/> <input type='hidden' name='taken_by' value='"+item.taken_by+"'/> <input type='hidden' name='order_id' value='"+item.order_id+"'/> <button type='submit' class='btn btn-success'>Notify "+item.taken_by+"</button></form></td></tr>";
+                    tableBody = $(".table tbody");
+                    tableBody.append(markup); 
+
+                    }); 
+                },
+                error:function(){
+                    console.log("error");              
+                }
+            });
+
+            }, 5000);           
+
+    })
+
+})(jQuery);
 </script>
 
 </body>

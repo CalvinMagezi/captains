@@ -328,7 +328,7 @@ class OrderController extends Controller
                             'ready' => true,
                         ]);
 
-        return Redirect::back()->with(['message', 'Successfully Notified Waiter']);                        
+        return Redirect::back()->with(['success', 'Successfully Notified Waiter']);                        
     }
 
     //Ajax Requests
@@ -336,6 +336,30 @@ class OrderController extends Controller
     {       
     
         $data = DB::table('order_details')->select('*')->get();
+   
+        return response()->json($data);
+    }
+
+    public function get_mainbar_items(){
+        $data = DB::table('order_details')->where('dispatched_to','=','main bar')->where('ready','=',false)->select('*')->get();
+
+        $data = $data->filter();
+   
+        return response()->json($data);
+    }
+
+    public function get_kitchen_items(){
+        $data = DB::table('order_details')->where('dispatched_to','=','kitchen')->where('ready','=',false)->select('*')->get();
+
+        $data = $data->filter();
+   
+        return response()->json($data);
+    }
+
+    public function get_cocktailbar_items(){
+        $data = DB::table('order_details')->where('dispatched_to','=','cocktail bar')->where('ready','=',false)->select('*')->get();
+
+        $data = $data->filter();
    
         return response()->json($data);
     }

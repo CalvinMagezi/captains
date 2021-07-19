@@ -24,7 +24,7 @@
 
              //Populate Array With All Products
             $.ajax({          
-                url: "/api/get-order-details",
+                url: "/api/get-mainbar-items",
                 type:"GET",          
                 success:function(result){
                 console.log("success");
@@ -49,28 +49,14 @@
 
 
             function mainBarItems(){
-                $(".add-row").click(function () {
-                    markup = "<tr><td>This is row "+ "</td></tr>";
-
-
-
+                for(var i = 0; i<= order_id.length; i++){
+                    markup = "<tr><td> "+ i + "</td>  <td>"+ order_id[i] +"</td> <td>"+ item_name[i]+"</td> <td>" + quantity[i] +"</td> <td>"+ specifics[i] +"</td><td>"+ priority[i]+" </tr>";
                     tableBody = $(".table tbody");
-                    tableBody.append(markup);                    
-                });
+                    tableBody.append(markup);  
+                }                                                                     
             }
 
             mainBarItems()
-
-
-
-
-
-
-
-
-
-
-
 
     })
 
