@@ -305,10 +305,10 @@
                                     </div>
                                     <div class="card-footer text-muted">
                                         <input type="hidden" class="final_price" name="price_total" readonly>
-                                        {{-- <div class="form-group">
+                                        <div class="form-group">
                                             <label for="extra_notes">Extra Notes</label>
                                             <textarea class="form-control" id="extra_notes" rows="3"></textarea>
-                                          </div> --}}
+                                          </div>
                                         {{-- <button href="#" class="btn btn-primary mb-2 print_table">Print Order</button> --}}
                                         <button type="submit" class="btn btn-success mb-2 save-order">Submit Order</button>
                                     </div>
