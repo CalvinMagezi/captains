@@ -29,7 +29,7 @@ class OrderController extends Controller
         ->where('status','=','ongoing')
         ->paginate(10);
 
-        $order_details = OrderDetails::all();   
+        $order_details = OrderDetails::where('ready','=',false)->get();   
 
         $tables = Table::all();
 
@@ -48,7 +48,7 @@ class OrderController extends Controller
         ->where('status','=','ongoing')
         ->paginate(10);
 
-        $order_details = OrderDetails::all();   
+        $order_details = OrderDetails::where('ready','=',false)->get();   
 
         $tables = Table::all();
 
@@ -67,7 +67,7 @@ class OrderController extends Controller
         ->where('status','=','ongoing')
         ->paginate(10);
 
-        $order_details = OrderDetails::all();   
+        $order_details = OrderDetails::where('ready','=',false)->get();  
 
         $tables = Table::all();
 
@@ -313,6 +313,8 @@ class OrderController extends Controller
                                 'closed_by'       => $closed_by,
                                 'completed_at'       => $completed_at
                             ]);
+
+        $update_table = DB::table('tables')->where('table_number',$table_number)->update(['status' => 'free']);                 
 
 
         return Redirect::back()->with(['message', 'Successfully Closed Order']);

@@ -25,12 +25,31 @@ Route::get('/', function () {
     return redirect('/dashboard');
 });
 Route::get('/home', [App\Http\Controllers\AdminController::class, 'index'])->middleware('auth')->name('home');
+Route::post('/signin', [App\Http\Controllers\AuthController::class, 'login'])->name('signin');
 Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
 //=============
 //Admin Routes
 //=============
 Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->middleware('auth')->name('dashboard');
+
+//Users
+Route::get('/create-user',[App\Http\Controllers\UserController::class, 'index'])->middleware('auth');
+Route::post('/create-user',[App\Http\Controllers\UserController::class, 'create'])->middleware('auth');
+Route::get('/manage-users',[App\Http\Controllers\UserController::class, 'manage'])->middleware('auth');
+Route::post('/edit-user',[App\Http\Controllers\UserController::class, 'edit'])->middleware('auth');
+Route::post('/delete-user',[App\Http\Controllers\UserController::class, 'delete'])->middleware('auth');
+Route::get('/assign-casuals',[App\Http\Controllers\UserController::class, 'casuals'])->middleware('auth');
+Route::post('/assign-casual',[App\Http\Controllers\UserController::class, 'assign_casual'])->middleware('auth');
+Route::post('/clear-casuals',[App\Http\Controllers\UserController::class, 'clear_casuals'])->middleware('auth');
+
+//Items
+Route::get('/inventory',[App\Http\Controllers\ProductController::class, 'index'])->middleware('auth');
+Route::post('/edit-item',[App\Http\Controllers\ProductController::class, 'edit'])->middleware('auth');
+Route::post('/delete-item',[App\Http\Controllers\ProductController::class, 'destroy'])->middleware('auth');
+Route::get('/create-item',[App\Http\Controllers\ProductController::class, 'new'])->middleware('auth');
+Route::post('/create-item',[App\Http\Controllers\ProductController::class, 'create'])->middleware('auth');
+
 
 //Search
 Route::get('search', [SearchController::class, 'index'])->name('search');

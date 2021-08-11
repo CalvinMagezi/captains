@@ -536,66 +536,7 @@
                                                     </div>
                                                 </div>
                                                 
-                                            </div>
-                                            <div class="col-xl-4 col-md-12">
-                                                <div class="card ">
-                                                    <div class="card-header">
-                                                        <h5>Active Staff Members</h5>
-                                                        <div class="card-header-right">
-                                                            <ul class="list-unstyled card-option">
-                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                                <li><i class="fa fa-minus minimize-card"></i></li>
-                                                                <li><i class="fa fa-refresh reload-card"></i></li>
-                                                                <li><i class="fa fa-trash close-card"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-block">
-
-                                                        @foreach($users as $user)   
-                                                        @if($user->role == 'staff')
-                                                        <div class="align-middle m-b-30">
-
-                                                            @if($user->role == 'admin' || $user->position == 'asst. accountant')
-                                                            <img src="admin/images/roles/admin.png" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            @endif
-                                                            @if($user->position == 'cashier')
-                                                            <img src="admin/images/roles/admin.png" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            @endif
-                                                            @if($user->position == 'cook' || $user->position == 'sous-chef')
-                                                            <img src="admin/images/roles/cook.png" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            @endif
-                                                            @if($user->position == 'steward')
-                                                            <img src="admin/images/roles/steward.png" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            @endif
-                                                            @if($user->position == 'wait' || $user->position == 'bartender')
-                                                            <img src="admin/images/roles/wait.png" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            @endif
-                                                            
-                                                            <div class="d-inline-block">
-                                                                <h6>{{ $user->first_name.' '.$user->last_name }}</h6>
-                                                                <p class="text-muted m-b-0">{{ $user->status }}</p>
-                                                                <p class="text-muted m-b-0">{{ $user->position }}</p>
-                                                            </div>
-                                                        </div>
-                                                        @endif
-                                                        @endforeach
-                                                         
-                                                        @if (Auth::user()->role == 'admin')
-                                                        <div class="text-center">
-                                                            <a href="#!" class="b-b-primary text-primary">Edit Staff</a>
-                                                        </div>
-                                                        @endif
-                                                        
-                                                    </div>
-                                                </div>
-
-                                                <br>
-
-                                               
-                                            </div>
-                                            <!--  staff member end -->                                            
+                                            </div>                                                                                    
                                         </div>
                                     </div>
                                     <!-- Page-body end -->

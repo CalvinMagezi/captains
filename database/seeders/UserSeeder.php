@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
             'first_name' => 'Sharon',
             'last_name' => 'Adhiambo Oduor',
             'staff_number' => '42',
+            'pin' => '8721',
             'position' => 'cashier',
             'role' => 'staff',
             'email' => 'sharon'.'@captains.com',
@@ -34,8 +35,9 @@ class UserSeeder extends Seeder
             'first_name' => 'Anita',
             'last_name' => 'Oneya Omuruli',
             'staff_number' => '40',
+            'pin' => '1537',
             'color_code'   => '#7D3C98',
-            'position' => 'wait',
+            'position' => 'waitress',
             'role' => 'staff',
             'email' => 'anita'.'@captains.com',
             'password' => Hash::make('password'),
@@ -45,7 +47,8 @@ class UserSeeder extends Seeder
             'first_name' => 'George',
             'last_name' => 'Morigo Mwangi',
             'staff_number' => '39',
-            'position' => 'wait',
+            'position' => 'bartender',
+            'pin' => '5111',
             'color_code' => '#F1C40F',
             'role' => 'staff',
             'email' => 'george'.'@captains.com',
@@ -56,6 +59,7 @@ class UserSeeder extends Seeder
             'first_name' => 'Marylin',
             'last_name' => 'Aluoch Odhiambo',
             'staff_number' => '38',
+            'pin' => '1142',
             'position' => 'cashier',
             'role' => 'staff',
             'email' => 'marylin'.'@captains.com',
@@ -63,19 +67,10 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'first_name' => 'Macdonald',
-            'last_name' => 'Ondigo Obondi',
-            'staff_number' => '36',
-            'position' => 'head chef',
-            'role' => 'admin',
-            'email' => 'macdonald'.'@captains.com',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
             'first_name' => 'Moses',
-            'last_name' => 'Mbae Njoroge',
+            'last_name' => 'Mbue Njoroge',
             'staff_number' => '35',
+            'pin' => '8931',
             'position' => 'bartender',
             'role' => 'staff',
             'email' => 'mbae'.'@captains.com',
@@ -86,119 +81,44 @@ class UserSeeder extends Seeder
             'first_name' => 'Esther Muya',
             'last_name' => 'Esther Muya',
             'staff_number' => '34',
+            'pin' => '6125',
             'position' => 'asst. accountant',
             'role' => 'staff',
             'email' => 'esther'.'@captains.com',
             'password' => Hash::make('password'),
         ]);
-
-        DB::table('users')->insert([
-            'first_name' => 'James',
-            'last_name' => 'Mutiso',
-            'staff_number' => '33',
-            'position' => 'steward',
-            'role' => 'staff',
-            'email' => 'james'.'@captains.com',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'first_name' => 'Simon',
-            'last_name' => 'Khachina Sakwa',
-            'staff_number' => '32',
-            'position' => 'cook',
-            'role' => 'staff',
-            'email' => 'simon'.'@captains.com',
-            'password' => Hash::make('password'),
-        ]);
+     
 
         DB::table('users')->insert([
             'first_name' => 'Shamim',
-            'last_name' => 'Aseda Anyango',
+            'last_name' => 'Aseda Onyango',
             'staff_number' => '29',
-            'position' => 'wait',
+            'pin' => '5615',
+            'position' => 'waitress',
             'color_code' => '#16A085',
             'role' => 'staff',
             'email' => 'shamim'.'@captains.com',
             'password' => Hash::make('password'),
         ]);
 
-        DB::table('users')->insert([
-            'first_name' => 'Lawrence',
-            'last_name' => 'Muderema Jumba',
-            'staff_number' => '27',
-            'position' => 'sous-chef',
-            'role' => 'staff',
-            'email' => 'lawrence'.'@captains.com',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'first_name' => 'Benson',
-            'last_name' => 'Maingi Ndeti',
-            'staff_number' => '24',
-            'position' => 'steward',
-            'role' => 'staff',
-            'email' => 'benson'.'@captains.com',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'first_name' => 'Noel',
-            'last_name' => 'Imali Amolla',
-            'staff_number' => '19',
-            'position' => 'head waitress',
-            'color_code' => '#34495E',
-            'role' => 'admin',
-            'email' => 'noel'.'@captains.com',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'first_name' => 'Joshua',
-            'last_name' => 'Muli Muange',
-            'staff_number' => '18',
-            'position' => 'steward',
-            'role' => 'staff',
-            'email' => 'joshua'.'@captains.com',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'first_name' => 'Moses',
-            'last_name' => 'Kyalo Musembi',
-            'staff_number' => '17',
-            'position' => 'cook',
-            'role' => 'staff',
-            'email' => 'moses'.'@captains.com',
-            'password' => Hash::make('password'),
-        ]);
 
         DB::table('users')->insert([
             'first_name' => 'Kevin',
             'last_name' => 'Otieno Olele',
             'staff_number' => '16',
+            'pin' => '5251',
             'position' => 'restaurant manager',
             'role' => 'admin',
             'email' => 'kevin'.'@captains.com',
             'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'first_name' => 'Eliud',
-            'last_name' => 'Maina Muthuri',
-            'staff_number' => '10',
-            'position' => 'cook',
-            'role' => 'staff',
-            'email' => 'eluid'.'@captains.com',
-            'password' => Hash::make('password'),
-        ]);
+        ]);       
 
         DB::table('users')->insert([
             'first_name' => 'Shadrack',
             'last_name' => 'Kilei Mweu',
             'staff_number' => '3',
-            'position' => 'store keeper',
+            'position' => 'stockist',
+            'pin' => '1212',
             'role' => 'admin',
             'email' => 'shadrack'.'@captains.com',
             'password' => Hash::make('password'),
@@ -208,7 +128,8 @@ class UserSeeder extends Seeder
             'first_name' => 'Mary',
             'last_name' => 'Wambui Maingi',
             'staff_number' => '1',
-            'position' => 'service supervisor',
+            'pin' => '5252',
+            'position' => 'restaurant supervisor',
             'role' => 'admin',
             'email' => 'mary'.'@captains.com',
             'password' => Hash::make('password'),
@@ -218,24 +139,20 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'first_name' => 'Calvin',          
-            'last_name' => 'Magezi',          
+            'last_name' => 'Msimbo',          
             'role' => 'admin',
+            'position' => 'Tech',
+            'pin' => '0800',
             'email' => 'calvinmagezi@ymail.com',
             'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'first_name' => 'Admin',          
-            'last_name' => 'Admin',          
-            'role' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('password'),
-        ]);
+        ]);       
 
         DB::table('users')->insert([
             'first_name' => 'Jack',          
             'last_name' => 'Msimbo',          
             'role' => 'admin',
+            'position' => 'Tech',
+            'pin' => '1800',
             'email' => 'jack@captains.com',
             'password' => Hash::make('password'),
         ]);
@@ -244,17 +161,12 @@ class UserSeeder extends Seeder
             'first_name' => 'Clinton',          
             'last_name' => 'Msimbo',          
             'role' => 'admin',
+            'position' => 'Tech',
+            'pin' => '2800',
             'email' => 'clinton@captains.com',
             'password' => Hash::make('password'),
         ]);
-
-        DB::table('users')->insert([
-            'first_name' => 'staff',          
-            'last_name' => 'staff',          
-            'role' => 'staff',
-            'email' => 'staff@gmail.com',
-            'password' => Hash::make('password'),
-        ]);
+       
     }
     
 }

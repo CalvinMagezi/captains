@@ -55,9 +55,10 @@
                                                 <th>Table #</th>
                                                 <th>Taken By</th>
                                                 <th>Status</th>
-                                                <th>Total</th>                                                
-                                                <th>View</th>
-                                                @if (Auth::user()->role == 'admin')
+                                                <th>Total</th> 
+                                                @if (Auth::user()->role == 'admin')   
+                                                {{-- <th>Edit</th>                                             --}}
+                                                <th>View</th>                                                                                   
                                                 <th>Close Order</th>
                                                 <th>Delete</th>
                                                 @endif                                                
@@ -68,17 +69,19 @@
                                                 @foreach ($all_orders as $order)
                                                 @if($order->status == 'ongoing')
                                                 <tr>
-                                                    <td># {{$loop->iteration}}</td>
+                                                    <td># {{$order->id}}</td>
                                                     <td>Table: {{ $order->table_number }}</td>
                                                     <td>{{ $order->taken_by }}</td>
                                                     <td>{{ $order->status }}</td>
                                                     <td>KES {{ $order->prices_total }}</td>
-                                                    
+                                                    {{-- <td>
+                                                        <button class="btn btn-primary" data-toggle="modal" data-target="#edit_{{$order->id}}">Edit</button>
+                                                    </td> --}}
                                                     <td>
-                                                        <button class="btn btn-success" data-toggle="modal" data-target="#edit_{{$order->id}}">View</button>
+                                                        <button class="btn btn-success" data-toggle="modal" data-target="#view_{{$order->id}}">View</button>
 
                                                         <!-- Modal -->
-                                                        <div class="modal fade" id="edit_{{$order->id}}" tabindex="-1" aria-labelledby="edit_{{$order->id}}Label" aria-hidden="true">
+                                                        <div class="modal fade" id="view_{{$order->id}}" tabindex="-1" aria-labelledby="edit_{{$order->id}}Label" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -153,18 +156,18 @@
                                                                         <div class="col-6">
                                                                             <h6>Amount Received:</h6>
                                                                             <br>
-                                                                            <input type="text" name="amount_received" required>
+                                                                            <input type="text" id="received" name="amount_received" required>
                                                                         </div>  
                                                                         <div class="col-6">
                                                                         <h6>Expected Amount:</h6>
                                                                         <br>
-                                                                            <input type="text" placeholder="KES {{$order->prices_total}}" readonly>
+                                                                            <input type="text" id="expected" value="{{$order->prices_total}}" placeholder="KES {{$order->prices_total}}" readonly>
                                                                         </div>  
                                                                         </div>                                                                                                                                     
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-success">Close Order</button>
+                                                                <button type="submit" class="btn btn-success" id="close" disabled="disabled">Close Order</button>
                                                             </form>
                                                                 </div>
                                                             </div>
@@ -252,7 +255,23 @@
     var mainBar = $('#main_bar_table tr').length;
 
     $('#total_cocktails').html(cocktailBar)
-    $('#total_main_bar').html(mainBar) 
+    $('#total_main_bar').html(mainBar)
+
+    $("#received").keyup(function () {
+            //Reference the Button.
+            var btnSubmit = $("#close");
+            var expected = $('#expected').val();
+ 
+            //Verify the TextBox value.
+            if ($(this).val().trim() != expected) {
+                //Enable the TextBox when TextBox has value.
+                btnSubmit.attr("disabled", "disabled");                
+            } else {
+                //Disable the TextBox when TextBox is empty.
+                btnSubmit.removeAttr("disabled");
+            }
+        });
+
 </script>
 
 </body>

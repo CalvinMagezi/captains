@@ -93,5 +93,6 @@ class config_products extends Command
 
             }
 
+            echo "Successfully updated product list \n";
     }
 }

@@ -30,5 +30,22 @@ class AuthController extends Controller
     return view('auth.login');
     }
 
+    public function login(Request $request){
+        $pin = $request->pin;
+
+        $user = User::where('pin','=',$pin)->first();
+
+        if ($user != null) {
+            Auth::login($user);
+
+            return redirect('/dashboard');
+        }else{
+            return redirect()->back()->with('error','No User exists with that pin.');
+        }
+        
+
+
+    }
+
 
 }

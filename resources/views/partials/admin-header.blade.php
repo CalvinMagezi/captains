@@ -193,27 +193,7 @@
                                   <span>{{Auth::user()->first_name.' '.Auth::user()->last_name }}</span>
                                   <i class="ti-angle-down"></i>
                               </a>
-                              <ul class="show-notification profile-notification">
-                                  <li class="waves-effect waves-light">
-                                      <a href="#!">
-                                          <i class="ti-settings"></i> Settings
-                                      </a>
-                                  </li>
-                                  <li class="waves-effect waves-light">
-                                      <a href="#">
-                                          <i class="ti-user"></i> Profile
-                                      </a>
-                                  </li>
-                                  <li class="waves-effect waves-light">
-                                      <a href="#">
-                                          <i class="ti-email"></i> My Messages
-                                      </a>
-                                  </li>
-                                  <li class="waves-effect waves-light">
-                                      <a href="#">
-                                          <i class="ti-lock"></i> Lock Screen
-                                      </a>
-                                  </li>
+                              <ul class="show-notification profile-notification">                                 
                                   <li class="waves-effect waves-light">
                                       <a href="/logout">
                                           <i class="ti-layout-sidebar-left"></i> Logout
@@ -354,19 +334,64 @@
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
-                              <li>
+                              {{-- <li>
                                   <a href="#" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">Table Info</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
-                              </li>
+                              </li> --}}
                               
                               
         
                           </ul> 
 
+                          @if (Auth::user()->role == 'admin')  
                           
+                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Items</div>
+                          <ul class="pcoded-item pcoded-left-item">
+                              <li>
+                                  <a href="/inventory" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inventory Management</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="/create-item" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Create Item</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+        
+                          </ul> 
+
+                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">User Management</div>
+                          <ul class="pcoded-item pcoded-left-item">
+                              <li>
+                                  <a href="/create-user" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Create User</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="/manage-users" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Manage Users</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+                              <li>
+                                <a href="/assign-casuals" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Assign Casuals</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+        
+                          </ul> 
 
                           {{-- <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Reports</div>
                           <ul class="pcoded-item pcoded-left-item">
@@ -380,45 +405,36 @@
                               <li>
                                   <a href="#" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inside Sales</span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Kitchen Sales</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
                               <li>
                                 <a href="#" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Outside Sales</span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Mainbar Sales</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">History</span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Cocktail Bar Sales</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Sales</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
         
-                          </ul> --}}
-        
-                          {{-- <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Items</div>
-                          <ul class="pcoded-item pcoded-left-item">
-                              <li>
-                                  <a href="#" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Items</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="#" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Most Popular</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                              </li>
-        
-                          </ul>                            --}}
+                          </ul>  --}}
+                                                   
+                          
+                          @endif
                           
 
                       </div>

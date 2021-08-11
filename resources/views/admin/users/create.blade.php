@@ -89,70 +89,101 @@
   </div>
   <!-- Pre-loader end -->
 
-    <section class="login-block">
-        <!-- Container-fluid starts -->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <!-- Authentication card start -->
-                    
-                        <form action="{{ route('signin') }}" method="post" class="md-float-material form-material">
-                            @csrf
-                            <div class="text-center">
-                                <img style="max-width: 300px;" src="{{ asset('admin/images/logo.png') }}" alt="logo.png">
+  <section class="login-block">
+    <!-- Container-fluid starts -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="/create-user" method="POST" class="md-float-material form-material">
+                    @csrf
+                    <div class="text-center">
+                        <img src="admin/images/logo.png" style="max-width: 150px;" class="img img-responsive" alt="logo.png">
+                    </div>
+                    <div class="auth-box card">
+                        <div class="card-block">
+                            <div class="row m-b-20">
+                                <div class="col-md-12">
+                                    <h3 class="text-center txt-primary">Create New User</h3>
+                                </div>
                             </div>
-                            <div class="auth-box card">
-                                <div class="card-block">
-                                    <div class="row m-b-20">
-                                        <div class="col-md-12">
-                                            <h3 class="text-center">Sign In</h3>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-sm-6">
                                     <div class="form-group form-primary">
-                                        <input type="text" name="pin" class="form-control" required="">
+                                        <input type="text" name="first_name" class="form-control" required>
                                         <span class="form-bar"></span>
-                                        <label class="float-label">User Pin</label>
-                                    </div>                                    
-                                    <div class="row m-t-25 text-left">
-                                        <div class="col-12">
-                                            <div class="checkbox-fade fade-in-primary d-">
-                                                <label>
-                                                    <input type="checkbox" value="">
-                                                    <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                                    <span class="text-inverse">Remember me</span>
-                                                </label>
-                                            </div>
-                                            <div class="forgot-phone text-right f-right">
-                                                <a href="#" class="text-right f-w-600"> Forgot Password?</a>
-                                            </div>
-                                        </div>
+                                        <label class="float-label">First Name</label>
                                     </div>
-                                    <div class="row m-t-30">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">Sign in</button>
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <p class="text-inverse text-left m-b-0">Karibu</p>
-                                            {{-- <p class="text-inverse text-left"><a href="index.html"><b>Back to website</b></a></p> --}}
-                                        </div>
-                                        <div class="col-md-2">
-                                            <img style="max-width: 60px;" src="{{ asset('admin/images/logo.png') }}" alt="small-logo.png">
-                                        </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group form-primary">
+                                        <input type="text" name="last_name" class="form-control" required>
+                                        <span class="form-bar"></span>
+                                        <label class="float-label">Last Name</label>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                        <!-- end of form -->
-                </div>
-                <!-- end of col-sm-12 -->
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group form-primary">
+                                        <input type="text" name="pin" class="form-control" required>
+                                        <span class="form-bar"></span>
+                                        <label class="float-label">Pin</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group form-primary">
+                                        <input type="text" name="position" class="form-control" required>
+                                        <span class="form-bar"></span>
+                                        <label class="float-label">Position</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Role</label>
+                                        <select name="role" class="form-control" id="exampleFormControlSelect1" required>                                            
+                                            <option value="staff">Staff</option>                                            
+                                            <option value="casual">Casual</option>                                            
+                                            <option value="admin">Admin</option>                                            
+                                        </select>
+                                      </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group form-primary">
+                                        <input type="text" name="staff_number" class="form-control" required>
+                                        <span class="form-bar"></span>
+                                        <label class="float-label">Staff Number</label>
+                                    </div>
+                                </div>
+                            </div>                                                                                
+                                                      
+                            <div class="row m-t-30">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Create</button>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <p class="text-inverse text-left m-b-0">Teamwork Makes The Dream Work</p>
+                                    <p class="text-inverse text-left"><a href="/dashboard"><b>Back to dashboard</b></a></p>
+                                </div>
+                                <div class="col-md-2">
+                                    <img src="admin/images/logo.png" style="max-width: 50px" alt="small-logo.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <!-- end of row -->
+            <!-- end of col-sm-12 -->
         </div>
-        <!-- end of container-fluid -->
-    </section>
+        <!-- end of row -->
+    </div>
+    <!-- end of container-fluid -->
+</section>
 <!-- Required Jquery -->
 <script type="text/javascript" src="{{ asset('admin/js/jquery/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/jquery-ui/jquery-ui.min.js') }}"></script>

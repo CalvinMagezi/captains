@@ -22,25 +22,17 @@
                     </ul>
                 </div>
             </div>
-        </div>
-        @if (session('success'))
-                    <div class="row justify-content-center">             
-                        <div class="col-12 btn btn-success" style="width: 100%">
-                            <h4 style="color: white;" class="pt-2 pb-2">{{ session()->get('success') }}</h4>
-                        </div>
-                      </div>
-        @endif
+        </div>       
     </div>
 
     <div class="pcoded-inner-content">
         <!-- Main-body start -->
-        <div class="main-body">
+        <div class="main-body">               
             <div class="page-wrapper">
                 <!-- Page-body start -->
                 <div class="page-body">
                     
-                    <div class="row justify-content-center">                        
-                        @if (Auth::user()->role == 'admin' || Auth::user()->position == 'bartender') 
+                    <div class="row justify-content-center">                                                
                         <div class="col-12">
                             <div class="card table-card">
                                 <div class="card-header">
@@ -61,6 +53,14 @@
                                     </div>
                                 </div>
                                 <div class="card-block">
+                                    @if(session()->has('success'))
+                                    <div class="row justify-content-center">
+                                        <div class="col-4 text-center">
+                                            <button class="btn btn-success" style="width: 100%;"> {{ session()->get('success') }}</button>
+                                        </div>
+                                    </div>            
+                                @endif
+                                
                                     <div class="table-responsive">
                                         <table class="table table-hover">
                                             <thead>
@@ -70,11 +70,30 @@
                                                     <td>Quantity</td>
                                                     <td>Specifics</td>
                                                     <td>Priority</td>                                                    
-                                                    <td>Ready</td>                                                                
+                                                    <td>Notify</td>                                                                
                                                 </tr>
                                             </thead>
-                                            <tbody id="main_bar_table">
-                                        
+                                            <tbody id="main_bar_table" >
+                                                @foreach ($order_details as $details)
+                                                @if ($details->dispatched_to == 'main bar')
+                                                    <tr class="text-center">
+                                                        <td>{{$details->order_id}}</td>
+                                                        <td>{{$details->item_name}}</td>
+                                                        <td>{{$details->quantity}}</td>
+                                                        <td>{{$details->specifics}}</td>
+                                                        <td>{{$details->priority}}</td>
+                                                        <td>
+                                                            <form action="/api/item-ready" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="taken_by" value="{{$details->taken_by}}">
+                                                            <input type="hidden" name="order_id" value="{{$details->order_id}}">
+                                                            <input type="hidden" name="item_name" value="{{$details->item_name}}">
+                                                            <button type="submit" class="btn btn-success">{{$details->taken_by}}</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
                                             </tbody>                                       
                                         </table>                                        
                                         
@@ -92,8 +111,7 @@
                                 </div>
                             </div>
                            
-                        </div>
-                        @endif 
+                        </div>                        
                     </div>
 
                     
@@ -151,7 +169,7 @@
                 success:function(result){                           
                 result.forEach((item) => {
                  
-                    markup = "<tr class='text-center'><td> "+ item.order_id + "</td> <td>"+ item.item_name +"</td> <td>" + item.quantity +"</td> <td>"+ item.specifics +"</td><td>"+ item.priority +"<td><form action='/api/item-ready' method='POST'> <input type='hidden' name='item_name' value='"+item.item_name+"'/> <input type='hidden' name='taken_by' value='"+item.taken_by+"'/> <input type='hidden' name='order_id' value='"+item.order_id+"'/> <button type='submit' class='btn btn-success'>Notify "+item.taken_by+"</button></form></td></tr>";
+                    markup = "<tr class='text-center'><td> "+ item.order_id + "</td> <td>"+ item.item_name +"</td> <td>" + item.quantity +"</td> <td>"+ item.specifics +"</td><td>"+ item.priority +"<td><form action='/api/item-ready' method='POST'> <input type='hidden' name='item_name' value='"+item.item_name+"'/> <input type='hidden' name='taken_by' value='"+item.taken_by+"'/> <input type='hidden' name='order_id' value='"+item.order_id+"'/> <button type='submit' class='btn btn-success'>"+item.taken_by+"</button></form></td></tr>";
                     tableBody = $(".table tbody");
                     tableBody.append(markup); 
 
@@ -162,7 +180,7 @@
                 }
             });
 
-            }, 5000);           
+            }, 20000);           
 
     })
 

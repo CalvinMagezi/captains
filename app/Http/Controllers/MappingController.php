@@ -129,8 +129,8 @@ class MappingController extends Controller
     public function assign_index(){
 
         $waiters = DB::table('users')
-                        ->where('position','=','wait')
-                        ->orWhere('position','=','head waitress')
+                        ->where('role','=','staff')
+                        ->orWhere('role','=','casual')
                         ->get();
 
         $tables = Table::all();                        
