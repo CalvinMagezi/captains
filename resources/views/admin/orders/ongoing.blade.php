@@ -117,7 +117,14 @@
                                                                     </table>                                                                
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                                                
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>  
+                                                                @if (Auth::user()->role == 'admin')
+                                                                <form action="/edit-order" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="id" value="{{$order->id}}">
+                                                                <button type="submit" class="btn btn-warning" style="color: #000;">Edit</button>                                                                                                                                    
+                                                                </form>
+                                                                @endif                                                              
                                                                 </div>
                                                             </div>
                                                             </div>
@@ -125,11 +132,11 @@
                                                     </td>
                                                     @if (Auth::user()->role == 'admin' || Auth::user()->position == 'cashier')
                                                     <td>
-                                                        <button class="btn btn-warning" data-toggle="modal" data-target="#close_{{$order->id}}">Close Order</button>
+                                                        <button class="btn btn-warning" data-toggle="modal" data-target="#close_{{$order->id}}" style="color: #000 !important;">Close Order</button>
                                                         
                                                         <div class="modal fade" id="close_{{$order->id}}" tabindex="-1" aria-labelledby="close_{{$order->id}}Label" aria-hidden="true">
                                                             <div class="modal-dialog">
-                                                            <div class="modal-content">
+                                                            <div class="modal-content printing">
                                                                 <div class="modal-header">
                                                                 <h5 class="modal-title" id="close_{{$order->id}}Label">Close Order: {{ $loop->iteration}}</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -151,6 +158,30 @@
                                                                         <input type="hidden" name="table_number" value="{{$order->table_number}}">
                                                                             </div>
                                                                         </div>
+                                                                        <table class="table table-responsive confirm_table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <td>Order Items</td>
+                                                                                    <td>Item Price</td>
+                                                                                    <td>Quantity</td>
+                                                                                    <td>Specifics</td>
+                                                                                    <td>Priority</td>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                @foreach ($order_details as $details)
+                                                                                    @if ($details->order_id == $order->id)
+                                                                                        <tr>
+                                                                                            <td>{{$details->item_name}}</td>
+                                                                                            <td>{{$details->price}}</td>
+                                                                                            <td>{{$details->quantity}}</td>
+                                                                                            <td>{{$details->specifics}}</td>
+                                                                                            <td>{{$details->priority}}</td>
+                                                                                        </tr>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>  
                                                                           <hr>
                                                                         <div class="row mt-1 text-center">
                                                                         <div class="col-6">
@@ -166,9 +197,14 @@
                                                                         </div>                                                                                                                                     
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-success" id="close" disabled="disabled">Close Order</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                                                                                                               
+                                                                <button type="submit" class="btn btn-success" id="close" disabled="disabled" >Close Order</button>
                                                             </form>
+                                                            <form action="/print-receipt" method="POST" target="_blank">
+                                                                @csrf
+                                                                <input type="hidden" name="id" value="{{$order->id}}">
+                                                                <button type="submit" class="btn btn-primary print_r">Print Receipt</button>
+                                                                </form> 
                                                                 </div>
                                                             </div>
                                                             </div>
@@ -253,13 +289,15 @@
 <script>
     var cocktailBar = $('#cocktail_bar_table tr').length;
     var mainBar = $('#main_bar_table tr').length;
+    var btnSubmit = $("#close");
+    var confirmTable = $('.confirm_table');
 
     $('#total_cocktails').html(cocktailBar)
     $('#total_main_bar').html(mainBar)
 
     $("#received").keyup(function () {
             //Reference the Button.
-            var btnSubmit = $("#close");
+            
             var expected = $('#expected').val();
  
             //Verify the TextBox value.
@@ -270,7 +308,7 @@
                 //Disable the TextBox when TextBox is empty.
                 btnSubmit.removeAttr("disabled");
             }
-        });
+        });  
 
 </script>
 

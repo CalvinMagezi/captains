@@ -7,10 +7,14 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Table;
+use App\Models\Sale;
+use App\Models\Product;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Log;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -302,8 +306,38 @@ class OrderController extends Controller
         $table_number = $request->input('table_number');
         $completed_at = Carbon::now();
 
+        $kitchen = 0;
+        $cocktail = 0;
+        $main = 0;
 
-        $restore = DB::table('orders')
+        $total_items = DB::table('order_details')->where('order_id','=',$order_id)->get();
+
+        foreach ($total_items as $item) {
+            if ($item->dispatched_to == 'kitchen') {
+                $kitchen = $kitchen + (int)$item->price;
+            }
+            if ($item->dispatched_to == 'main bar') {
+                $main= $main + (int)$item->price;
+            }
+            if ($item->dispatched_to == 'cocktail bar') {
+                $cocktail = $cocktail + (int)$item->price;
+            }
+        }
+
+
+        $new_sale = new Sale([
+            'unique_id' => substr( bin2hex( random_bytes( 8 ) ),  0, 8 ),
+            'handled_by' => $taken_by,  
+            'total' => $amount_received,
+            'kitchen' => $kitchen,
+            'mainbar' => $main,
+            'cocktailbar' => $cocktail         
+        ]);
+
+        $new_sale->save();
+
+
+        $close = DB::table('orders')
                             ->where('id',$order_id)
                             ->where('taken_by',$taken_by)
                             ->where('table_number',$table_number)
@@ -331,6 +365,89 @@ class OrderController extends Controller
                         ]);
 
         return Redirect::back()->with(['success', 'Successfully Notified Waiter']);                        
+    }
+
+    public function print_r(Request $request){
+        $order = Order::where('id','=',$request->id)->first();
+        $details = OrderDetails::where('order_id','=',$order->id)->get();
+
+        return view('admin.orders.print',[
+            'order' => $order,
+            'details' => $details
+        ]);
+    }
+
+    public function show_edit(Request $request){
+        $order = Order::where('id','=',$request->id)->first();
+        $order_details = OrderDetails::where('order_id','=',$order->id)->paginate(25);
+
+        return view('admin.orders.edit', [
+            'order' => $order,
+            'order_details' => $order_details
+        ]);
+    }
+
+    public function add_item(Request $request){
+        $order = Order::where('id','=',$request->id)->first();
+        $item = Product::where('name','=',$request->item_name)->first();
+
+        if ($item->major_category == 'Drinks') {
+
+            if ($item->category == 'cocktail') {
+                $section = 'cocktail bar';
+            }else{
+                $section = 'main bar';
+            }                
+        }
+        
+        if($item->major_category == 'Food'){
+            $section = 'kitchen';
+        }
+        
+
+        $new = new OrderDetails([
+            'order_id' => $request->id,
+            'taken_by' => $order->taken_by,
+            'table_number' => $order->table_number,
+            'item_name' => $request->item_name,
+            'item_category' => $item->category,
+            'dispatched_to' => $section,
+            'item_m_category' => $item->major_category,
+            'price' => $item->price,
+            'quantity' => 1,
+            'specifics' => 'regular',
+            'priority' => 'regular'
+        ]);
+
+        $new->save();
+
+        $order->update([
+            'prices_total' => (int)$order->prices_total + (int)$item->price,
+        ]);
+
+        return redirect('/ongoing-orders')->with('success', 'Successfully Added Item To Order');
+    }
+
+    public function delete_item(Request $request){
+        $order = Order::where('id','=',$request->id)->first();
+        $item = Product::where('name','=',$request->item_name)->first();
+        $order->update([
+            'prices_total' => (int)$order->prices_total - (int)$item->price,
+        ]);
+
+        $detail = OrderDetails::where('order_id','=',$order->id)->where('item_name','=',$item->name)->first();
+        $detail->delete();
+
+        return redirect('/ongoing-orders')->with('success', 'Successfully Deleted Item From Order');
+    }
+
+    public function edit(Request $request){
+        $data = request()->except(['_token','id']);       
+        
+        $updates = array_filter($data); 
+
+        $order = Order::where('id','=',$request->id)->first();
+
     }
 
     //Ajax Requests

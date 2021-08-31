@@ -12,10 +12,12 @@ use App\Models\OrderDetails;
 use App\Models\Item;
 use App\Models\Product;
 use App\Models\Table;
+use App\Models\Sale;
 use Gate;
 use DB;
 use Log;
 use Auth;
+use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Response;
 
 use App\Models\User;
@@ -36,10 +38,10 @@ class AdminController extends Controller
         ->orWhere('position','=','head waitress')
         ->get();
 
-        $all_order_count = Order::all()->count();
+        $all_order_count = Order::all()->where('status','=','ongoing')->count();
         $all_closed_orders = Order::all()->where('status','=','closed')->count();
 
-        $my_order_count = Order::all()->where('taken_by','=',Auth::user()->first_name.' '.Auth::user()->last_name)->count();
+        $my_order_count = Order::all()->where('taken_by','=',Auth::user()->first_name.' '.Auth::user()->last_name)->where('status','=','ongoing')->count();
         $my_closed_order_count = Order::all()
                             ->where('taken_by','=',Auth::user()->first_name.' '.Auth::user()->last_name)
                             ->where('status','=','closed')
@@ -51,6 +53,17 @@ class AdminController extends Controller
                             ->get();                           
 
         $active_table_count = Table::where('status','=','active')->count();
+
+        $todays_sales = Sale::whereDate('created_at', Carbon::today())->get();        
+        $total = 0;
+        $my_total = 0;
+
+        foreach ($todays_sales as $value) {
+            $total = $total + $value->total;
+            if ($value->handled_by == Auth::user()->first_name.' '.Auth::user()->last_name) {
+                $my_total = $my_total + $value->total;
+            }
+        }
         
         return view('admin.dashboard', [
             'users' => $users,
@@ -65,6 +78,8 @@ class AdminController extends Controller
             'my_closed_order_count' => $my_closed_order_count,
             'my_assigned_tables' => $my_assigned_tables,
             'total_active_tables' => $active_table_count,
+            'todays_sales' => $total,
+            'my_sales' => $my_total
         ]);
     }
 

@@ -124,7 +124,7 @@
                                                             <div class="col-8">
                                                                 @if (Auth::user()->role != 'admin')
                                                                 <h4 class="text-c-green">{{ $my_closed_order_count}}</h4>
-                                                                <h6 class="text-muted m-b-0">My losed Orders</h6>
+                                                                <h6 class="text-muted m-b-0">My Closed Orders</h6>
                                                                 @else
                                                                 <h4 class="text-c-green">{{ $all_closed_orders }}</h4>
                                                                 <h6 class="text-muted m-b-0">Closed Orders</h6>
@@ -172,13 +172,18 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-xl-3 col-md-6">
+                                            <div class="col-xl-3 col-md-6">
                                                 <div class="card">
                                                     <div class="card-block">
                                                         <div class="row justify-content-center text-center  align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-blue">KES 500</h4>
+                                                                @if (Auth::user()->role != 'admin')
+                                                                <h4 class="text-c-blue">KES {{$my_sales}}</h4>
+                                                                <h6 class="text-muted m-b-0">My Sales Today</h6>
+                                                                @else 
+                                                                <h4 class="text-c-blue">KES {{$todays_sales}}</h4>
                                                                 <h6 class="text-muted m-b-0">Today's Sales </h6>
+                                                                @endif                                                               
                                                             </div>
                                                            
                                                         </div>
@@ -194,7 +199,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div> --}}
+                                            </div>
                                             <!-- task, page, download counter  end -->
     
                                             <!--  sale analytics start -->

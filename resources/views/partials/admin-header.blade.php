@@ -364,6 +364,13 @@
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
+                              <li>
+                                <a href="/happyhour" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Happy Hour</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
         
                           </ul> 
 
@@ -393,45 +400,45 @@
         
                           </ul> 
 
-                          {{-- <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Reports</div>
+                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Sales Reports</div>
                           <ul class="pcoded-item pcoded-left-item">
                               <li>
-                                  <a href="#" class="waves-effect waves-dark">
+                                  <a href="/todays_sales" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">Today's Sales</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
-                              <li>
-                                  <a href="#" class="waves-effect waves-dark">
+                              {{-- <li>
+                                  <a href="/kitchen_sales" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">Kitchen Sales</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
                               <li>
-                                <a href="#" class="waves-effect waves-dark">
+                                <a href="/mainbar_sales" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">Mainbar Sales</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="waves-effect waves-dark">
+                                <a href="/cocktailbar_sales" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">Cocktail Bar Sales</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
-                                <a href="#" class="waves-effect waves-dark">
+                                <a href="/sales_history" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Sales</span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Sales History</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
         
-                          </ul>  --}}
+                          </ul> 
                                                    
                           
                           @endif

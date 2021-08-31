@@ -34,6 +34,8 @@
                     <div class="row justify-content-center">
                         <div class="col-12">
                             <div class="card table-card">
+                           @include('partials.message')      
+                                           
                                 <div class="card-header">
                                     <h5>Product List</h5>
                                     <div class="card-header-right">
