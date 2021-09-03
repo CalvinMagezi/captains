@@ -17,6 +17,7 @@ class Sale extends Model
         'kitchen',       
         'mainbar',       
         'cocktailbar',       
-        'total',       
+        'total', 
+        'discount'      
     ];
 }

@@ -38,3 +38,5 @@ Route::get('/get-outside', 'App\Http\Controllers\MappingController@getOutside')-
 Route::post('/save-tables', 'App\Http\Controllers\MappingController@store')->name('save-tables');
 Route::post('/assign-tables', 'App\Http\Controllers\MappingController@assign')->name('assign-tables');
 
+Route::get('/get-orders', 'App\Http\Controllers\AjaxController@orders');
+

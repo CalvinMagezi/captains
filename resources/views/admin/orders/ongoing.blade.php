@@ -193,7 +193,11 @@
                                                                         <h6>Expected Amount:</h6>
                                                                         <br>
                                                                             <input type="text" id="expected" value="{{$order->prices_total}}" placeholder="KES {{$order->prices_total}}" readonly>
-                                                                        </div>  
+                                                                        </div> 
+                                                                        <div class="col-md-6"></div>
+                                                                        <div class="col-md-6">
+                                                                        <input type="text" class="discount" placeholder="Discount %" name="discount">                                                                            
+                                                                        </div> 
                                                                         </div>                                                                                                                                     
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -290,6 +294,7 @@
     var cocktailBar = $('#cocktail_bar_table tr').length;
     var mainBar = $('#main_bar_table tr').length;
     var btnSubmit = $("#close");
+    var discount = $('.discount').val().trim();
     var confirmTable = $('.confirm_table');
 
     $('#total_cocktails').html(cocktailBar)
@@ -301,14 +306,32 @@
             var expected = $('#expected').val();
  
             //Verify the TextBox value.
-            if ($(this).val().trim() != expected) {
+            if ($(this).val().trim() == expected ) {
                 //Enable the TextBox when TextBox has value.
-                btnSubmit.attr("disabled", "disabled");                
+                btnSubmit.removeAttr("disabled");                              
             } else {
                 //Disable the TextBox when TextBox is empty.
-                btnSubmit.removeAttr("disabled");
+                btnSubmit.attr("disabled", "disabled"); 
             }
-        });  
+        }); 
+        
+    $(".discount").keyup(function () {
+            //Reference the Button. 
+            
+            var expected = $('#expected').val();
+            var received = $('#received').val();
+ 
+            //Verify the TextBox value.
+            if ($(this).val().trim() > 0 ) {
+                //Enable the TextBox when TextBox has value.
+                btnSubmit.removeAttr("disabled"); 
+                var new_val = expected - (expected * ($(this).val().trim() / 100));
+                $('#received').val(new_val)                              
+            } else {
+                //Disable the TextBox when TextBox is empty.
+                btnSubmit.attr("disabled", "disabled"); 
+            }
+        }); 
 
 </script>
 

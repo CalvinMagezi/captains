@@ -300,7 +300,13 @@ class OrderController extends Controller
     public function close_order(Request $request){
 
         $order_id = $request->input('order_id');   
-        $amount_received = $request->input('amount_received');
+        if ($request->discount) {
+            $discount = $request->discount;
+        }else{
+            $discount = 0;
+        }
+        $amount_received = $request->input('amount_received');       
+        $discount = $request->discount;
         $closed_by = $request->input('closed_by');
         $taken_by = $request->input('taken_by');
         $table_number = $request->input('table_number');
@@ -331,7 +337,8 @@ class OrderController extends Controller
             'total' => $amount_received,
             'kitchen' => $kitchen,
             'mainbar' => $main,
-            'cocktailbar' => $cocktail         
+            'cocktailbar' => $cocktail,
+            'discount' => $discount        
         ]);
 
         $new_sale->save();
@@ -449,6 +456,15 @@ class OrderController extends Controller
         $order = Order::where('id','=',$request->id)->first();
 
     }
+
+    public function search(Request $request){
+        $order = Order::where('id','=',$request->id)->first();
+        $details = OrderDetails::where('order_id','=',$request->id)->get();
+        return view('admin.search.orders', [
+            'order' => $order,
+            'order_details' => $details
+        ]);
+    }    
 
     //Ajax Requests
     public function get_details()

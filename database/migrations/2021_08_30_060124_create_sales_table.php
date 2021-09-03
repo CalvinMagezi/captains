@@ -20,6 +20,7 @@ class CreateSalesTable extends Migration
             $table->integer('kitchen');
             $table->integer('mainbar');
             $table->integer('cocktailbar');
+            $table->integer('discount');
             $table->integer('total');
             $table->timestamps();
         });

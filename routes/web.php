@@ -72,6 +72,7 @@ Route::post('/print-receipt',[App\Http\Controllers\OrderController::class, 'prin
 Route::post('/order-edit', [App\Http\Controllers\OrderController::class, 'edit'])->middleware('auth');
 Route::post('/edit-order', [App\Http\Controllers\OrderController::class, 'show_edit'])->middleware('auth');
 Route::post('/add-item', [App\Http\Controllers\OrderController::class, 'add_item'])->middleware('auth');
+Route::post('/search-order',[App\Http\Controllers\OrderController::class, 'search'])->middleware('auth');
 
 
 //Mapping

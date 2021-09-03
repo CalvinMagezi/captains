@@ -29,6 +29,45 @@
 <!-- custom js -->
 <script type="text/javascript" src="{{ asset('admin/js/script.js') }}"></script>
 
+<script>
+    (function ($) {
+    "user strict";
+
+    var orders = [];
+
+    $(document).ready(function(){
+        $.ajaxSetup({
+
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });                     
+             //Populate Array With All Users
+            $.ajax({          
+            url: "/api/get-orders",
+            type:"GET",          
+            success:function(result){
+                console.log("success");
+                result.forEach((item) => {
+                orders.push(item.id);                                                    
+                }); 
+            },
+            error:function(){
+                console.log("error");              
+            }
+        });
+
+        $( ".search_orders" ).autocomplete({
+            source: orders
+        });
+
+        $( ".search_orders" ).autocomplete( "widget" );
+
+    })
+
+})(jQuery);
+</script>   
+
 {{-- Data Tables --}}
 {{-- <script src="{{ asset('admin/js/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('admin/js/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
