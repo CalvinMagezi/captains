@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class SectionSeeder extends Seeder
 {
@@ -16,20 +14,17 @@ class SectionSeeder extends Seeder
      */
     public function run()
     {
-        
-        DB::table('sections')->insert([
-            'name' => 'cocktail bar',
-            'assigned_to' =>'free'
-        ]);
-
         DB::table('sections')->insert([
             'name' => 'main bar',
-            'assigned_to' =>'free'
+            'slug' => 'main-bar'
         ]);
-
+        DB::table('sections')->insert([
+            'name' => 'cocktail bar',
+            'slug' => 'cocktail-bar'
+        ]);
         DB::table('sections')->insert([
             'name' => 'kitchen',
-            'assigned_to' =>'free'
+            'slug' => 'kitchen'
         ]);
     }
 }

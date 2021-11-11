@@ -10,7 +10,7 @@ SET time_zone = "+00:00";
 --   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 --   `table_number` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
 --   `managed_by` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
---   `table_id` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+--   `table_key` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
 --   `section` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
 --   `position` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
 --   `status` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -19,10 +19,10 @@ SET time_zone = "+00:00";
 --   `created_at` timestamp NULL DEFAULT NULL,
 --   `updated_at` timestamp NULL DEFAULT NULL,
 --   PRIMARY KEY (`id`),
---   UNIQUE KEY `tables_table_id_unique` (`table_id`)
+--   UNIQUE KEY `tables_table_id_unique` (`table_key`)
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `tables` (`id`, `table_number`, `managed_by`, `table_id`, `section`, `position`, `status`, `top`, `left`, `created_at`, `updated_at`) VALUES
+INSERT INTO `tables` (`id`, `table_number`, `managed_by`, `table_key`, `section`, `position`, `status`, `top`, `left`, `created_at`, `updated_at`) VALUES
 (1,	'1',	NULL,	'0Kqgj',	'1',	'outside',	'in-active',	'103px',	'122px',	NULL,	NULL),
 (2,	'2',	NULL,	'1byh9',	'1',	'inside',	'in-active',	'135px',	'161px',	NULL,	NULL),
 (3,	'3',	NULL,	'2bAmE',	'1',	'outside',	'in-active',	'184px',	'157px',	NULL,	NULL),

@@ -1,92 +1,187 @@
 <?php
 
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MappingController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\SearchController;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\OrderDetail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\SmsController;
+use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\Admin\TableController;
+use App\Http\Controllers\Admin\BookingController;
+use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Auth\UserProfileController;
+use App\Http\Controllers\Admin\OrderDetailController;
+use App\Http\Controllers\Admin\RequisitionController;
+use App\Http\Controllers\Admin\SectionSaleController;
+use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\ContactCompanyController;
+use App\Http\Controllers\Admin\ContactContactController;
+use App\Http\Controllers\Admin\SystemCalendarController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/', function () {
-    return redirect('/dashboard');
-});
-Route::get('/home', [App\Http\Controllers\AdminController::class, 'index'])->middleware('auth')->name('home');
+
 Route::post('/signin', [App\Http\Controllers\AuthController::class, 'login'])->name('signin');
 Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
-//=============
-//Admin Routes
-//=============
-Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->middleware('auth')->name('dashboard');
-Route::get('/happyhour', [App\Http\Controllers\HappyHourController::class, 'index'])->middleware('auth');
-
-//Users
-Route::get('/create-user',[App\Http\Controllers\UserController::class, 'index'])->middleware('auth');
-Route::post('/create-user',[App\Http\Controllers\UserController::class, 'create'])->middleware('auth');
-Route::get('/manage-users',[App\Http\Controllers\UserController::class, 'manage'])->middleware('auth');
-Route::post('/edit-user',[App\Http\Controllers\UserController::class, 'edit'])->middleware('auth');
-Route::post('/delete-user',[App\Http\Controllers\UserController::class, 'delete'])->middleware('auth');
-Route::get('/assign-casuals',[App\Http\Controllers\UserController::class, 'casuals'])->middleware('auth');
-Route::post('/assign-casual',[App\Http\Controllers\UserController::class, 'assign_casual'])->middleware('auth');
-Route::post('/clear-casuals',[App\Http\Controllers\UserController::class, 'clear_casuals'])->middleware('auth');
-
-//Items
-Route::get('/inventory',[App\Http\Controllers\ProductController::class, 'index'])->middleware('auth');
-Route::post('/edit-item',[App\Http\Controllers\ProductController::class, 'edit'])->middleware('auth');
-Route::post('/delete-item',[App\Http\Controllers\ProductController::class, 'destroy'])->middleware('auth');
-Route::get('/create-item',[App\Http\Controllers\ProductController::class, 'new'])->middleware('auth');
-Route::post('/create-item',[App\Http\Controllers\ProductController::class, 'create'])->middleware('auth');
-Route::post('/update-happy',  [App\Http\Controllers\HappyHourController::class, 'update'])->middleware('auth');
-
-//Search
-Route::get('search', [SearchController::class, 'index'])->name('search');
-Route::get('autocomplete', [SearchController::class, 'autocomplete_product'])->name('autocomplete');
-
-//Orders
-Route::get('/create-order', [App\Http\Controllers\OrderController::class, 'new_order'])->middleware('auth')->name('new-order');
-Route::post('/create-order', [App\Http\Controllers\AdminController::class, 'store'])->name('store-order');
-Route::get('/new-order', [App\Http\Controllers\OrderController::class, 'new_order'])->middleware('auth')->name('new-order');
-Route::get('/ongoing-orders', [App\Http\Controllers\OrderController::class, 'ongoing'])->name('ongoing-orders');
-Route::get('/flagged-orders', [App\Http\Controllers\OrderController::class, 'flagged'])->name('flagged-orders');
-Route::get('/closed-orders', [App\Http\Controllers\OrderController::class, 'closed'])->name('closed-orders');
-Route::get('/main-bar', [App\Http\Controllers\OrderController::class, 'main_bar'])->name('main_bar');
-Route::get('/cocktail-bar', [App\Http\Controllers\OrderController::class, 'cocktail_bar'])->name('cocktail_bar');
-Route::get('/kitchen', [App\Http\Controllers\OrderController::class, 'kitchen'])->name('kitchen');
-Route::post('/soft-delete-order',[App\Http\Controllers\OrderController::class, 'soft_delete'])->name('soft-delete-order');
-Route::post('/restore-order',[App\Http\Controllers\OrderController::class, 'restore'])->name('restore-order');
-Route::post('/print-receipt',[App\Http\Controllers\OrderController::class, 'print_r'])->middleware('auth');
-Route::post('/order-edit', [App\Http\Controllers\OrderController::class, 'edit'])->middleware('auth');
-Route::post('/edit-order', [App\Http\Controllers\OrderController::class, 'show_edit'])->middleware('auth');
-Route::post('/add-item', [App\Http\Controllers\OrderController::class, 'add_item'])->middleware('auth');
-Route::post('/search-order',[App\Http\Controllers\OrderController::class, 'search'])->middleware('auth');
-
-
+Route::middleware(['auth'])->group(function () {
+Route::get('/', function(){
+    return view('welcome');
+});
+Route::post('/item-ready', [App\Http\Controllers\OrderController::class, 'item_ready'])->name('item-ready');
 //Mapping
-Route::get('/show-tables', [App\Http\Controllers\MappingController::class, 'show'])->middleware('auth')->name('show-mapping');
-Route::post('/new-inside-table', [App\Http\Controllers\MappingController::class, 'create_inside'])->middleware('auth')->name('new-inside-table');
-Route::post('/new-outside-table', [App\Http\Controllers\MappingController::class, 'create_outside'])->middleware('auth')->name('new-outside-table');
-Route::post('/reset-table', [App\Http\Controllers\MappingController::class, 'reset'])->middleware('auth')->name('reset-table');
-// Route::post('/delete-table', [App\Http\Controllers\MappingController::class, 'delete'])->middleware('auth')->name('delete-table');
-Route::get('/assign-tables', [App\Http\Controllers\MappingController::class, 'assign_index'])->middleware('auth')->name('assign-tables');
-Route::post('/clear-assign', [App\Http\Controllers\MappingController::class, 'clear_assign'])->middleware('auth')->name('clear-assign');
+Route::get('/assign-tables', function(){
+    return view('mapping.assign');
+})->name('assign-tables');
+//Point Of Sale
+Route::get('/pos', function (){
+    return view('orders.create');
+})->name('pos');
+//Point Of Cashier
+Route::get('/cashier', function (){
+    return view('orders.cashier');
+})->name('cashier');
+//Return Section Choices Page
+Route::get('/section/{section}',function($section){
+    return view('section-choices', [
+        'section' => $section
+    ]);
+});
+Route::post('store-order',[App\Http\Controllers\OrderController::class, 'store'])->name('store-order');
+Route::get('/check-receipt', function(){
+    $products = Product::all();
+    $orders = Order::all();
+    //Last order details
+    $lastID = OrderDetail::max('order_id');
+    $order_receipt = OrderDetail::where('order_id', $lastID)->get();
+    return view('reports.receipt', [
+        'products' => $products,
+        'orders' => $orders,
+        'order_receipt' => $order_receipt,
+    ]);
+});
+Route::get('/receipt/{id}',function($id){
+    return view('receipt', [
+        'order' => $id,
+    ]);
+});
+//Inventory
+Route::post('/update-happy',  [App\Http\Controllers\HappyHourController::class, 'update']);
+//Mapping
+Route::post('/new-inside-table', [App\Http\Controllers\MappingController::class, 'create_inside'])->name('new-inside-table');
+Route::post('/new-outside-table', [App\Http\Controllers\MappingController::class, 'create_outside'])->name('new-outside-table');
+Route::post('/reset-table', [App\Http\Controllers\MappingController::class, 'reset'])->name('reset-table');
+// Route::post('/delete-table', [App\Http\Controllers\MappingController::class, 'delete'])->name('delete-table');
 
-//Sales
-Route::get('/todays_sales', [App\Http\Controllers\SaleController::class, 'today'])->middleware('auth');
-Route::get('/kitchen_sales', [App\Http\Controllers\SaleController::class, 'kitchen'])->middleware('auth');
-Route::get('/mainbar_sales', [App\Http\Controllers\SaleController::class, 'mainbar'])->middleware('auth');
-Route::get('/cocktailbar_sales', [App\Http\Controllers\SaleController::class, 'cocktailbar'])->middleware('auth');
-Route::get('/sales_history', [App\Http\Controllers\SaleController::class, 'history'])->middleware('auth');
+Route::post('/clear-assign', [App\Http\Controllers\MappingController::class, 'clear_assign'])->name('clear-assign');
+
+});
+
+// Super Admin Routes
+
+Auth::routes(['register' => true]);
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    // Permissions
+    Route::resource('permissions', PermissionController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Roles
+    Route::resource('roles', RoleController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Users
+    Route::resource('users', UserController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // System Calendar
+    Route::resource('system-calendars', SystemCalendarController::class, ['except' => ['store', 'update', 'destroy', 'create', 'edit', 'show']]);
+
+    // Contact Company
+    Route::resource('contact-companies', ContactCompanyController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Contact Contacts
+    Route::resource('contact-contacts', ContactContactController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Staff
+    Route::resource('staff', StaffController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Product
+    Route::post('products/media', [ProductController::class, 'storeMedia'])->name('products.storeMedia');
+    Route::resource('products', ProductController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Cart
+    Route::resource('carts', CartController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Transaction
+    Route::resource('transactions', TransactionController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Order Details
+    Route::resource('order-details', OrderDetailController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Order
+    Route::resource('orders', OrderController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Section
+    Route::resource('sections', SectionController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Table
+    Route::resource('tables', TableController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Notifications
+    Route::resource('notifications', NotificationController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Requisition
+    Route::resource('requisitions', RequisitionController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Sms
+    Route::resource('sms', SmsController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Discount
+    Route::resource('discounts', DiscountController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Customer
+    Route::post('customers/csv', [CustomerController::class, 'csvStore'])->name('customers.csv.store');
+    Route::put('customers/csv', [CustomerController::class, 'csvUpdate'])->name('customers.csv.update');
+    Route::resource('customers', CustomerController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Booking
+    Route::resource('bookings', BookingController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Section Sales
+    Route::resource('section-sales', SectionSaleController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Category
+    Route::resource('categories', CategoryController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Type
+    Route::resource('types', TypeController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Messages
+    Route::get('messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::post('messages', [MessageController::class, 'store'])->name('messages.store');
+    Route::get('messages/inbox', [MessageController::class, 'inbox'])->name('messages.inbox');
+    Route::get('messages/outbox', [MessageController::class, 'outbox'])->name('messages.outbox');
+    Route::get('messages/create', [MessageController::class, 'create'])->name('messages.create');
+    Route::get('messages/{conversation}', [MessageController::class, 'show'])->name('messages.show');
+    Route::post('messages/{conversation}', [MessageController::class, 'update'])->name('messages.update');
+    Route::post('messages/{conversation}/destroy', [MessageController::class, 'destroy'])->name('messages.destroy');
+});
+
+Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {
+    if (file_exists(app_path('Http/Controllers/Auth/UserProfileController.php'))) {
+        Route::get('/', [UserProfileController::class, 'show'])->name('show');
+    }
+});

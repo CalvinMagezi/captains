@@ -24,8 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('check_happy')->everyMinute();
-        $schedule->command('extend_happy')->daily();
+        // $schedule->command('inspire')->hourly();
     }
 
     /**

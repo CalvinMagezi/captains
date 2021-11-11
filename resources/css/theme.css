@@ -1,0 +1,226 @@
+.row {
+  @apply w-full px-4 mb-12;
+}
+
+.card {
+  @apply relative flex flex-col w-full min-w-0 mb-6 break-words border-0 rounded-lg shadow-lg;
+}
+
+.card .card-header {
+  @apply px-6 py-6 mb-0 bg-white rounded-t;
+}
+
+.card .card-header-container {
+  @apply flex justify-between text-center;
+}
+
+.card .card-title {
+  @apply text-xl font-bold text-blueGray-700;
+}
+
+.card .card-body {
+  @apply flex-auto px-4 py-10 pt-0 lg:px-10;
+}
+
+.card .card-controls {
+  @apply flex-auto px-4 py-3 lg:px-10;
+}
+
+.card .card-table {
+  @apply py-3 pt-0;
+}
+
+.btn {
+  @apply justify-center inline-block px-4 py-2 mr-1 text-xs font-bold uppercase transition-all duration-150 ease-linear border-transparent rounded shadow outline-none cursor-pointer hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-sm {
+  @apply px-2 py-1;
+}
+
+.btn.btn-primary {
+  @apply text-white bg-pink-500 active:bg-pink-600 focus:ring-pink-500;
+}
+
+.btn.btn-indigo {
+  @apply text-white bg-indigo-500 active:bg-indigo-600 focus:ring-indigo-500;
+}
+
+.btn.btn-secondary {
+  @apply bg-white text-blueGray-500 hover:bg-blueGray-50 active:bg-blueGray-100 focus:ring-indigo-500;
+}
+
+.btn.btn-success {
+  @apply text-white bg-green-500 active:bg-green-600 focus:ring-green-500;
+}
+
+.btn.btn-warning {
+  @apply text-white bg-yellow-500 active:bg-yellow-600 focus:ring-yellow-500;
+}
+
+.btn.btn-danger {
+  @apply text-white bg-red-500 active:bg-red-600 focus:ring-red-500;
+}
+
+.btn.btn-info {
+  @apply text-white bg-blue-500 active:bg-blue-600 focus:ring-blue-500;
+}
+
+.sidebar-nav-active {
+  @apply block py-3 text-xs font-bold text-pink-500 uppercase;
+}
+
+.sidebar-nav-active > i {
+  @apply mr-2 text-sm opacity-75;
+}
+
+.sidebar-nav-active:hover {
+  @apply text-pink-600;
+}
+
+.sidebar-nav {
+  @apply block py-3 text-xs font-bold uppercase text-blueGray-800;
+}
+
+.sidebar-nav > i {
+  @apply mr-2 text-sm text-blueGray-400;
+}
+
+.sidebar-nav:hover {
+  @apply text-blueGray-600;
+}
+
+.form-group {
+  @apply mt-4;
+}
+
+.form-group:first-of-type {
+  @apply mt-0;
+}
+
+.validation-message {
+  display: none;
+  @apply text-red-500;
+}
+
+.form-group.invalid input,
+.form-group.invalid select,
+.form-group.invalid textarea {
+  @apply border-red-500 !important;
+}
+
+.form-group.invalid .validation-message {
+  display: block !important;
+}
+
+.form-label {
+  @apply block mb-2 text-xs font-bold uppercase text-blueGray-600;
+}
+
+.form-control {
+  @apply w-full;
+}
+
+input[type='text'].form-control,
+input[type='email'].form-control,
+input[type='number'].form-control,
+input[type='password'].form-control,
+textarea.form-control {
+  @apply px-3 py-3 text-sm bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring;
+}
+
+.flatpickr input[type='text'].form-control {
+  @apply px-3 py-3 pl-10 text-sm bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring;
+}
+
+.flatpickr input[type='text'].form-control:required {
+  @apply px-3 py-3 text-sm bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring;
+}
+
+.table {
+  @apply items-center bg-transparent border-collapse table-auto;
+}
+
+.table th {
+  @apply text-xs font-semibold text-left uppercase align-middle border border-solid whitespace-nowrap bg-blueGray-50 text-blueGray-500;
+}
+
+.table td {
+  @apply border-blueGray-200;
+}
+
+.table.table-view th,
+.table.table-view td {
+  @apply px-6 py-3 border border-solid;
+}
+
+.table.table-index th {
+  @apply px-6 py-3 border-l-0 border-r-0 border-blueGray-100;
+}
+
+.table.table-index td {
+  @apply px-4 py-2 border-t border-dashed;
+}
+
+.table.table-index > tbody > tr:hover {
+  @apply bg-blueGray-50;
+}
+
+.table.table-messages th {
+  @apply px-6 py-3 border-l-0 border-r-0 border-blueGray-100;
+}
+
+.table.table-messages td {
+  @apply border-t border-dashed;
+}
+
+.table.table-messages > tbody > tr:hover {
+  @apply bg-blueGray-50;
+}
+
+.form-group .required::after {
+  content: ' *';
+  @apply text-rose-500;
+}
+
+.dropzone .dz-preview .dz-image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.help-block {
+  @apply pt-2 text-sm text-blueGray-600;
+}
+
+.badge {
+  @apply inline-block px-2 py-1 mr-1 text-xs font-semibold rounded last:mr-0;
+}
+
+.badge-relationship {
+  @apply text-indigo-600 bg-indigo-200;
+}
+
+.link-light-blue {
+  @apply flex items-center mb-1 text-lightBlue-500 hover:underline last:mb-0;
+}
+
+.link-light-blue i {
+  @apply mr-1;
+}
+
+.link-photo {
+  @apply inline-block mr-1 last:mr-0;
+}
+
+.radio-label {
+  @apply flex items-center mb-1 cursor-pointer last:mb-0;
+}
+
+.radio-label input[type='radio'] {
+  @apply mr-2;
+}
+
+.min-w-5 {
+  min-width: 1.25rem;
+}

@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 -- DROP TABLE IF EXISTS `products`;
 -- CREATE TABLE IF NOT EXISTS `products` (
 --   `id` int(11) NOT NULL DEFAULT '0',
---   `unique_id` int(11) DEFAULT NULL,
+--   `unique_key` int(11) DEFAULT NULL,
 --   `name` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
 --   `category` varchar(19) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
 --   `sprice` int(11) DEFAULT NULL,
@@ -42,7 +42,7 @@ SET time_zone = "+00:00";
 --   'barcode' text,
 --   `details` text,
 --   `specifics` text,
---   `major_category` text,
+--   `type` text,
 --   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
 --   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 -- ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -51,7 +51,7 @@ SET time_zone = "+00:00";
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `unique_id`, `name`, `category`, `price`, `hprice`, `status`, `details`, `major_category`, `created_at`, `updated_at`) VALUES
+INSERT INTO `products` (`id`, `unique_key`, `name`, `category`, `price`, `hprice`, `status`, `details`, `type`, `created_at`, `updated_at`) VALUES
 (1, NULL, 'Femme Fatale-', 'cocktail', 900, 750, NULL, NULL, NULL, '2021-06-07 11:55:17', '2021-06-07 11:55:17'),
 (2, NULL, 'Captain in Manhattan-', 'cocktail', 850, 650, NULL, NULL, NULL, '2021-06-07 11:55:17', '2021-06-07 11:55:17'),
 (3, NULL, 'Captainpolitan-', 'cocktail', 850, 650, NULL, NULL, NULL, '2021-06-07 11:55:17', '2021-06-07 11:55:17'),
@@ -461,7 +461,7 @@ INSERT INTO `products` (`id`, `unique_id`, `name`, `category`, `price`, `hprice`
 (407, NULL, 'Ugali-', 'African menu', 250, 0, NULL, NULL, NULL, '2021-06-07 11:55:17', '2021-06-07 11:55:17'),
 (408, NULL, 'Vanilla milkshake-', 'Smothies and shakes', 500, 0, NULL, NULL, NULL, '2021-06-07 11:55:17', '2021-06-07 11:55:17'),
 (409, NULL, 'Vegetable fried rice-', 'accompanyments', 300, 0, NULL, NULL, NULL, '2021-06-07 11:55:17', '2021-06-07 11:55:17');
-INSERT INTO `products` (`id`, `unique_id`, `name`, `category`, `price`, `hprice`, `status`, `details`, `major_category`, `created_at`, `updated_at`) VALUES
+INSERT INTO `products` (`id`, `unique_key`, `name`, `category`, `price`, `hprice`, `status`, `details`, `type`, `created_at`, `updated_at`) VALUES
 (410, NULL, 'Vegetarian mezze-', 'Sharing Platters', 2900, 0, NULL, NULL, NULL, '2021-06-07 11:55:17', '2021-06-07 11:55:17'),
 (411, NULL, 'Vegetarian mezze 1/2-', 'Sharing Platters', 1800, 0, NULL, NULL, NULL, '2021-06-07 11:55:17', '2021-06-07 11:55:17'),
 (412, NULL, 'Veggy Burger-', 'burgers', 1050, 0, NULL, NULL, NULL, '2021-06-07 11:55:17', '2021-06-07 11:55:17'),

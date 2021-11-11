@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Order;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 use Log;
 
 class AjaxController extends Controller
@@ -21,7 +21,7 @@ class AjaxController extends Controller
         $data = DB::table('orders')->select('*')->get();
 
         $data = $data->filter();
-   
+
         return response()->json($data);
     }
 

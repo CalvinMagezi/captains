@@ -2,41 +2,78 @@
 
 namespace App\Models;
 
+use \DateTimeInterface;
+use App\Support\HasAdvancedFilter;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
     use HasFactory;
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
+    use HasAdvancedFilter;
+    use SoftDeletes;
 
     public $table = 'orders';
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
+    public $orderable = [
+        'id',
+        'unique_key',
+        'status',
+        'taken_by',
+        'closed_by',
+        'table_number',
+        'extra_notes',
+        'total_amount',
+        'amount_received',
         'completed_at',
     ];
 
-    protected $fillable = [
+    public $filterable = [
+        'id',
+        'unique_key',
+        'status',
         'taken_by',
         'closed_by',
-        'status',
         'table_number',
-        'items',
-        'priority',
-        'specifics',
-        'quantities',
-        'prices',
-        'prices_total',
+        'extra_notes',
+        'total_amount',
         'amount_received',
-        'created_at',
-        'updated_at',
-        'completed_at',        
+        'completed_at',
     ];
 
+    protected $dates = [
+        'completed_at',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    protected $fillable = [
+        'unique_key',
+        'status',
+        'taken_by',
+        'closed_by',
+        'table_number',
+        'extra_notes',
+        'total_amount',
+        'amount_received',
+        'completed_at',
+    ];
+
+    public function getCompletedAtAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('project.datetime_format')) : null;
+    }
+
+    public function setCompletedAtAttribute($value)
+    {
+        $this->attributes['completed_at'] = $value ? Carbon::createFromFormat(config('project.datetime_format'), $value)->format('Y-m-d H:i:s') : null;
+    }
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 }

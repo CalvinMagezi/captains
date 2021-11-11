@@ -29,17 +29,17 @@
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
-                                    <div class="page-body"> 
+                                    <div class="page-body">
                                         <div class="row fixed-bottom">
-                                        <div class="col-12 text-right pb-2">                                            
-                                            @if (Auth::user()->position == 'wait' || Auth::user()->position == 'head waitress' || Auth::user()->role == 'admin') 
-    
-                                            @foreach ($my_orders as $order) 
+                                        <div class="col-12 text-right pb-2">
+                                            @if (Auth::user()->position == 'wait' || Auth::user()->position == 'head waitress' || Auth::user()->role == 'admin')
+
+                                            @foreach ($my_orders as $order)
                                         <!-- Button trigger modal -->
                                             <button type="button"  class="btn btn-danger text-left mr-2" data-toggle="modal" data-target="#Modal{{$loop->iteration}}">
                                                 Order For Table: {{$order->table_number}}
                                             </button>
-                                        
+
                                             <style>
                                                 .modal-backdrop {
                                                 z-index: -1 !important;
@@ -47,7 +47,7 @@
                                                 width: 100%;
                                                 }
                                             </style>
-                                            
+
                                             <!-- Modal -->
                                             <div class="modal fade text-center" id="Modal{{$loop->iteration}}" tabindex="-1" aria-labelledby="ModalLabel{{$loop->iteration}}" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -67,26 +67,26 @@
                                                             <strong style="font-size: 1.1rem">Dispatched to:</strong> {{$order_d->dispatched_to}}
                                                             <br>
                                                             @if ($order_d->ready == '0')
-                                                            <strong style="font-size: 1.1rem;">Status: </strong><span style="color:red;">preparing</span>                                                            
+                                                            <strong style="font-size: 1.1rem;">Status: </strong><span style="color:red;">preparing</span>
                                                             @else
                                                             <strong style="font-size: 1.1rem;">Status: </strong> <span style="color:green;">ready</span>
                                                             @endif
                                                             </p>
                                                         <br>
-                                                        @endif                        
-                                                        @endforeach 
+                                                        @endif
+                                                        @endforeach
                                                     </div>
                                                     <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
                                                 </div>
-                                            </div>  
-                                        
+                                            </div>
+
                                               @endforeach
                                         @endif
                                         </div>
-                                        </div>                                       
+                                        </div>
                                         <div class="row justify-content-center">
                                             <!-- task, page, download counter  start -->
                                             <div class="col-xl-3 col-md-6">
@@ -95,13 +95,13 @@
                                                         <div class="row justify-content-center text-center align-items-center">
                                                             <div class="col-8">
                                                                 @if (Auth::user()->role != 'admin')
-                                                                <h4 class="text-c-purple">{{ $my_order_count }}</h4>                                                                
+                                                                <h4 class="text-c-purple">{{ $my_order_count }}</h4>
                                                                 <h6 class="text-muted m-b-0">My Open Orders</h6>
                                                                 @else
-                                                                <h4 class="text-c-purple">{{ $all_orders }}</h4> 
+                                                                <h4 class="text-c-purple">{{ $all_orders }}</h4>
                                                                 <h6 class="text-muted m-b-0">All Open Orders</h6>
-                                                                @endif                                                                
-                                                            </div>                                                            
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="card-footer bg-c-purple">
@@ -110,10 +110,10 @@
                                                                 <p class="text-white m-b-0">% change from yesterday</p>
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>                                                            
+                                                                <i class="fa fa-line-chart text-white f-16"></i>
                                                             </div>
                                                         </div>
-            
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,8 +128,8 @@
                                                                 @else
                                                                 <h4 class="text-c-green">{{ $all_closed_orders }}</h4>
                                                                 <h6 class="text-muted m-b-0">Closed Orders</h6>
-                                                                @endif                                                                
-                                                            </div>                                                           
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="card-footer bg-c-green">
@@ -152,12 +152,12 @@
                                                                 @if (Auth::user()->role != 'admin')
                                                                 <h4 class="text-c-red">{{ $my_assigned_tables }}</h4>
                                                                 <h6 class="text-muted m-b-0">My Assigned Tables</h6>
-                                                                @else 
+                                                                @else
                                                                 <h4 class="text-c-red">{{ $total_active_tables }}</h4>
                                                                 <h6 class="text-muted m-b-0">Active Tables</h6>
                                                                 @endif
                                                             </div>
-                                                           
+
                                                         </div>
                                                     </div>
                                                     <div class="card-footer bg-c-red">
@@ -180,12 +180,12 @@
                                                                 @if (Auth::user()->role != 'admin')
                                                                 <h4 class="text-c-blue">KES {{$my_sales}}</h4>
                                                                 <h6 class="text-muted m-b-0">My Sales Today</h6>
-                                                                @else 
+                                                                @else
                                                                 <h4 class="text-c-blue">KES {{$todays_sales}}</h4>
                                                                 <h6 class="text-muted m-b-0">Today's Sales </h6>
-                                                                @endif                                                               
+                                                                @endif
                                                             </div>
-                                                           
+
                                                         </div>
                                                     </div>
                                                     <div class="card-footer bg-c-blue">
@@ -194,14 +194,14 @@
                                                                 <p class="text-white m-b-0">% change</p>
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>                                                                
+                                                                <i class="fa fa-line-chart text-white f-16"></i>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- task, page, download counter  end -->
-    
+
                                             <!--  sale analytics start -->
                                             <div class="col-xl-8 col-md-12">
                                                 <div class="card">
@@ -212,12 +212,12 @@
                                                             @foreach ($waiters as $waiter)
                                                             <div class="col-3">
                                                                 <div class="p-3 mr-1 text-center" style="color: #fff; background: {{$waiter->color_code}}; border:1px solid grey; border-radius:5px;">{{$waiter->first_name}}</div>
-                                                            </div>                                        
+                                                            </div>
                                                         @endforeach
                                                         <div class="col-3">
                                                             <div class="p-3 m-1 text-center" style="color: #fff; border:1px solid grey; border-radius:5px; background:red;">Free</div>
                                                         </div>
-                                                        </div> 
+                                                        </div>
                                                         <div class="card-header-right">
                                                             <ul class="list-unstyled card-option">
                                                                 <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -242,7 +242,7 @@
                                                                 <h4>My Active Tables</h4>
                                                                 @else
                                                                 <h4>All Active Tables</h4>
-                                                                @endif                                                                
+                                                                @endif
                                                                 <p class="text-muted">Today</p>
                                                             </div>
                                                             <div class="col-auto">
@@ -251,13 +251,13 @@
                                                         </div>
                                                         @if (Auth::user()->role == 'admin')
                                                         <div class="row justify-content-center">
-                                                            @foreach ($tables as $table)  
-                                                            @if($table->status == 'active')                                                                                                                  
+                                                            @foreach ($tables as $table)
+                                                            @if($table->status == 'active')
                                                             <div class="col-lg-3 col-md-4 col-sm-6 p-1 mr-1 mb-1 text-center" style="border:1px solid black; background:green;">
                                                                 <button style="border: none; width:100%; color:white; background:green;" type="button" data-toggle="modal" data-target="#mod_{{ $table->table_number}}">
                                                                     {{ $table->table_number }}
-                                                                </button>   
-                                                                
+                                                                </button>
+
                                                                 <!-- Modal -->
                                                                 <div class="modal fade" id="mod_{{ $table->table_number}}" tabindex="-{{ $loop->iteration}}" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog">
@@ -268,8 +268,8 @@
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                         </div>
-                                                                        <div class="modal-body">                                                                            
-                                                                                                                                        
+                                                                        <div class="modal-body">
+
                                                                         View Info For table number <strong>{{ $table->table_number}}</strong>.
                                                                         </div>
                                                                         <div class="modal-footer">
@@ -278,8 +278,8 @@
                                                                         </div>
                                                                     </div>
                                                                     </div>
-                                                                </div> 
-                                                                                                                                   
+                                                                </div>
+
                                                             </div>
                                                             @endif
                                                             @endforeach
@@ -287,14 +287,14 @@
                                                         @endif
                                                         @if(Auth::user()->role != 'admin')
                                                         <div class="row justify-content-center">
-                                                            @foreach ($tables as $table)  
+                                                            @foreach ($tables as $table)
                                                             @if($table->status == 'active')
-                                                            @if ($table->managed_by == Auth::user()->first_name)                                                                                                                                                                                                                                                                                                       
+                                                            @if ($table->managed_by == Auth::user()->first_name)
                                                             <div class="col-lg-3 col-md-4 col-sm-6 p-1 mr-1 mb-1 text-center" style="border:1px solid black; background:green;">
                                                                 <button style="border: none; width:100%; background:green;" type="button" data-toggle="modal" data-target="#mod_{{ $table->table_number}}">
                                                                     {{ $table->table_number }}
-                                                                </button>   
-                                                                
+                                                                </button>
+
                                                                 <!-- Modal -->
                                                                 <div class="modal fade" id="mod_{{ $table->table_number}}" tabindex="-{{ $loop->iteration}}" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog">
@@ -305,8 +305,8 @@
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                         </div>
-                                                                        <div class="modal-body">                                                                            
-                                                                                                                                        
+                                                                        <div class="modal-body">
+
                                                                         View Info For table number <strong>{{ $table->table_number}}</strong>.
                                                                         </div>
                                                                         <div class="modal-footer">
@@ -315,14 +315,14 @@
                                                                         </div>
                                                                     </div>
                                                                     </div>
-                                                                </div> 
-                                                                                                                                   
+                                                                </div>
+
                                                             </div>
                                                             @endif
                                                             @endif
                                                             @endforeach
                                                         </div>
-                                                        @endif                                                       
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 {{-- <div class="card quater-card">
@@ -342,10 +342,10 @@
                                             </div>
 
                                             <!--  sale analytics end -->
-    
+
                                             <!--  project and team member start -->
                                             <div class="col-xl-8 col-md-12">
-                                                
+
                                                 <div class="card table-card">
                                                     <div class="card-header">
                                                         <h5>Active Orders</h5>
@@ -368,16 +368,16 @@
                                                                     <th>Table #</th>
                                                                     <th>Taken By</th>
                                                                     <th>Status</th>
-                                                                    <th>Total</th>                                                
+                                                                    <th>Total</th>
                                                                     <th>View</th>
                                                                     @if (Auth::user()->role == 'admin')
                                                                     {{-- <th>Edit</th> --}}
                                                                     <th>Delete</th>
-                                                                    @endif                                                
+                                                                    @endif
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-                        
+
                                                                     @foreach ($orders as $order)
                                                                     @if($order->status == 'ongoing')
                                                                     <tr>
@@ -386,10 +386,10 @@
                                                                         <td>{{ $order->taken_by }}</td>
                                                                         <td>{{ $order->status }}</td>
                                                                         <td>KES {{ $order->prices_total }}</td>
-                                                                        
+
                                                                         <td>
                                                                             <button class="btn btn-success" data-toggle="modal" data-target="#edit_{{$order->id}}">View</button>
-                    
+
                                                                             <!-- Modal -->
                                                                             <div class="modal fade" id="edit_{{$order->id}}" tabindex="-1" aria-labelledby="edit_{{$order->id}}Label" aria-hidden="true">
                                                                                 <div class="modal-dialog">
@@ -400,7 +400,7 @@
                                                                                         <span aria-hidden="true">&times;</span>
                                                                                     </button>
                                                                                     </div>
-                                                                                    <div class="modal-body">                                                               
+                                                                                    <div class="modal-body">
                                                                                         <table class="table table-responsive">
                                                                                             <thead>
                                                                                                 <tr>
@@ -424,10 +424,10 @@
                                                                                                     @endif
                                                                                                 @endforeach
                                                                                             </tbody>
-                                                                                        </table>                                                                
+                                                                                        </table>
                                                                                     </div>
                                                                                     <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                                                
+                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                                     </div>
                                                                                 </div>
                                                                                 </div>
@@ -436,7 +436,7 @@
                                                                         @if (Auth::user()->role == 'admin')
                                                                         {{-- <td>
                                                                             <button class="btn btn-warning" data-toggle="modal" data-target="#close_{{$order->id}}">Edit</button>
-                                                                            
+
                                                                             <div class="modal fade" id="close_{{$order->id}}" tabindex="-1" aria-labelledby="close_{{$order->id}}Label" aria-hidden="true">
                                                                                 <div class="modal-dialog">
                                                                                 <div class="modal-content">
@@ -449,7 +449,7 @@
                                                                                     <div class="modal-body">
                                                                                         <form action="">
                                                                                             @csrf
-                        
+
                                                                                             <table class="table table-responsive">
                                                                                                 <thead>
                                                                                                     <tr>
@@ -465,7 +465,7 @@
                                                                                                         @if ($details->order_id == $order->id)
                                                                                                             <tr>
                                                                                                                 <td>
-                                                                                                                    <input type="text" name="detail_name" placeholder="{{$details->item_name}}">                                                                                                
+                                                                                                                    <input type="text" name="detail_name" placeholder="{{$details->item_name}}">
                                                                                                                 </td>
                                                                                                                 <td>
                                                                                                                     <input type="text" name="detail_price" placeholder="{{$details->price}}">
@@ -475,19 +475,19 @@
                                                                                                                 </td>
                                                                                                                 <td>
                                                                                                                     <input type="text" name="detail_specifics" placeholder="{{$details->specifics}}">
-                                                                                                                    
+
                                                                                                                 </td>
                                                                                                                 <td>
-                                                                                                                    <input type="text" name="detail_priority" placeholder="{{$details->priority}}">                                                                                                
+                                                                                                                    <input type="text" name="detail_priority" placeholder="{{$details->priority}}">
                                                                                                                 </td>
                                                                                                             </tr>
                                                                                                         @endif
                                                                                                     @endforeach
                                                                                                 </tbody>
                                                                                             </table>
-                        
-                        
-                                                                                        
+
+
+
                                                                                     </div>
                                                                                     <div class="modal-footer">
                                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -520,28 +520,28 @@
                                                                                         <input type="hidden" name="order_id" value="{{$order->id}}">
                                                                                         <button type="submit" class="btn btn-danger">Delete Order</button>
                                                                                     </form>
-                                                                                    
+
                                                                                     </div>
                                                                                 </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </td>                                                        
+                                                                        </td>
                                                                         @endif
                                                                     </tr>
                                                                     @endif
                                                                     @endforeach
-                                                            
-                                                                    
-                                                                </tbody>                                        
-                                                            </table>                                        
+
+
+                                                                </tbody>
+                                                            </table>
                                                             <div class="text-right m-r-20">
                                                                 <a href="#!" class=" b-b-primary text-primary">{{ $orders->render() }}</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
-                                            </div>                                                                                    
+
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- Page-body end -->
@@ -554,9 +554,9 @@
             </div>
         </div>
     </div>
-    
+
     @include('partials.admin-footer')
-    <script type="text/javascript" src="{{ asset('admin/js/mapping.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('dash_admin/js/mapping.js') }}"></script>
 </body>
 
 </html>

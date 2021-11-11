@@ -1,15 +1,57 @@
 /**
  * First we will load all of this project's JavaScript dependencies which
- * includes React and other helpers. It's a great starting point while
- * building robust, powerful web applications using React + Laravel.
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require('./bootstrap')
 
-/**
- * Next, we will create a fresh React component instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+/* Sidebar - Side navigation menu on mobile/responsive mode */
+window.toggleNavbar = function (collapseID) {
+  document.getElementById(collapseID).classList.toggle('hidden')
+  document.getElementById(collapseID).classList.toggle('bg-white')
+  document.getElementById(collapseID).classList.toggle('m-2')
+  document.getElementById(collapseID).classList.toggle('py-3')
+  document.getElementById(collapseID).classList.toggle('px-6')
+}
 
-require('./components/Example');
+/* Opens sidebar navigation that contains sub-items */
+window.openSubNav = function (el) {
+  let parent = el.parentElement
+
+  let subnavs = document.getElementsByClassName('subnav')
+  for (let i = 0; i < subnavs.length; i++) {
+    if (!subnavs[i].classList.contains('hidden')) {
+      subnavs[i].classList.add('hidden')
+    }
+  }
+
+  parent.getElementsByClassName('subnav')[0].classList.remove('hidden')
+}
+
+window.initialSubNavLoad = function () {
+  let active = document.getElementsByClassName('has-sub sidebar-nav-active')
+  if (active[0]) {
+    window.openSubNav(active[0])
+  }
+}
+
+/* Opens sidebar navigation that contains sub-items */
+initialSubNavLoad()
+
+/* Function for dropdowns */
+window.openDropdown = function openDropdown(event, dropdownID) {
+  let element = event.target;
+  while (element.nodeName !== "A") {
+    element = element.parentNode;
+  }
+  Popper.createPopper(element, document.getElementById(dropdownID), {
+    placement: "bottom-start",
+  });
+  document.getElementById(dropdownID).classList.toggle("hidden");
+  document.getElementById(dropdownID).classList.toggle("block");
+
+  if (dropdownID == 'nav-notification-dropdown') {
+    fetch('/admin/user-alerts/seen')
+  }
+}

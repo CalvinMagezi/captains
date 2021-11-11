@@ -8,17 +8,17 @@ use App\Http\Requests\MassDestroyOrderRequest;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
-use App\Models\OrderDetails;
+use App\Models\OrderDetail;
 use App\Models\Item;
 use App\Models\Product;
 use App\Models\Table;
 use App\Models\Sale;
 use Gate;
-use DB;
-use Log;
-use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 
@@ -30,7 +30,7 @@ class AdminController extends Controller
         $orders = DB::table('orders')
                     ->where('status','=','ongoing')
                     ->paginate(10);
-        $order_details = OrderDetails::all();
+        $order_details = OrderDetail::all();
         $tables = Table::all();
 
         $waiters = DB::table('users')
@@ -46,15 +46,15 @@ class AdminController extends Controller
                             ->where('taken_by','=',Auth::user()->first_name.' '.Auth::user()->last_name)
                             ->where('status','=','closed')
                             ->count();
-        $my_assigned_tables = Table::where('managed_by','=',Auth::user()->first_name)->count();  
-        
+        $my_assigned_tables = Table::where('managed_by','=',Auth::user()->first_name)->count();
+
         $my_orders = Order::where('taken_by','=',Auth::user()->first_name.' '.Auth::user()->last_name)
                             ->where('status','=','ongoing')
-                            ->get();                           
+                            ->get();
 
         $active_table_count = Table::where('status','=','active')->count();
 
-        $todays_sales = Sale::whereDate('created_at', Carbon::today())->get();        
+        $todays_sales = Sale::whereDate('created_at', Carbon::today())->get();
         $total = 0;
         $my_total = 0;
 
@@ -64,7 +64,7 @@ class AdminController extends Controller
                 $my_total = $my_total + $value->total;
             }
         }
-        
+
         return view('admin.dashboard', [
             'users' => $users,
             'orders' => $orders,
@@ -93,8 +93,8 @@ class AdminController extends Controller
                 $request->user()->cart()->get()
             );
         }
-        $products = Product::all();              
-       
+        $products = Product::all();
+
         return view('admin.create-order', compact('products'));
     }
 
@@ -115,13 +115,13 @@ class AdminController extends Controller
         $quantities = implode (" ", $request->input('quantities',[]));
         $specifics = implode (" ", $request->input('specifics',[]));
         $priority = implode (" ", $request->input('priority',[]));
-        $prices = implode (" ", $request->input('prices',[])); 
+        $prices = implode (" ", $request->input('prices',[]));
         $prices_sum = array_sum ($request->input('prices',[]));
         $quantities_sum = array_sum ($request->input('quantities',[]));
         $taken_by = Auth::user();
         Log::info($taken_by);
         $new_order = new Order;
-        
+
         $new_order->taken_by = $taken_by;
         $new_order->table_number = $request->table_number;
         $new_order->specifics = $specifics;
@@ -130,19 +130,19 @@ class AdminController extends Controller
         $new_order->qunatities_total = $quantities_sum;
         $new_order->prices = $prices;
         $new_order->prices_total = $prices_sum;
-            
+
 
         // for ($product=0; $product < count($products); $product++) {
         //     if ($products[$product] != '') {
         //         $order->products()->attach($products[$product], ['quantity' => $quantities[$product]]);
         //     }
         // }
-        
+
         Log::info($new_order);
 
         $new_order->save();
 
-        
+
 
         return redirect('/create-order')->with('success', 'Order Successfully Placed!');
     }
@@ -201,5 +201,5 @@ class AdminController extends Controller
 
 
 
-    
+
 }

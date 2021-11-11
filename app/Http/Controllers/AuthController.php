@@ -1,7 +1,7 @@
 <?php
- 
+
 namespace App\Http\Controllers;
- 
+
 use App\Models\User;
 use App\Mail\SigninEmail;
 use Illuminate\Http\Request;
@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Crypt;
 use DB;
- 
+
 class AuthController extends Controller
 {
- 
+
     /**
      * Processes the logout
      *
@@ -25,7 +25,7 @@ class AuthController extends Controller
     {
         // logout
     Auth::logout();
- 
+
     // Redirect to homepage
     return view('auth.login');
     }
@@ -37,14 +37,10 @@ class AuthController extends Controller
 
         if ($user != null) {
             Auth::login($user);
-
-            return redirect('/dashboard');
+            return redirect('/')->with('success','Karibu');
         }else{
             return redirect()->back()->with('error','No User exists with that pin.');
         }
-        
-
-
     }
 
 

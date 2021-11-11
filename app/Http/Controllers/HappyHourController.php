@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HappyHour;
 use Illuminate\Http\Request;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class HappyHourController extends Controller
 {
@@ -71,9 +71,9 @@ class HappyHourController extends Controller
      */
     public function update(Request $request)
     {
-        $data = request()->except(['_token','id']);       
-        
-        $updates = array_filter($data); 
+        $data = request()->except(['_token','id']);
+
+        $updates = array_filter($data);
 
         $exists = DB::table('happy_hours')->where('id','=',1)->first();
 
@@ -86,9 +86,9 @@ class HappyHourController extends Controller
                 'end' => $request->end
             ]);
             $new->save();
-        }                                     
+        }
 
-        return redirect('/inventory')->with('success', 'Successfully Updated Happy Hour Timings.'); 
+        return redirect('/inventory')->with('success', 'Successfully Updated Happy Hour Timings.');
     }
 
     /**
