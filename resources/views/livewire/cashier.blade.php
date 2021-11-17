@@ -22,7 +22,7 @@
             <h4 class="py-3">Print</h4>
             <hr>
            </div>
-        <div class="col-m6-4">
+        <div wire:ignore class="col-m6-4">
             <a
             href="/receipt/{{ $selected_id }}"
             target="_blank"
@@ -177,7 +177,7 @@
              type="submit"
              class="p-5 bg-green-600 rounded-lg ">Close</button>
          </div>
-         @if (Auth::user()->role == 'admin')
+         {{-- @if (Auth::user()->role == 'admin')
          <div class="w-3/4 pt-2 mx-auto">
              <button wire:click="updateShowModal({{ $order_id }})"
              class="p-5 bg-yellow-600 rounded-lg ">Edit</button>
@@ -186,7 +186,7 @@
              <button wire:click="deleteShowModal({{ $order_id }})"
              class="p-5 bg-red-600 rounded-lg ">Delete</button>
          </div>
-         @endif
+         @endif --}}
          </div>
   </div>
 

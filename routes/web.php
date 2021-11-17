@@ -60,6 +60,12 @@ Route::get('/section/{section}',function($section){
         'section' => $section
     ]);
 });
+Route::get('/order/{id}', function($id){
+    return view('orderdetails', [
+        "id" => $id
+    ]);
+});
+
 Route::post('store-order',[App\Http\Controllers\OrderController::class, 'store'])->name('store-order');
 Route::get('/check-receipt', function(){
     $products = Product::all();

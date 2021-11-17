@@ -1,12 +1,12 @@
-@extends('layouts.receipt')
-@section('content')
+@include('partials.receiptstyles')
+
   <div id="invoice-POS">
         {{-- Printing Section --}}
     <div class="print_content">
         <center id="logo">
-            {{-- <div class="logo">
-                <img src="img/logo/logo.png" alt="">
-            </div> --}}
+            <div class="logo">
+                <img src="{{ asset('img/logo.svg') }}" class="w-24" alt="">
+            </div>
             <div class="info">
 
             </div>
@@ -14,7 +14,7 @@
         </center>
     </div>
 
-    <div class="text-black mid">
+    {{-- <div class="text-black mid">
         <div class="info">
             <h2>Contact Us</h2>
             <ul class="block">
@@ -24,7 +24,7 @@
                 <li>Website: Test</li>
             </ul>
         </div>
-    </div>
+    </div> --}}
 
     <div class="text-black bot">
         <div class="table">
@@ -72,12 +72,12 @@
                 </p>
             </div>
             <div class="serial-number">
-                Serial: <span class="serial">12099476817982</span>
+                Serial: <span class="serial">{{ Str::random(8) }}</span>
                 <br>
                 <span>{{ Carbon\Carbon::now('Africa/Nairobi') }}</span>
             </div>
         </div>
     </div>
   </div>
-@endsection
+
 

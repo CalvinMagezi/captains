@@ -9,7 +9,22 @@
             <button class="outline-none focus:outline-none">
               <svg class="w-5 h-5 text-gray-600 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </button>
-            <input type="search" name="" id="" placeholder="Search" class="w-full pl-3 text-sm text-black bg-transparent outline-none focus:outline-none" />
+            <form wire:submit.prevent="searchOrder">
+            <input wire:model="term" type="search" placeholder="Search" class="w-full pl-3 text-sm text-black bg-transparent outline-none focus:outline-none" />
+            </form>
+            @if ($term_results)
+                      <div  class="absolute z-20 mt-2 overflow-hidden bg-white rounded-md shadow-lg left-70 top-10" style="width:20rem;">
+                        <div class="py-2">
+                                 <a href="/order/{{ $term_results->id }}" class="flex items-center px-4 py-3 -mx-2 border-b hover:bg-gray-100">
+                                    <p class="mx-2 text-sm text-gray-600">
+                                        <span class="font-bold">
+                                            Order {{ $term_results->id }}
+                                        </span>
+                                    </p>
+                                </a>
+                        </div>
+                    </div>
+            @endif
           </div>
           <ul class="flex items-center">
             <li>
@@ -28,7 +43,8 @@
                     <div x-show="dropdownOpen" class="absolute right-0 z-20 mt-2 overflow-hidden bg-white rounded-md shadow-lg" style="width:20rem;">
                         <div class="py-2">
                             @forelse ($notifications as $notification)
-                                <button  wire:click="clearNotification({{ $notification->unique_key }})"
+                            <form wire:submit.prevent="clearNotification({{ $notification->id }})" class="pt-3">
+                                <button type="submit"
                                     class="flex items-center px-4 py-3 -mx-2 border-b hover:bg-gray-100">
                                     <p class="mx-2 text-sm text-gray-600">{{ $loop->iteration }}</p>
                                     <p class="mx-2 text-sm text-gray-600">
@@ -37,6 +53,7 @@
                                         </span>
                                     </p>
                                 </button>
+                                </form>
                             @empty
                                  <a href="#" class="flex items-center px-4 py-3 -mx-2 border-b hover:bg-gray-100">
                                     <p class="mx-2 text-sm text-gray-600">
@@ -53,7 +70,7 @@
                 </div>
             </li>
             <li>
-              <button
+              <button wire:ignore
                 aria-hidden="true"
                 @click="toggleTheme"
                 class="p-2 text-gray-900 transition-colors duration-200 bg-blue-200 rounded-full shadow-md group hover:bg-blue-200 dark:bg-gray-50 dark:hover:bg-gray-200 focus:outline-none"
