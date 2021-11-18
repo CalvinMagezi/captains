@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             RoleUserTableSeeder::class,
             TableSeeder::class,
+            SectionSeeder::class,
         ]);
         $path = public_path('sql/items.sql');
         $sql = file_get_contents($path);
