@@ -7,6 +7,9 @@
         <h1>This table is: {{ $table_chosen->managed_by }}</h1>
         <button class="btn btn-success btn-lg">Book Now {{ $table_chosen->managed_by }}</button>
     @endif
+    {{-- <div class="row justi">
+        <div class="col-4"></div>
+    </div> --}}
 
     @endif
 </div>
