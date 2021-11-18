@@ -12,7 +12,7 @@
         <h1>This table is: {{ $table_chosen->managed_by }}</h1>
         <button class="btn btn-success btn-lg">Book Now {{ $table_chosen->managed_by }}</button>
     @endif
-    <div class="text-center row justify-content-center">
+    <div class="text-left row justify-content-left">
         <div class="col-4">
             <a target="_blank" href="https://captain-s-terrace.web.app/menu.html"class="btn btn-primary btn-lg" >
                 <h1>Browse Our Menu </h1>
