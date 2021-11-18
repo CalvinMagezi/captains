@@ -10,31 +10,6 @@ use App\Http\Controllers\Api\V1\Admin\RequisitionApiController;
 use App\Http\Controllers\Api\V1\Admin\SectionSaleApiController;
 use App\Http\Controllers\Api\V1\Admin\TransactionApiController;
 
-Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
-    // Transaction
-    Route::apiResource('transactions', TransactionApiController::class);
-
-    // Order Details
-    Route::apiResource('order-details', OrderDetailApiController::class);
-
-    // Section
-    Route::apiResource('sections', SectionApiController::class);
-
-    // Requisition
-    Route::apiResource('requisitions', RequisitionApiController::class);
-
-    // Sms
-    Route::apiResource('sms', SmsApiController::class);
-
-    // Discount
-    Route::apiResource('discounts', DiscountApiController::class);
-
-    // Booking
-    Route::apiResource('bookings', BookingApiController::class);
-
-    // Section Sales
-    Route::apiResource('section-sales', SectionSaleApiController::class);
-});
 
 Route::post('ussd', [USSDStringController::class, "start"]);
 Route::post('ussd_notification', [USSDStringController::class, "ussd_notification"]);
@@ -46,3 +21,9 @@ Route::post('/save-tables', 'App\Http\Controllers\MappingController@store')->nam
 Route::post('/assign-tables', 'App\Http\Controllers\MappingController@assign')->name('assign-tables');
 
 Route::get('/get-orders', 'App\Http\Controllers\AjaxController@orders');
+
+Route::get('/{table_number}', function($table_number){
+    return view('tableqr', [
+        'table_number' => $table_number
+    ]);
+});
