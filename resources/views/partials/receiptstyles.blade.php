@@ -1,4 +1,21 @@
  <style>
+     h2{
+         font-size:1.3rem !important;
+     }
+     h1{
+         font-size: 1.4rem !important;
+     }
+     p{
+         font-size: 1.4rem !important;
+
+     }
+     li{
+         font-size: 1.2rem !important;
+     }
+     tr{
+         margin-top: 30px;
+         margin-bottom: 30px;
+     }
       #invoice-POS{
           box-shadow: 0 0 1in rgb(0,0,0.5);
           padding:2mm;
