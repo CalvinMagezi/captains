@@ -31,7 +31,7 @@
 <hr style="width:100%; margin-top:10px;">
     <div class="text-black bot">
         <div class="table">
-            <table>
+            <table style="font-weight:900;">
                 <tr class="tabletitle">
                     <td colspan="2" class="item"><h2>Item Name</h2></td>
                     <td class="Hours"><h2>Qty</h2></td>

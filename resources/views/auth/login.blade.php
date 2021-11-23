@@ -109,7 +109,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group form-primary">
-                                        <input type="text" name="pin" class="form-control" required="">
+                                        <input type="password" name="pin" class="form-control" required="">
                                         <span class="form-bar"></span>
                                         <label class="float-label">User Pin</label>
                                     </div>
