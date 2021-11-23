@@ -1,8 +1,8 @@
 @include('partials.receiptstyles')
 
-  <div style="width: 100vw; height:100vh font-weight:600; text-shadow:
-        -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
-        -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;" id="invoice-POS">
+  <div style="width: 100vw; height:100vh font-weight:300; text-shadow:
+        -1px 0 black, 0 0.5px black, 0.5px 0 black, 0 -1px black,
+        -1px -1px black, 0.5px 0.5px black, -1px 0.5px black, 0.5px -1px black;" id="invoice-POS">
         {{-- Printing Section --}}
     <div class="print_content">
         <center id="logo">
@@ -33,7 +33,7 @@
 <hr style="width:100%; margin-top:10px;">
     <div class="text-black bot">
         <div class="table">
-            <table style="font-weight:900;">
+            <table style="font-weight:300;">
                 <tr class="tabletitle">
                     <td colspan="2" class="item"><h2>Item Name</h2></td>
                     <td class="Hours"><h2>Qty</h2></td>
