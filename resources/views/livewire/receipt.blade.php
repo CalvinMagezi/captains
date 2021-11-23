@@ -1,6 +1,8 @@
 @include('partials.receiptstyles')
 
-  <div style="width: 100%; height:100%" id="invoice-POS">
+  <div style="width: 100vw; height:100vh font-weight:600; text-shadow:
+        -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
+        -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;" id="invoice-POS">
         {{-- Printing Section --}}
     <div class="print_content">
         <center id="logo">
