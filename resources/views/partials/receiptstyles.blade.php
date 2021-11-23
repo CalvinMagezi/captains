@@ -17,9 +17,10 @@
          margin-bottom: 30px;
      }
       #invoice-POS{
+
           padding:2mm;
           margin: 0 auto;
-          width: 100vw;
+          width: 68mm;
           background: #fff
       }
       #invoice-POS ::selection{
