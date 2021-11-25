@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\SectionSale;
 use Illuminate\Console\Command;
 
 class SetupSections extends Command
@@ -37,6 +38,15 @@ class SetupSections extends Command
      */
     public function handle()
     {
-        return Command::SUCCESS;
+        for ($i=1; $i < 4; $i++) {
+            SectionSale::create([
+                'section_id' => $i,
+                'todays_sales' => 0,
+                'yesterdays_sales' => 0,
+                'weeks_sales' => 0,
+                'months_sales' => 0,
+                'years_sales' => 0,
+            ]);
+        }
     }
 }

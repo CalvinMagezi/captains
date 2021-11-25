@@ -26,7 +26,7 @@
                     </div>
             @endif
           </div>
-          <ul class="flex items-center">
+          <ul wire:poll class="flex items-center">
             <li>
                  <div x-data="{ dropdownOpen: false }" class="relative my-32">
                     <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 flex block p-3 mx-2 bg-white rounded-full focus:outline-none">
