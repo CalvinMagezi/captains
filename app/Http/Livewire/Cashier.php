@@ -10,6 +10,7 @@ use App\Models\OrderDetail;
 use App\Models\SectionSale;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class Cashier extends Component
 {
@@ -117,57 +118,60 @@ class Cashier extends Component
         ]);
 
         $this->reset();
-        $this->topUpSales();
+        $this->topUpSales($transaction->order_key);
 
         $this->message_color = 'green';
         return $this->ordermessage = "Successfully Closed Order";
 
     }
 
-    public function topUpSales(){
-        $closed_orders = OrderDetail::with('orderKey')->with('productKey')->where('ready','=','ready')->get();
+    public function topUpSales($order_key){
+        $closed_orders = OrderDetail::with('orderKey')->with('productKey')->where('order_key_id','=',$order_key)->get();
+
+        Log::info("Order: $closed_orders \n Selected Order: $order_key");
 
         $main_bar = 0;
         $kitchen = 0;
         $cocktail_bar = 0;
 
         foreach ($closed_orders as $order) {
-           if($order->orderKey->status == 'closed'){
                 if($order->dispatched_to == 'kitchen'){
                     $kitchen = $kitchen + (int)$order->productKey->price;
-                     $sectionSale = SectionSale::where('section_id','=',3)->first();
-                     $sectionSale->update([
-                        'todays_sales' => $kitchen + (int)$sectionSale->todays_sales,
-                        'yesterdays_sales' => $kitchen + (int)$sectionSale->yesterdays_sales,
-                        'weeks_sales' => $kitchen + (int)$sectionSale->weeks_sales,
-                        'months_sales' => $kitchen + (int)$sectionSale->months_sales,
-                        'years_sales' => $kitchen + (int)$sectionSale->years_sales,
-                    ]);
                 }
                 if($order->dispatched_to == 'cocktail bar'){
                     $cocktail_bar = $cocktail_bar + (int)$order->productKey->price;
-                     $sectionSale = SectionSale::where('section_id','=',2)->first();
-                     $sectionSale->update([
-                        'todays_sales' => $cocktail_bar + (int)$sectionSale->todays_sales,
-                        'yesterdays_sales' => $cocktail_bar + (int)$sectionSale->yesterdays_sales,
-                        'weeks_sales' => $cocktail_bar + (int)$sectionSale->weeks_sales,
-                        'months_sales' => $cocktail_bar + (int)$sectionSale->months_sales,
-                        'years_sales' => $cocktail_bar + (int)$sectionSale->years_sales,
-                    ]);
                 }
                 if($order->dispatched_to == 'main bar'){
                     $main_bar = $main_bar + (int)$order->productKey->price;
-                    $sectionSale = SectionSale::where('section_id','=',1)->first();
-                     $sectionSale->update([
-                        'todays_sales' => $main_bar + (int)$sectionSale->todays_sales,
-                        'yesterdays_sales' => $main_bar + (int)$sectionSale->yesterdays_sales,
-                        'weeks_sales' => $main_bar + (int)$sectionSale->weeks_sales,
-                        'months_sales' => $main_bar + (int)$sectionSale->months_sales,
-                        'years_sales' => $main_bar + (int)$sectionSale->years_sales,
-                    ]);
                 }
-           }
         }
+
+        $kitchenSales = SectionSale::where('section_id','=',3)->first();
+                     $kitchenSales->update([
+                        'todays_sales' => $kitchen + (int)$kitchenSales->todays_sales,
+                        'yesterdays_sales' => $kitchen + (int)$kitchenSales->yesterdays_sales,
+                        'weeks_sales' => $kitchen + (int)$kitchenSales->weeks_sales,
+                        'months_sales' => $kitchen + (int)$kitchenSales->months_sales,
+                        'years_sales' => $kitchen + (int)$kitchenSales->years_sales,
+                    ]);
+
+        $cocktailbarSales = SectionSale::where('section_id','=',2)->first();
+                     $cocktailbarSales->update([
+                        'todays_sales' => $cocktail_bar + (int)$cocktailbarSales->todays_sales,
+                        'yesterdays_sales' => $cocktail_bar + (int)$cocktailbarSales->yesterdays_sales,
+                        'weeks_sales' => $cocktail_bar + (int)$cocktailbarSales->weeks_sales,
+                        'months_sales' => $cocktail_bar + (int)$cocktailbarSales->months_sales,
+                        'years_sales' => $cocktail_bar + (int)$cocktailbarSales->years_sales,
+                    ]);
+
+        $mainbarSales = SectionSale::where('section_id','=',1)->first();
+                     $mainbarSales->update([
+                        'todays_sales' => $main_bar + (int)$mainbarSales->todays_sales,
+                        'yesterdays_sales' => $main_bar + (int)$mainbarSales->yesterdays_sales,
+                        'weeks_sales' => $main_bar + (int)$mainbarSales->weeks_sales,
+                        'months_sales' => $main_bar + (int)$mainbarSales->months_sales,
+                        'years_sales' => $main_bar + (int)$mainbarSales->years_sales,
+                    ]);
     }
 
     public function getChange(){
